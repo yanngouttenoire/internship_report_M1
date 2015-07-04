@@ -1,0 +1,1079 @@
+\documentclass[a4paper]{article}
+\usepackage[9pt]{extsizes}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+%\usepackage[francais]{babel}
+\usepackage[english]{babel}
+\usepackage{layout}
+%\usepackage{geometry}
+%\usepackage{setspace}
+%\usepackage{soul}
+%\usepackage{ulem}
+%\usepackage{eurosym}
+%\usepackage{bookman}
+%\usepackage{charter}
+%\usepackage{newcent}
+%\usepackage[super]{nth}
+\usepackage{xspace}
+\usepackage{textcomp}
+\usepackage{lmodern}
+\usepackage{appendix} 
+\usepackage{verbatim}
+\usepackage{listings}
+%\usepackage[inline]{asymptote}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{placeins}
+%\usepackage{MyMnSymbol}
+%\usepackage{mathpazo}
+%\usepackage{mathptmx}
+%\usepackage{url}
+%\usepackage{verbatim}
+%\usepackage{moreverb} 
+%\usepackage{listings}
+%\usepackage{fancyhdr}
+%\usepackage{wrapfig}
+%\usepackage{color}
+%\usepackage{colortbl}
+\usepackage{mathtools,amssymb,amsfonts,amsthm}
+%\usepackage{mathabx}
+\usepackage{cancel}
+%\usepackage{mathrsfs}
+%\usepackage{asmthm}
+%\usepackage{makeidx}
+\usepackage{parskip}
+\newcommand\nth{\textsuperscript{th}\xspace}
+%\setlength{\textwidth}{410pt}
+%\setlength{\oddsidemargin}{25pt}
+%\allowdisplaybreaks
+\title{Introduction \`a la Th\'eorie des Perturbations Canoniques en M\'ecanique C\'eleste}
+\author{Yann Gouttenoire}
+\date{Du 26 Mai 2014 au 05 Juillet 2014}
+
+\setlength{\oddsidemargin}{0pt}
+\setlength{\marginparsep}{0pt}
+\setlength{\textwidth}{454pt}
+%\linespread{0.5}
+\lstset
+{
+breaklines=true,
+basicstyle=\footnotesize,
+frame=single,
+columns=fullflexible,
+literate={*}{{\char42}}1
+         {-}{{\char45}}1
+}
+
+
+\begin{document}
+\makeatletter
+
+  \begin{titlepage}
+  \centering
+  {\LARGE \textbf{Introduction \`a la Th\'eorie des Perturbations}} \\
+   \vspace{0.5cm}
+    {\LARGE \textbf{Canoniques en M\'ecanique C\'eleste}} \\
+      \vspace{1cm}
+  {\large \@author} \\
+      \vspace{1cm}
+  {\textbf{1$^{\`ere}$ Ann\'ee au Magist\`ere de Physique Fondamentale d'Orsay}} \\
+      \vspace{1cm}
+    \includegraphics[width=0.25\textwidth]{logo1.jpg}
+      \vfill
+  {\LARGE \textbf{Responsables de Stage:}} \\
+       \vspace{1cm} 
+  {\large \textbf{Gwena\"el Bou\'e, Laurent Niederman}} \\
+       \vspace{1cm}
+  {\textbf{Institut de M\'ecanique C\'eleste et de Calcul des \'Eph\'em\'erides}} \\
+      \vspace{1cm}
+    \includegraphics[width=0.35\textwidth]{logo2.jpg} \\
+      \vspace{1cm}
+  {\large\textbf{	\@date}} \\
+      \vfill
+   
+ 
+        \end{titlepage}
+\makeatother
+
+\newpage
+\unboldmath{\tableofcontents}
+\newpage
+
+%\layout{}
+\section{Introduction}
+
+\large{
+S\'eduit par la M\'ecanique C\'eleste depuis la premi\`ere ann\'ee de classe pr\'epa, je suis \`a pr\'esent heureux d'avoir pu satisfaire cette curiosit\'e d\`es la premi\`ere ann\'ee au Magist\`ere de Physique en effectuant le projet d'informatique sur la simulation num\'erique des perturbations s\'eculaires des \'elements orbitaux de Mercure et en r\'ealisant le stage de 6 semaines sur l'application de la th\'eorie des perturbations canoniques. J'ai pu ainsi d\'ecouvrir dans un premier temps l'aspect num\'erique de la M\'ecanique C\'eleste et dans un second temps son aspect analytique.
+
+L'objet du stage est l'\'etude du mouvement \`a long terme d'un satellite perturb\'e par le Soleil, ou d'une plan\`ete dans un syst\`eme d'\'etoile double.
+
+Plusieurs m\'ethodes s'offrent \`a nous pour r\'esoudre le probl\`eme.
+Dans le papier de \textit{Giuppone et al.} (Voir \cite{giuppone}), la m\'ethode utilis\'ee est une m\'ethode semi-analytique difficile \`a mettre en oeuvre car elle utilise de longues s\'eries trigonom\'etriques. De l'autre c\^ot\'e, il y a le papier de \textit{C\`uk et al.} (Voir \cite{cuk}) analytique, mais dont il manque des termes. On peut aussi envisager une m\'ethode purement num\'erique (int\'egration des \'equations du mouvement), mais co\^uteuse en temps de calcul \`a cause du mouvement \`a court terme le long de l'orbite qui ne nous int\'eresse pas car on sait d\'ej\`a qu'il est quasi-k\'epl\'erien.
+
+On choisit la solution purement analytique. On suppose que le probl\`eme est int\'egrable ou assez proche de l'int\'egrabilit\'e. C'est-\`a-dire que les solutions sont r\'eguli\`eres sur l'intervalle de temps que l'on consid\`ere, et qu'il existe des transformations permettant de rendre le syst\`eme plus simple, ou plus facilement int\'egrable. Il faut alors simplifier les \'equations: r\'eduire la dimension de l'espace des phases qui est de 18 au d\'epart (c'est-\`a-dire 9 degr\'es de libert\'e). Le but est de ne garder que les degr\'es de libert\'e qui nous int\'eressent, \`a savoir ceux du mouvement s\'eculaire (excentricit\'e/inclinaison du satellite). En effet, lorsqu'il ne reste plus que 2 degr\'es de libert\'e, on peut dans certains cas avoir des expressions analytiques des fr\'equences de pr\'ecession de l'orbite perturb\'ee, ce que l'on aurait pas r\'eussi \`a avoir avec le Hamiltonien de d\'epart.
+
+Un de mes responsables de stage, \textit{Gwena\"el Bou\'e} a d\'ej\`a commenc\'e a r\'ediger un d\'ebut d'article sur la r\'esolution du probl\`eme de mani\`ere analytique. L'objectif du stage est de comprendre, de v\'erifier et au possible de compl\'eter les calculs pr\'esents sur le papier.
+
+Partant du Hamiltonien du probl\`eme \`a trois corps, on utilise l'invariance par translation pour supprimer les degr\'es de libert\'e associ\'es au barycentre du syst\`eme et r\'eduire leur nombre \`a 6.
+Puis on se place dans le cas du probl\`eme restreint o\`u l'on g\`ele les degr\'es de libert\'e associ\'es \`a l'\'etoile pertubatrice pour descendre leur nombre \`a 4.
+Ensuite on moyennise le Hamiltonien sur les angles rapides par le biais de transformations canoniques (transformations de Lie via la m\'ethode de \textit{Hori} (1966) et \textit{Deprit} (1969)) pour obtenir un syst\`eme \`a 2 degr\'es de libert\'e correspondant au mouvement s\'eculaire.
+C'est alors que l'on peut en d\'eduire les fr\'equences de pr\'ecession (instantan\'ees) sur le long terme de l'orbite perturb\'ee \`a partir du nouveau Hamiltonien.
+
+Travaillant chez moi ou \`a la BU, je me suis entretenu avec mes responsables de stage au titre d'une fois par semaine en plus des communications par email.
+J'ai pr\'ef\'er\'e \'ecrire ce rapport en anglais afin de me familiariser avec le vocabulaire et parce qu'il est d'usage dans la recherche de r\'ediger en anglais.
+}
+
+
+\section{The Three-Body Problem}
+The three-body system can be of the type Sun-Earth-Satellite or it can be the association of a binary stellar system and of an exoplanet as $\gamma$-Cephei (See \cite{giuppone})
+\subsection{The Hamiltonian Of The System}
+Let us consider the system $\mathcal S$ composed of the sun $(m_{2},\mathbf y_{2},\mathbf {\tilde y}_{2})$, the earth $(m_{0},\mathbf y_{0},\mathbf {\tilde y}_{0})$ and a satellite $(m_{1},\mathbf y_{1},\mathbf {\tilde y}_{1})$ where $m_{k}$, $\mathbf y_{k}$ and $\mathbf {\tilde y}_{k}$ are respectively the mass, the Cartesian coordinates in an inertial system and the corresponding momentum of the k-th body. 
+We suppose $m_{1}\ll m_{0}$, $m_{1}\ll m_{2}$ and $a_{1}\ll a_{2}$ where $a_{1}$ and $a_{2}$ refer to the semi-major axis of the inner and outer orbits.
+The three bodies interact among themselves through their mutual gravitational attraction according to the Newton's law. Therefore the Hamiltonian of $\mathcal S$ is given by
+\begin{equation}
+\label{Hamiltonian}
+H_{\mathcal S}=\frac{\| \mathbf {\tilde y}_{2} \|^{2}}{2m_{2}}+\frac{\| \mathbf {\tilde y}_{0} \|^{2}}{2m_{0}}+\frac{\| \mathbf {\tilde y}_{1} \|^{2}}{2m_{1}}-\frac{Gm_{0}m_{2}}{\|\mathbf y_{0}- \mathbf y_{2}\|}-\frac{Gm_{0}m_{1}}{\|\mathbf y_{0}- \mathbf y_{1}\|}-\frac{Gm_{1}m_{2}}{\|\mathbf y_{1}- \mathbf y_{2}\|} \ .
+\end{equation}
+In order to reduce the number of degrees of freedom from 9 to 6 using the symmetry of invariance by translation, we will perform a variables transformation and move to Jacobi's variables $\mathbf r$ where the position of each body is defined relative to the center of mass of the inner orbit. 
+They are defined by 
+\begin{align}
+\mathbf r = T \, \mathbf y \quad \text{with} \quad 
+T=
+\begin{pmatrix}
+1 & 0 & 0 \\
+-1 & 1 & 0 \\
+\delta-1 & -\delta & 1
+\end{pmatrix}
+\quad
+\text{where}
+\quad
+\delta=\frac{m_{1}}{m_{0}+m_{1}} \ .
+\end{align}
+The variables transformation have to be canonical in order to preserve the invariance of Hamilton's equations (See Appendix \ref{HJJ}).
+Thus, the momenta must verify
+\begin{equation}
+\mathbf {\tilde r}= \, ^tT^{-1} \mathbf {\tilde y} \ .
+\end{equation}
+Then, $H_\mathcal S$ becomes
+\begin{gather}
+H_\mathcal S'=\frac{\| \mathbf {\tilde r}_{2} \|^{2}}{2}(\frac{1}{m_{2}}+\frac{1}{m_{0}+m_{1}})+\frac{\| \mathbf {\tilde r}_{1} \|^{2}}{2}(\frac{1}{m_{0}}+\frac{1}{m_{1}})+\frac{\| \mathbf {\tilde r}_{0} \|^{2}}{2m_{0}}-\frac{\mathbf {\tilde r}_{0}\mathbf {\tilde r}_{2}}{m_{0}+m_{1}}-\frac{\mathbf {\tilde r}_{0}\mathbf {\tilde r}_{1}}{m_{0}} \notag \\
+-\frac{Gm_{0}m_{1}}{\|\mathbf r_{1}\|}-\frac{Gm_{0}m_{2}}{\|\mathbf r_{2} + \delta \mathbf r_{1}\|}-\frac{Gm_{1}m_{2}}{\|\mathbf r_{2}- (1-\delta)\mathbf r_{1}\|} \ .
+\label{Hi'}
+\end{gather}
+We can immediately notice $\mathbf r_{0}$ is cyclic since it does not appear in \eqref{Hi'}. Therefore, $\mathbf {\tilde r}_{0}$ is a constant of the motion and we can choose 
+\begin{equation}
+\mathbf {\tilde r}_{0}=0 \ .
+\end{equation}
+Owing to \cite{Duriez} and denoting by $P_{n}(X)$ the nth-degree Legendre polynomial, we can write
+\begin{align}
+x\ll r \implies \frac{1}{\|\mathbf r - \mathbf x\|}
+&=\displaystyle\sum_{n=0}^{\infty} P_{n}\left(\frac{\mathbf r \cdot \mathbf x}{r\, x }\right)\left( \frac{x}{r} \right)^{n}  \notag \\
+&=\frac{1}{r}
+\left(
+1
++\underbrace{\frac{\mathbf r \cdot \mathbf x}{r^{2}}}_{Dipolar \ term}
++\underbrace{\frac{3(\mathbf r \cdot {\mathbf x)^2- r }^2 \, { x }^2}{2r^{4}}}_{Quadrupolar \ term}
++\underbrace{\frac{5(\mathbf r \cdot \mathbf x)^3-3(\mathbf r \cdot {\mathbf x) r }^2 \, { x }^2}{2r^{6}}}_{Octupolar \ term}
++\cdots \right) \ .
+\label{legendre}
+\end{align}
+Considering that $\delta \mathbf r_{1}\ll \mathbf r_{2}$, $(1-\delta)\mathbf r_{1}\ll \mathbf r_{2}$ and using \eqref{legendre} we obtain
+\begin{multline}
+H_\mathcal S'=
+\frac{\| \mathbf {\tilde r}_{2} \|^{2}}{2\beta_{2}}
+-\frac{\mu_{2}\beta_{2}}{\|\mathbf r_{2}\|} 
++\frac{\| \mathbf {\tilde r}_{1} \|^{2}}{2\beta_{1}}
+-\frac{\mu_{1}\beta_{1}}{\|\mathbf r_{1}\|} \\
+-\frac{Gm_{2}\beta_{1}}{2r_{2}^{5}}(3(\mathbf r_{2}\cdot {\mathbf r_{1})^2-r_{2}^{2}r_{1}^{2}})
+-\frac{Gm_{2}\beta_{1}(1-2\delta)}{2r_{2}^{7}}(5(\mathbf r_{2}\cdot \mathbf r_{1})^3-3(\mathbf r_{2}\cdot {\mathbf r_{1})r_{2}^{2}r_{1}^{2}}) \ ,
+\end{multline}
+where $\beta_{1}=\frac{m_{0}m_{1}}{m_{0}+m{1}}$, \; $\mu_{1}=G(m_{0}+m_{1})\simeq G m_{0}$, \; $\beta_{2}=\frac{m_{2}(m_{0}+m_{1})}{m_{0}+m{1}+m_{2}}$ and $\mu_{2}=G(m_{0}+m_{1}+m_{2})\simeq G(m_{0}+m_{2})$.
+Finally $H_\mathcal S'=K+P^{Q}+P^{O}$ where $K$, $P^{Q}$ and $P^{O}$ are respectively the Keplerian term, the Quadrupolar term and the Octupolar term and are given by
+\begin{align}
+K&=-\frac{\mu_{1}\beta_{1}}{2a_{1}}-\frac{\mu_{2}\beta_{2}}{2a_{2}} \ , \\
+P^{Q}&=-\frac{\mu_{2}\beta_{1}}{2r_{2}^{5}}(3(\mathbf r_{2}\cdot {\mathbf r_{1})^2-r_{2}^{2}r_{1}^{2}}) \ , \\
+P^{O}&=-\frac{\mu_{2}\beta_{1}}{2r_{2}^{7}}(5(\mathbf r_{2}\cdot \mathbf r_{1})^3-3(\mathbf r_{2}\cdot {\mathbf r_{1})r_{2}^{2}r_{1}^{2}}) \ . \label{Octupolar}
+\end{align}
+\subsection{The Restricted Problem}
+Neglecting the gravitational effects of the pertubed mass on the other bodies, the outer orbit will be a fixed ellipse and we can consider $\mathbf r_{2}$ not as a variable but as a known function of time $t$ corresponding to a Keplerian orbit. Thus $\Lambda_{2}$, $G_{2}$, $\Theta_{2}$, $\omega_{2}$, $\Omega_{2}$ (see Appendix \ref{orbitalelements}) are constant parameters and $\lambda_{2}$ is the quantity which increases uniformly with the time $t$. But it is more convenient to consider the variable $t$ (or $\lambda_{2}$) as a dynamical variable. So we move to the extended space in which we add $(\lambda_{2},\Lambda_{2})$ and make the particular choice of replacing the Keplerian term $-\frac{\mu_{2}\beta_{2}}{2a_{2}}$ by $n_{2}\Lambda_{2}$ where $n_{2}$ is the angular frequency of the outer orbit such that the new hamiltonian H' verifies
+\begin{equation}
+\frac{d \Lambda_{2}}{d t}=-\frac{\partial H'}{\partial \lambda_{2}} \ , \qquad \frac{d \lambda_{2}}{d t}=\frac{\partial H'}{\partial \Lambda_{2}}=n_{2} \ .
+\end{equation}
+In so doing, we reduce the number of degrees of freedom from 6 to 4.
+\section{Canonical Lie Transformations}
+The goal of that section is to simplify the Hamiltonian by averaging over fast angles $(\lambda_{1}, \lambda_{2})$ such that it remains only the secular motion which will allow us to determine the long term evolution and which is associated to variables $\left( (\omega_{1}, G_{1}), (\Omega_{1}, \Theta_{1}) \right)$. 
+In so doing, we reduce the number of degrees of freedom from 4 to 2.
+Transformations of the Hamiltonian have to be canonical in order to preserve Hamilton's equations, that is why we need to use Lie transformations developed by \textit{Hori} and \textit{Deprit}.
+\label{clt}
+\subsection{The Quadrupolar Term}
+Consider the Hamiltonian: \[H=h_{1}+h_{2}+h_{3} \ ,\]
+where 
+\begin{align}
+\label{h1}
+h_{1}(\Lambda_{1})&=-\frac{\mu_{1}^{2}\beta_{1}^{3}}{2\Lambda_{1}^{2}} \ , \\
+\label{h2}
+h_{2}(\Lambda_{2})&=n_{2}\Lambda_{2} \ , \\
+\label{h3}
+h_{3}(\lambda_{1},\Lambda_{1},\omega_{1},G_{1},\Omega_{1},\Theta_{1},\lambda_{2})&=-\frac{\mu_{2}\beta_{1}(3(\mathbf r_{2} \cdot \mathbf r_{1})^{2}-r_{2}^{2}r_{1}^{2})}{r_{2}^{5}} \ .
+\end{align}
+Let us introduce the small parameter $\varepsilon=\frac{n_{2}}{n_{1}}$ corresponding to the ratio of the angular frequency of the outer orbit to the angular frequency of the inner orbit in order to control the tininess of the perturbation term $h_{3}$ according to the Kepler term $h_{1}$. In fact, we have 
+\begin{equation}
+\frac{h_{3}}{h_{1}} \sim \frac{\mu_{2}\beta_{1}a_{1}^{2}}{a_{2}^{3}} \frac{a_{1}}{\mu_{1}\beta_{1}}
+=\frac{\mu_{2}}{\mu_{1}} \left(\frac{a_{1}}{a_{2}}\right)^{3}=\varepsilon^{2} \ ,
+\label{h3eps}
+\end{equation}
+where we used the third Kepler's law $\mu=n^{2}a^{3}$. \\
+In this paper, we will make use of perturbation procedures based on the algorithm of the Lie transformation as developed by \textit{Hori} and \textit{Deprit} in 1966 and 1969 (See Appendix \ref{lie}). \\
+ We will have to deal with three different types of Poisson Brackets: $\{f,h_{1}\}$, $\{f,h_{2}\}$, $\{f,g\}$ where $f=f(\lambda_{1},\Lambda_{1},\omega_{1},G_{1},\Omega_{1},\Theta_{1},\lambda_{2},\cancel \Lambda_{2})$ and $g=g(\lambda_{1},\Lambda_{1},\omega_{1},G_{1},\Omega_{1},\Theta_{1},\lambda_{2}, \cancel \Lambda_{2})$. 
+ Let us draw up a systematic procedure in order to calculate them. \\
+ As regards Poisson brackets, we choose the following convention 
+ \begin{equation}
+ \{f, g\} = \frac{\partial f}{\partial p}\frac{\partial g}{\partial q} - \frac{\partial f}{\partial q}\frac{\partial g}{\partial p} \ ,
+ \end{equation}
+ where q denotes a generalized coordinate and p its momentum. \\
+First, we note that
+\begin{align}
+h_{1}=h_{1}(\Lambda_{1}) \qquad \text{and}& \qquad \frac{\partial h_{1}}{\partial \Lambda_{1}}=n_{1} \ , \\
+h_{2}=h_{2}(\Lambda_{2}) \qquad \text{and}& \qquad \frac{\partial h_{2}}{\partial \Lambda_{2}}=n_{2} \ . \\
+\end{align}
+Second, we note that we can express $f=f(\lambda_{1},\Lambda_{1},\omega_{1},G_{1},\Omega_{1},\Theta_{1},\lambda_{2})$ as a Fourier serie whose generic term is of the type $\Lambda_{1}^{\alpha}G_{1}^{\beta}\Theta_{1}^{\gamma} \, e^{i(p\lambda_{1}+q\omega_{1}+r\Omega_{1}+s\lambda_{2})}$ with $\alpha$, $\beta$, $\gamma$, $p$, $q$, $r$ and $s$ of order unity. Then we can do the following approximations
+\begin{align}
+\label{approx1}
+\frac{\partial f}{\partial \lambda_{1}, \omega_{1}, \Omega_{1}, \lambda_{2}} &\sim f  \ , \\
+\label{approx2}
+\frac{\partial f}{\partial \Lambda_{1},G_{1},\Theta_{1}} &\sim \frac{f}{\Lambda_{1}}  \ .
+\end{align}
+and the same for $g$. \\
+Last, we suppose  
+\begin{itemize}
+\item
+$f \sim \frac{h_{1}\varepsilon^{n}}{n_{1}}$ with $n \in \mathbb N$ ,
+\item
+$g \sim h_{1}\varepsilon^{m}$ with $m \in \mathbb N$ .
+\end{itemize}
+We deduce that
+\begin{align}
+\label{fh1}
+\{f,h_{1}\}&=-\frac{\partial f}{\partial \lambda_{1}}\frac{\partial h_{1}}{\partial \Lambda_{1}}=-\frac{\partial f}{\partial \lambda_{1}}n_{1} \sim (f)(n_{1}) \sim (\frac{h_{1}\varepsilon^{n}}{n_{1}})(n_{1}) \sim h_{1}\varepsilon^{n} \ , \\
+\label{fh2}
+\{f,h_{2}\}&=-\frac{\partial f}{\partial \lambda_{2}}\frac{\partial h_{2}}{\partial \Lambda_{2}}=-\frac{\partial f}{\partial \lambda_{2}}n_{2} \sim (f)(n_{2}) \sim (\frac{h_{1}\varepsilon^{n}}{n_{1}})(n_{2}) \sim h_{1}\varepsilon^{n+1} \ , \\
+\label{fg}
+\{f,g\}&=\frac{\partial g}{\partial \lambda_{1}}\frac{\partial f}{\partial \Lambda_{1}}-\frac{\partial f}{\partial \lambda_{1}}\frac{\partial g}{\partial \Lambda_{1}}
++\frac{\partial g}{\partial \omega_{1}}\frac{\partial f}{\partial G_{1}}-\frac{\partial f}{\partial \omega_{1}}\frac{\partial g}{\partial G_{1}} 
++\frac{\partial g}{\partial \Omega_{1}}\frac{\partial f}{\partial \Theta_{1}}-\frac{\partial f}{\partial \Omega_{1}}\frac{\partial g}{\partial \Theta_{1}} \notag \\
+&\sim \frac{(f)(g)}{\Lambda_{1}}+\frac{(f)(g)}{G_{1}}+\frac{(f)(g)}{\Theta_{1}}
+\sim \frac{(f)(g)}{\Lambda_{1}}
+\sim (\frac{h_{1}\varepsilon^{n}}{n_{1}})(\frac{h_{1}\varepsilon^{m}}{\Lambda_{1}})
+\sim (\frac{h_{1}\varepsilon^{n}}{n_{1}})(n_{1}\varepsilon^m)
+\sim h_{1}\varepsilon^{n+m} \ .
+\end{align}
+\subsubsection{First Canonical Transformation}
+\label{FCT}
+In order to average $h_{3}$ over $\lambda_{1}$, we introduce a canonical Lie transformation which differs from the identity transformation by a small amount, so that the generator $\varepsilon W_{1}$ is of the same order than the perturbation. 
+The new Hamiltonian will be 
+\begin{equation}
+K_{1}=H \circ \exp (L_{\varepsilon W_{1}})=h_{1}+h_{2}+h_{3}+\{\varepsilon W_{1},h_{1}\}+\{\varepsilon W_{1},h_{2}\}+\{\varepsilon W_{1},h_{3}\}\\+\frac{1}{2}\{\varepsilon W_{1},\{\varepsilon W_{1},h_{1}\}\}+\ldots \ .
+\label{K1}
+\end{equation} 
+In order to get the averaged Hamiltonian, the generator must verify the following homological equation 
+\begin{equation}
+\{\varepsilon W_{1},h_{1}\}= \langle h_{3} \rangle _{\lambda_{1}}-h_{3} \ ,
+\label{he1} 
+\end{equation} 
+where $ \langle h_{3} \rangle _{\lambda_{1}}$ is $h_{3}$ averaged over $\lambda_{1}$. \\
+From this and from \eqref{h3eps}, we obtain 
+\begin{equation}
+\{\varepsilon W_{1},h_{1}\}=-\frac{\partial \varepsilon W_{1}}{\partial \lambda_{1}}n_{1}
+\sim \varepsilon W_{1} n_{1} \implies \varepsilon W_{1}\sim \frac{h_{1}\varepsilon^{2}}{n_{1}} \ .
+\label{w1eps}
+\end{equation} 
+Using respectively \eqref{fh2} with n=2 and \eqref{fg} with (n=2, m=2), we get
+\begin{align}
+\label{pb1}
+\{\varepsilon W_{1},h_{2}\} &\sim h_{1}\varepsilon^{3} \ , \\
+\frac{1}{2}\{\varepsilon W_{1},\{\varepsilon W_{1},h_{1}\}\}+\{\varepsilon W_{1},h_{3}\} &= \frac{1}{2}\{\varepsilon W_{1},h_{3}+ \langle h_{3} \rangle _{\lambda_{1}}\}\sim h_{1}\varepsilon^{4} \ .
+\end{align}
+We get our new Hamiltonian averaged over $\lambda_{1}$ up to the second order in $\varepsilon$
+\begin{equation}
+K_{1}=h_{1}+h_{2}+\underbrace{ \langle h_{3} \rangle _{\lambda_{1}}}_{h_{1}\varepsilon^{2}}-\underbrace{\frac{\partial \varepsilon W_{1}}{\partial \lambda_{2}}n_{2}}_{h_{1}\varepsilon^{3}}+\text{o}(\varepsilon^{4}) \ .
+\label{K11}
+\end{equation}
+\subsubsection{Second Canonical Transformation}
+With the aim of getting rid of $\lambda_{1}$ up to the third order in $\varepsilon$, we perform a second near-identity transformation generated by the function $\varepsilon W_{2}$. 
+The new Hamiltonian will be
+\begin{equation}
+K_{2}=K_{1} \circ \exp (L_{\varepsilon W_{2}})=h_{1}+h_{2}+\underbrace{ \langle h_{3} \rangle _{\lambda_{1}}}_{h_{1}\varepsilon^{2}}-\underbrace{\frac{\partial \varepsilon W_{1}}{\partial \lambda_{2}}n_{2}}_{h_{1}\varepsilon^{3}} \\
++\{\varepsilon W_{2},h_{1}\}+\{\varepsilon W_{2},h_{2}\}+\ldots \ .
+\label{K2}
+\end{equation}
+With the intention of averaging $-\frac{\partial \varepsilon W_{1}}{\partial \lambda_{2}}n_{2}$ over $\lambda_{1}$, $\varepsilon W_{2}$ must verify
+\begin{equation}
+\{\varepsilon W_{2},h_{1}\}=\frac{\partial \varepsilon W_{1}}{\partial \lambda_{2}}n_{2}- \langle {\frac{\partial \varepsilon W_{1}}{\partial \lambda_{2}}n_{2}} \rangle _{\lambda_{1}} \ .
+\label{he2}
+\end{equation}
+But we can choose the primitive of the first homological equation \eqref{he1} and then $\varepsilon W_{1}$ such that its average over $\lambda_{1}$ vanishes. Therefore, one has 
+\begin{equation}
+ \langle {\frac{\partial \varepsilon W_{1}}{\partial \lambda_{2}}n_{2}} \rangle _{\lambda_{1}}=0 \ .
+\end{equation}
+From the homological equation \eqref{he2} and from \eqref{w1eps}, we deduce the size of $\varepsilon W_{2}$ 
+\begin{equation}
+\{\varepsilon W_{2},h_{1}\}=\frac{\partial \varepsilon W_{2}}{\partial \lambda_{1}} \frac{\partial h_{1}}{\partial \Lambda_{1}}\sim \varepsilon W_{2}n_{1} \implies \varepsilon W_{2} \sim \varepsilon^{2} W_{1} \sim \frac{h_{1}\varepsilon^{3}}{n_{1}} \ ,
+\label{w2eps}
+\end{equation}
+From \eqref{fh2} with n=3, one has
+\begin{equation}
+\{\varepsilon W_{2},h_{2}\} \sim h_{1}\varepsilon^{4} \ .
+\end{equation} 
+We get the new Hamiltonian averaged over $\lambda_{1}$ up to the third order in $\varepsilon$
+\begin{equation}
+K_{2}=h_{1}+h_{2}+\underbrace{ \langle h_{3} \rangle _{\lambda_{1}}}_{h_{1}\varepsilon^{2}}+\text{o}(\varepsilon^{3}) \ .
+\label{K22}
+\end{equation}
+\subsubsection{Third Canonical Transformation}
+\label{SCT}
+In view of erasing the dependence in $\lambda_{2}$ up to the second order in $\varepsilon$, we consider a third near-identity transformation generated by the function $\varepsilon F_{1}$. 
+The new Hamiltonian will be
+\begin{multline}
+E_{1}=K_{2} \circ \exp (L_{\varepsilon F_{1}})=h_{1}+h_{2}+\underbrace{ \langle h_{3} \rangle _{\lambda_{1}}}_{h_{1}\varepsilon^{2}}
++\{\varepsilon F_{1},h_{1}\}+\{\varepsilon F_{1},h_{2}\}+\{\varepsilon F_{1}, \langle h_{3} \rangle _{\lambda_{1}}\} \\
++\frac{1}{2}\{\varepsilon F_{1},\{\varepsilon F_{1},h_{1}\}\}+\frac{1}{2}\{\varepsilon F_{1},\{\varepsilon F_{1},h_{2}\}\}+\frac{1}{2}\{\varepsilon F_{1},\{\varepsilon F_{1}, \langle h_{3} \rangle _{\lambda_{1}}\}\}+\ldots \ .
+\label{E1}
+\end{multline}
+In order to average $ \langle h_{3} \rangle _{\lambda_{1}}$ over $\lambda_{2}$, we choose $\varepsilon F_{1}$ such that
+\begin{equation}
+\label{he3}
+\{\varepsilon F_{1},h_{2}\}= \langle h_{3} \rangle _{\lambda_{1,2}}- \langle h_{3} \rangle _{\lambda_{1}} \ .
+\end{equation}
+Besides, one has
+\begin{equation} \label{f1dep}
+\varepsilon F_{1}=\varepsilon F_{1}(\cancel\lambda_{1},\Lambda_{1},\omega_{1},G_{1},\Omega_{1},\Theta_{1},\lambda_{2}) \ \text{and} \ h_{1}=h_{1}(\Lambda_{1}) \implies
+\{\varepsilon F_{1},h_{1}\}=\frac{1}{2}\{\varepsilon F_{1},\{\varepsilon F_{1},h_{1}\}\}=0 \ .
+\end{equation}
+The size of $\varepsilon F_{1}$ is given by
+\begin{equation}
+\{\varepsilon F_{1},h_{2}\}=-\frac{\partial \varepsilon F_{1}}{\partial \lambda_{2}}n_{2}
+\implies
+\varepsilon F_{1} \sim \frac{h_{3}}{n_{2}} \sim \frac{h_{1}\varepsilon}{n_{1}} \ .
+\end{equation}
+Using \eqref{fg} with (n=1, m=2), we obtain
+\begin{equation}
+\label{pb2}
+\{\varepsilon F_{1}, \langle h_{3} \rangle _{\lambda_{1}}\} + \frac{1}{2}\{\varepsilon F_{1},\{\varepsilon F_{1},h_{2}\}\} = \frac{1}{2}\{\varepsilon F_{1}, \langle h_{3} \rangle _{\lambda_{1}}+ \langle h_{3} \rangle _{\lambda_{1,2}}\} \sim h_{1}\varepsilon^{3}  \ .
+\end{equation}
+Then, using \eqref{fg} with (n=1, m=3), one has
+\begin{equation}
+ \frac{1}{2}\{\varepsilon F_{1},\{\varepsilon F_{1}, \langle h_{3} \rangle _{\lambda_{1}}\}\} \sim h_{1}\varepsilon^{4} \ .
+\end{equation}
+We obtain the Hamiltonian averaged over $\lambda_{1}$ and $\lambda_{2}$ respectively up to the order three and two in $\varepsilon$
+\begin{gather}
+E_{1}=h_{1}+h_{2}+\underbrace{ \langle h_{3} \rangle _{\lambda_{1,2}}}_{h_{1}\varepsilon^{2}} + \underbrace{\frac{1}{2}\{\varepsilon F_{1}, \langle h_{3} \rangle _{\lambda_{1}} +  \langle h_{3} \rangle _{\lambda_{1,2}}\}}_{h_{1}\varepsilon^{3}}+\text{o}(\varepsilon^{3}) \ .
+\label{E11}
+\end{gather}
+\subsubsection{Fourth Canonical Transformation}
+In order to average \eqref{hquadrupolar} over $\lambda_{2}$ up to the third order in $\varepsilon$, we apply a fourth near-identity transformation generated by the function $\varepsilon F_{2}$. 
+The new Hamiltonian will be
+\begin{multline}
+E_{2}=E_{1} \circ \exp (L_{\varepsilon F_{2}})= h_{1}+h_{2}+\underbrace{ \langle h_{3} \rangle _{\lambda_{1,2}}}_{h_{1}\varepsilon^{2}} + \underbrace{\frac{1}{2}\{\varepsilon F_{1}, \langle h_{3} \rangle _{\lambda_{1}} +  \langle h_{3} \rangle _{\lambda_{1,2}}\}}_{h_{1}\varepsilon^{3}} \\
++\{\varepsilon F_{2},h_{1}\}+\{\varepsilon F_{2},h_{2}\}+\{\varepsilon F_{2}, \langle h_{3} \rangle _{\lambda_{1,2}}\} 
++\frac{1}{2}\{\varepsilon F_{2},\{\varepsilon F_{2},h_{1}\}\}+\frac{1}{2}\{\varepsilon F_{2},\{\varepsilon F_{2},h_{2}\}\}+\ldots \ .
+\label{E2}
+\end{multline}
+Within sight of averaging $\frac{1}{2}\{\varepsilon F_{1}, \langle h_{3} \rangle _{\lambda_{1}} +  \langle h_{3} \rangle _{\lambda_{1,2}}\}$ over $\lambda_{2}$, $\varepsilon F_{2}$ must hold
+\begin{equation}
+\label{he4}
+\{\varepsilon F_{2},h_{2}\}= \langle {\frac{1}{2}\{\varepsilon F_{1}, \langle h_{3} \rangle _{\lambda_{1}} +  \langle h_{3} \rangle _{\lambda_{1,2}}\}} \rangle _{\lambda_{1}}-\frac{1}{2}\{\varepsilon F_{1}, \langle h_{3} \rangle _{\lambda_{1}} +  \langle h_{3} \rangle _{\lambda_{1,2}}\} \ .
+\end{equation}
+As in \eqref{f1dep} one has
+\begin{equation}
+\{\varepsilon F_{2},h_{1}\}=\frac{1}{2}\{\varepsilon F_{2},\{\varepsilon F_{1},h_{1}\}\}=0 \ .
+\end{equation}
+From \eqref{he4} and \eqref{pb2}, we deduce the size of $\varepsilon F_{2}$
+\begin{equation}
+\varepsilon F_{2} \sim \frac{h_{1}\varepsilon^{3}}{n_{2}} \sim \frac{h_{1}\varepsilon^{2}}{n_{1}} \ .
+\end{equation}
+Therefore among all the new terms of \eqref{E2}, the only one which is at most of the order of $\varepsilon^{4}$ is
+\begin{equation}
+\{\varepsilon F_{2}, \langle h_{3} \rangle _{\lambda_{1,2}}\}=\{\varepsilon F_{2}, \langle h_{3} \rangle _{\lambda_{1,2}}\} \sim h_{1}\varepsilon^{4} \ ,
+\end{equation}
+where we used \eqref{fg} with (n=2, m=2). \\
+We obtain the Hamiltonian averaged over $\lambda_{1}$ and $\lambda_{2}$ up to the order three in $\varepsilon$
+\begin{equation}
+E_{2}=H_{1}+H_{2}+H_{3}+\text{o}(\varepsilon^{3}) \ ,
+\label{hquadrupolar}
+\end{equation}
+with
+\begin{equation}
+H_{1}=h_{1}+h_{2} \ , \qquad H_{2}=\underbrace{ \langle h_{3} \rangle _{\lambda_{1,2}}}_{h_{1}\varepsilon^{2}} \ , \qquad H_{3}=\underbrace{\frac{1}{2} \langle {\{\varepsilon F_{1}, \langle h_{3} \rangle _{\lambda_{1}} +  \langle h_{3} \rangle _{\lambda_{1,2}}\}} \rangle _{\lambda_{1,2}}}_{h_{1}\varepsilon^{3}} \ .
+\end{equation}
+\textbf{Numerical application} \\
+In the case of the system made of the sun, the earth and the moon, one has 
+\begin{align}
+\varepsilon=7 \times 10^{-2} \quad &\implies \quad \frac{H_{2}}{h_{1}}=\varepsilon^{2}=6 \times 10^{-3} \ , \\
+ &\implies \quad \frac{H_{3}}{h_{1}}=\varepsilon^{3}=4 \times 10^{-4} \ .
+\end{align}
+In the case of the system made of the sun, the earth and an artificial satellite as SPOT-1 (Time period: 102 min, Semi-major axis: 6500+830 km), one has 
+\begin{align}
+\varepsilon=2 \times 10^{-4} \quad &\implies \quad \frac{H_{2}}{h_{1}}=\varepsilon^{2}=4 \times 10^{-8} \ , \\
+ &\implies \quad \frac{H_{3}}{h_{1}}=\varepsilon^{3}=7 \times 10^{-12} \ . 
+\end{align}
+\subsection{The Octupolar Term}
+\label{octu}
+Taking in consideration the Octupolar term \eqref{Octupolar}, the Hamiltonian \eqref{hquadrupolar} becomes
+\begin{equation}
+H=H_{1}+H_{2}+H_{3}+h_{4} \ ,
+\label{hoctupolar}
+\end{equation}
+where \[h_{4}=-\frac{\mu_{2}\beta_{1}}{2r_{2}^{7}}(5(\mathbf r_{2}\cdot \mathbf r_{1})^3-3(\mathbf r_{2}\cdot {\mathbf r_{1})r_{2}^{2}r_{1}^{2}}) \ . \] \\
+Introducing the parameter $\alpha=\frac{a_{1}}{a_{2}}$, we evaluate the size of $h_{4}$ as
+\begin{equation}
+\frac{h_{4}}{h_{1}} \sim \frac{\mu_{2}\beta_{1}a_{1}^{3}}{a_{2}^{4}} \frac{a_{1}}{\mu_{1}\beta_{1}}
+=\frac{\mu_{2}}{\mu_{1}} \left(\frac{a_{1}}{a_{2}}\right)^{4}
+=\alpha\varepsilon^{2} \ .
+\end{equation}
+Within sight of averaging the Octupolar term $h_{4}$ in \eqref{hoctupolar} over $\lambda_{1}$ and $\lambda_{2}$, we perform two canonical transformations as we did previously.
+We get our final Hamiltonian whose Quadrupolar term and Octupolar term are averaged over $\lambda_{1}$ and $\lambda_{2}$ respectively up to the order of $\varepsilon^{3}$ and $\alpha\varepsilon^{2}$
+\begin{equation}
+H'=H_{1}+H_{2}+H_{3}+H_{4} \ ,
+\end{equation}
+with
+\begin{equation}
+H_{4}=\langle h_{4} \rangle _{\lambda_{1,2}}  \ .
+\end{equation}
+\textbf{Numerical application} \\
+In the case of the system made of the sun, the earth and the moon, one has 
+\begin{align}
+\alpha=2.57 \times 10^{-3}=\varepsilon^{2.3} \quad &\implies \quad H_{4}=h_{1}\varepsilon^{4.3} \ (\simeq h_{1}\varepsilon^{4}) \ , \\
+&\implies \quad \frac{H_{4}}{h_{1}}=1 \times 10^{-5} \ . 
+\end{align}
+In the case of the system made of the sun, the earth and an artificial satellite as SPOT-1 (Time period: 102 min, Semi-major axis: 6500+830 km), one has
+\begin{align}
+\alpha=5 \times 10^{-5}=\varepsilon^{1.2} \quad &\implies \quad H_{4}=h_{1}\varepsilon^{3.2} \ (\simeq h_{1}\varepsilon^{3}) \ , \\
+&\implies \quad \frac{H_{4}}{h_{1}}=2 \times 10^{-12} \ . 
+\label{sath3h4}
+\end{align}
+\section{The Final Hamiltonian: \boldmath{$H=H_{1}+H_{2}+H_{3}+H_{4}$}}
+\label{Hfinal}
+\subsection{\boldmath{$H_{2}$ And $H_{4}$}}
+We give just below final terms $H_{2}$, $H_{3}$ and $H_{4}$ as computed in appendix \ref{averaging}
+\begin{equation}
+ H_{2}=-\frac{\kappa}{8} \left[ -1+6e_{1}^{2} -15(\mathbf w_{2} \cdot \mathbf e_{1})^{2} +3(\mathbf w_{2} \cdot \mathbf j_{1})^{2} \right] \ ,
+\end{equation}
+with $\kappa=\frac{\mu_{2}\beta_{1}a_{1}^{2}}{a_{2}^{3}(1-e_{2}^{2})^\frac{3}{2}}$ \ .
+\begin{align}
+H_{4}=-\frac{\kappa'}{8} \bigg[
+ B_{1}(\mathbf e_{2} \cdot \mathbf e_{1})
++B_{2}(\mathbf e_{2} \cdot \mathbf e_{1})(\mathbf w_{2} \cdot \mathbf e_{1})^{2} 
++B_{3}(\mathbf e_{2} \cdot \mathbf e_{1})(\mathbf w_{2} \cdot \mathbf j_{1})^{2}
++B_{4}(\mathbf e_{2} \cdot \mathbf j_{1})(\mathbf w_{2} \cdot \mathbf e_{1})(\mathbf w_{2} \cdot \mathbf j_{1})
+\bigg ] \ ,
+\end{align}
+with $\kappa'=\frac{\mu_{2}\beta_{1}a_{1}^{3}}{a_{2}^{4}(1-e_{2}^{2})^{\frac{5}{2}}}$ and
+\begin{align}
+B_{1}&=+\frac{15}{8}-15e_{1}^{2} \ , &B_{3}&=-\frac{75}{8}   \ , \notag \\
+B_{2}&=+\frac{525}{8}   \ ,                     &B_{4}&=-\frac{75}{4}  \ .   
+\end{align}
+
+\subsection{\boldmath{$  H_{3}=\frac{1}{2}\langle {\{\varepsilon F_{1}, \langle  h_{3} \rangle  _{\lambda_{1}} +  \langle h_{3} \rangle _{\lambda_{1,2}}\}} \rangle _{\lambda_{2}} $}}
+\label{averagingcp}
+Since neither $\varepsilon F_{1}$ nor $\langle  h_{3} \rangle  _{\lambda_{1}} +  \langle h_{3} \rangle _{\lambda_{1,2}}$ depend on $\Lambda_{2}$ and $\lambda_{1}$, the Poisson bracket 
+\begin{equation}
+\label{poissonbracket}
+\{\varepsilon F_{1}, \langle  h_{3} \rangle  _{\lambda_{1}} +  \langle h_{3} \rangle _{\lambda_{1,2}}\} \ ,
+\end{equation}
+depends only on derivatives with respect to secular variables $(\omega_{1},G_{1},\Omega_{1},\Theta_{1})$.
+We have made the choice of expressing \eqref{h312f}, \eqref{f1f} and \eqref{h32f} by means of the vectors $(\mathbf e_{1},\mathbf j_{1})$. In view of computing \eqref{poissonbracket}, we will continue in this way and we will perform a variables transformation from Delaunay's coordinates $\mathbf z=(\omega_{1},G_{1},\Omega_{1},\Theta_{1})\in\mathbb R^{4}$ to $\mathbf y=(\mathbf e_{1},\mathbf j_{1})\in\mathbb R^{6}$.
+We suppose the Jacobian determinant $\begin{vmatrix} \frac{\partial \mathbf y}{\partial \mathbf z} \end{vmatrix}$ non-vanishing.
+We have 
+\begin{equation}
+\{f,g\}=\left(\frac{\partial f}{\partial z_{i}}\right)^{t} B_{ij} \left(\frac{\partial g}{\partial z_{j}}\right) \ ,
+\end{equation}
+where B is the Poisson's matrix which in case of canonical variables is equal to the $2n \times 2n$ matrix:
+$\begin{pmatrix} 
+\mathbf 0 & \mathbf 1 \\
+\mathbf 1 & \mathbf 0
+\end{pmatrix}$.
+We write
+\begin{equation}
+\{f,g\}=\left(\frac{\partial f}{\partial y_{k}}\right)^{t} \left(\frac{\partial y_{k}}{\partial z_{i}}\right)^{t} B_{ij} \left(\frac{\partial y_{l}}{\partial z_{j}}\right) \left(\frac{\partial g}{\partial y_{l}}\right)
+=\left(\frac{\partial f}{\partial y_{k}}\right)^{t} B'_{kl} \left(\frac{\partial g}{\partial y_{l}}\right) \ ,
+\end{equation}
+where the new Poisson's matrix of $\{f,g\}$ expressed by means of $\mathbf y$ is given by $B'_{ij}=\{y_{i},y_{j}\}$. \\
+We get
+\begin{align}
+\label{f,g}
+\{f,g\}&=\left(\frac{\partial f}{\partial \mathbf e}\right)^{t} \{\mathbf e, \mathbf e\} \left(\frac{\partial g}{\partial \mathbf e}\right)
++\left(\frac{\partial f}{\partial \mathbf e}\right)^{t} \{\mathbf e, \mathbf j\} \left(\frac{\partial g}{\partial \mathbf j}\right)  \notag \\
+& \; +\left(\frac{\partial f}{\partial \mathbf j}\right)^{t} \{\mathbf j, \mathbf e\} \left(\frac{\partial g}{\partial \mathbf e}\right)
++\left(\frac{\partial f}{\partial \mathbf j}\right)^{t} \{\mathbf j, \mathbf j\} \left(\frac{\partial g}{\partial \mathbf j}\right) \ .
+\end{align}
+According to \cite{Milankovitch}, the Poisson brackets above are given by 
+\begin{align}
+\label{milank}
+\{\mathbf e, \mathbf e\}=\frac{1}{\Lambda}\mathbf j \, \times \ , \qquad & \{\mathbf e, \mathbf j\}=\frac{1}{\Lambda}\mathbf e \, \times \ , \notag \\
+\{\mathbf j, \mathbf e\}=\frac{1}{\Lambda}\mathbf e \, \times \ , \qquad & \, \{\mathbf j, \mathbf j\}=\frac{1}{\Lambda}\mathbf j \, \times  \ .
+\end{align}
+Then, we subtitute in \eqref{f,g}
+\begin{align}
+\{f,g\}&=\frac{1}{\Lambda}\bigl[ \frac{\partial f}{\partial \mathbf e}  \cdot  (\mathbf j \, \times \, \frac{\partial g}{\partial \mathbf e})
++\frac{\partial f}{\partial \mathbf e}  \cdot  (\mathbf e \, \times \, \frac{\partial g}{\partial \mathbf j}) 
++\frac{\partial f}{\partial \mathbf j}  \cdot  (\mathbf e \, \times \, \frac{\partial g}{\partial \mathbf e})
++\frac{\partial f}{\partial \mathbf j}  \cdot  (\mathbf j \, \times \, \frac{\partial g}{\partial \mathbf j}) \bigl]  \notag \\
+&=\frac{1}{\Lambda}\bigl[  \mathbf j \cdot (\frac{\partial g}{\partial \mathbf e} \, \times \, \frac{\partial f}{\partial \mathbf e})
++ \mathbf e \cdot (\frac{\partial g}{\partial \mathbf e} \, \times \, \frac{\partial f}{\partial \mathbf j}) 
++ \mathbf e \cdot (\frac{\partial g}{\partial \mathbf j} \, \times \, \frac{\partial f}{\partial \mathbf e})
++ \mathbf j \cdot (\frac{\partial g}{\partial \mathbf j} \, \times \, \frac{\partial f}{\partial \mathbf j}) \bigl] \ .
+\label{poissonbracket2}
+\end{align}
+Therefore, the Poisson bracket in \eqref{poissonbracket} expressed by means of derivative with respect to $\mathbf e_{1}$ and $\mathbf j_{1}$ is given by \eqref{poissonbracket2} in which we replace f and g respectively by $\varepsilon F_{1}$ and $ \langle h_{3} \rangle _{\lambda_{1}} +  \langle h_{3} \rangle _{\lambda_{1,2}}$. \\
+We derivate expressions in \eqref{h312f}, \eqref{f1f} and \eqref{h32f} through $\mathbf e_{1}$ and $\mathbf j_{1}$ and we get
+\begin{align}
+&\frac{\partial  \langle h_{3} \rangle _{\lambda_{1}} +  \langle h_{3} \rangle _{\lambda_{1,2}}} {\partial \mathbf e_{1}}
+&=& A_{1}\mathbf e_{1}
++&A_{2}(\mathbf u_{2} \cdot \mathbf e_{1})\mathbf u_{2}
++A_{3}(\mathbf v_{2} \cdot \mathbf e_{1}) \mathbf v_{2} 
++A_{4}(\mathbf w_{2} \cdot \mathbf e_{1}) \mathbf w_{2} 
++A_{5} \left[ (\mathbf u_{2} \cdot \mathbf e_{1})\mathbf v_{2} +(\mathbf v_{2} \cdot \mathbf e_{1}) \mathbf u_{2} \right] \ , \\
+&\frac{\partial  \langle h_{3} \rangle _{\lambda_{1}} +  \langle h_{3} \rangle _{\lambda_{1,2}}} {\partial \mathbf j_{1}}
+&=& &B_{2}(\mathbf u_{2} \cdot \mathbf j_{1})\mathbf u_{2}
++B_{3}(\mathbf v_{2} \cdot \mathbf j_{1}) \mathbf v_{2} 
++B_{4}(\mathbf w_{2} \cdot \mathbf j_{1}) \mathbf w_{2} 
++B_{5} \left[ (\mathbf u_{2} \cdot \mathbf j_{1})\mathbf v_{2} +(\mathbf v_{2} \cdot \mathbf j_{1}) \mathbf u_{2} \right] \ , \\
+&\frac{\partial \varepsilon F_{1}} {\partial \mathbf e_{1}}
+&=& C_{1}\mathbf e_{1}
++&C_{2}(\mathbf u_{2} \cdot \mathbf e_{1})\mathbf u_{2}
++C_{3}(\mathbf v_{2} \cdot \mathbf e_{1}) \mathbf v_{2} 
++C_{4}(\mathbf w_{2} \cdot \mathbf e_{1}) \mathbf w_{2} 
++C_{5} \left[ (\mathbf u_{2} \cdot \mathbf e_{1})\mathbf v_{2} +(\mathbf v_{2} \cdot \mathbf e_{1}) \mathbf u_{2} \right] \ , \\
+&\frac{\partial \varepsilon F_{1}} {\partial \mathbf j_{1}}
+&=& &D_{2}(\mathbf u_{2} \cdot \mathbf j_{1})\mathbf u_{2}
++D_{3}(\mathbf v_{2} \cdot \mathbf j_{1}) \mathbf v_{2} 
++D_{4}(\mathbf w_{2} \cdot \mathbf j_{1}) \mathbf w_{2} 
++D_{5} \left[ (\mathbf u_{2} \cdot \mathbf j_{1})\mathbf v_{2} +(\mathbf v_{2} \cdot \mathbf j_{1}) \mathbf u_{2} \right] \ ,
+\end{align}
+with
+\begin{align}
+B_{2}&=+\frac{3 \kappa}{2} f_{0} \cos^{2}{\nu_{2}} \ ,
+&D_{2}&=-\frac{3 \kappa}{2n_{2}}(f_{1}+e_{2}\sin{\nu_{2}}) \ , \\
+B_{3}&=+\frac{3 \kappa}{2} f_{0} \sin^{2}{\nu_{2}} \ ,
+&D_{3}&=+\frac{3 \kappa}{2n_{2}}f_{1}  \ , \\
+B_{4}&=-\frac{3 \kappa}{4} \ , 
+&D_{4}&= -\frac{3 \kappa}{4 n_{2}}(\lambda_{2}-\nu_{2}) \ , \\
+B_{5}&=+\frac{3 \kappa}{2}f_{0} \cos{\nu_{2}} \sin{\nu_{2}} \ , 
+&D_{5}&=-\frac{3 \kappa}{2n_{2}}f_{2}  \ ,
+\end{align}
+and
+\begin{align}
+\label{R1}
+A_{k}&=-5B_{k} \quad \forall k \in \left[2,5\right]  \ , 
+&C_{k}&=-5D_{k}  \quad \forall k \in \left[2,5\right] \ , \\
+A_{1}&=+3\kappa \left[f_{0}-\frac{1}{2} \right]   
+&C_{1}&=-\frac{3 \kappa}{n_{2}}e_{2}\sin{\nu_{2}} - \frac{3 \kappa}{2n_{2}} (\lambda_{2}-\nu_{2}) \\
+&=2(B_{2}+B_{3}+B_{4}) \ , &&=2(D_{2}+D_{3}+D_{4}) \ .
+\end{align}
+Then, we consider 
+\begin{align}
+A_{k}'&=A_{k}C_{5}-C_{k}A_{5} \ ,  &C_{k}'&=A_{k}D_{5}-C_{k}B_{5} \ , \\
+B_{k}'&=B_{k}D_{5}-D_{k}B_{5} \ ,  &D_{k}'&=B_{k}C_{5}-D_{k}A_{5} \ ,
+\end{align}
+where we notice from relations \eqref{R1} that
+\begin{align}
+A_{k}'&=25B{k}' \quad \forall k \in \left[2,5\right] \ , &C_{k}'&=D_{k}'=-5B_{k}'  \quad \forall k \in \left[2,5\right] \ , \\
+ A_{1}'&=-10(B_{2}'+B_{3}'+B_{4}') \ ,  &C_{1}'&=2(B_{2}'+B_{3}'+B_{4}') \ .
+\end{align}
+Then, minutious calculations in which we only keep even terms lead to
+\begin{equation}
+\begin{split}
+\frac{1}{2}\{\varepsilon F_{1}, \langle  h_{3} \rangle  _{\lambda_{1}} +  \langle h_{3} \rangle _{\lambda_{1,2}}\}_{sec}
+=\frac{\kappa^2}{n_{2}\Lambda_{1}} \biggl[ A_{1}^{e}e_{1}^{2}(\mathbf w_{2} \cdot \mathbf j_{1})
++A_{2}^{e}\left[ j_{1}^{2} - (\mathbf w_{2} \cdot \mathbf j_{1})^2 \right] (\mathbf w_{2} \cdot \mathbf j_{1})
++A_{3}^{e}(\mathbf w_{2} \cdot \mathbf e_{1})^{2} (\mathbf w_{2} \cdot \mathbf j_{1}) \\
++A_{4}^{e}(\mathbf e_{2} \cdot \mathbf e_{1})^{2} (\mathbf w_{2} \cdot \mathbf j_{1})
++A_{5}^{e}(\mathbf e_{2} \cdot \mathbf j_{1})^{2} (\mathbf w_{2} \cdot \mathbf j_{1})
++A_{6}^{e}(\mathbf e_{2} \cdot \mathbf e_{1}) (\mathbf e_{2} \cdot \mathbf j_{1}) (\mathbf w_{2} \cdot \mathbf e_{1}) \biggr] \ .
+\end{split}
+\end{equation}
+with
+\begin{align}
+A_{1}^{e}&=\frac{n_{2}}{2\kappa^2}(10B_{2}'-15B_{3}'+5B_{4}') \ ,  &A_{4}^{e}&=\frac{n_{2}}{2\kappa^2e_{2}^{2}}(5B_{2}'+5B_{3}'-10B_{4}') \ , \\
+A_{2}^{e}&=\frac{n_{2}}{2\kappa^2}(-B_{3}'+B_{4}')  \ ,  &A_{5}^{e}&=\frac{n_{2}}{2\kappa^2e_{2}^{2}}(B_{2}'+B_{3}'-2B_{4}') =\frac{A_{4}^{e}}{5}  \ , \\
+A_{3}^{e}&=\frac{n_{2}}{2\kappa^2}(15B_{3}'-15B_{4}')=-15A_{2}^{e} \ ,  &A_{6}^{e}&=\frac{n_{2}}{2\kappa^2e_{2}^{2}}(10B_{2}'+10B_{3}'-20B_{4}') =2A_{4}^{e} \ .
+\end{align}
+This result had been checked with TRIP (\cite{trip}). \\
+It is now time to compute the average of $\frac{1}{2}\{\varepsilon F_{1}, \langle  h_{3} \rangle  _{\lambda_{1}} +  \langle h_{3} \rangle _{\lambda_{1,2}}\}_{sec}$ through $\lambda_{2}$. \\
+Using $\frac{d\nu}{d\lambda}=\frac{a^{2}}{r^{2}}\sqrt{1-e^{2}}=\frac{(1+e_{2}\cos{\nu_{2}})}{f_{0}}$ as in \eqref{nu}, we get
+\begin{align}
+\langle B_{2}' \rangle _{\lambda_{2}} =& \frac{9\kappa^2}{4n_{2}}\frac{1}{2\pi} \int_{0}^{2\pi} -(1+e_{2}\cos{\nu_{2}})f_{2}\cos^2{\nu_{2}}+(1+e_{2}\cos{\nu_{2}})(f_{1}+e_{2}\sin{\nu_{2}})\cos{\nu_{2}}\sin{\nu_{2}} \; d\nu_{2}  \notag \\
+=& \frac{\kappa^2}{n_{2}} \biggl[ +\frac{9}{32}+\frac{15}{32}e_{2}^{2} \biggr] \ , \\
+\langle B_{3}' \rangle _{\lambda_{2}} =& \frac{9\kappa^2}{4n_{2}}\frac{1}{2\pi} \int_{0}^{2\pi} -(1+e_{2}\cos{\nu_{2}})f_{2}\sin^2{\nu_{2}}-(1+e_{2}\cos{\nu_{2}})(f_{1})\cos{\nu_{2}}\sin{\nu_{2}} \; d\nu_{2}  \notag \\
+=& \frac{\kappa^2}{n_{2}} \biggl[ -\frac{9}{32}+\frac{3}{32}e_{2}^{2} \biggr] \ .
+\end{align}
+As regards $B_{4}'$, we have 
+\begin{equation}
+B_{4}'=\frac{9\kappa^{2}}{8n_{2}} \bigl[ f_{2}+f_{0}(\lambda_{2}-\nu_{2})\cos{\nu_{2}}\sin{\nu_{2}} \bigr] \ ,
+\end{equation}
+and an integration by part shows that $\langle f_{2} \rangle _{\lambda_{2}}=-\langle f_{0}(\lambda_{2}-\nu_{2})\cos{\nu_{2}}\sin{\nu_{2}} \rangle _{\lambda_{2}}$ which implies
+\begin{equation}
+\langle B_{4}' \rangle _{\lambda_{2}}=0 \ .
+\end{equation}
+Finally,
+\begin{align}
+\langle A_{1}^{e} \rangle _{\lambda_{2}} =& +\frac{225}{64}+\frac{105}{64}e_{2}^{2} \ ,  &\langle A_{4}^{e} \rangle _{\lambda_{2}}=& +\frac{45}{32} \ , \\
+\langle A_{2}^{e} \rangle _{\lambda_{2}} =& +\frac{9}{64}-\frac{3}{64}e_{2}^{2}  \ ,  &\langle A_{5}^{e} \rangle _{\lambda_{2}}=& +\frac{9}{32}  \ , \\
+\langle A_{3}^{e} \rangle _{\lambda_{2}} =& -\frac{135}{64}+\frac{45}{64}e_{2}^{2}  \ ,  &\langle A_{6}^{e} \rangle _{\lambda_{2}}=& +\frac{45}{16} \ .
+\end{align}
+This result had been checked with Maple (\cite{maple}). 
+\section{Secular Precession Frequencies: \boldmath{$\frac{d e_{1}}{dt}$, $\frac{d \omega_{1}}{dt}$, $\frac{d i_{1}}{dt}$ And $\frac{d \Omega_{1}}{dt}$}}
+All what we have done up to now was to approximate the initial Hamiltonian \eqref{Hamiltonian} with 4 degrees of freedom ($(\lambda_{1},\Lambda_{1})$, $(\lambda_{2},\Lambda_{2})$, $(\omega_{1},G_{1})$ and $(\Omega_{1}, \Theta_{1})$) by an Hamiltonian \eqref{hquadrupolar} with only 2 degrees of freedom corresponding to the secular motion ($(\omega_{1},G_{1})$ and $(\Omega_{1}, \Theta_{1})$). Having just computed the final Hamiltonian in Section \ref{Hfinal}, it is time now to figure out secular variations of the elements of the orbit of the perturbed body $e_{1}$, $\omega_{1}$, $i_{1}$ and $\Omega_{1}$ (See Appendix \ref{orbitalelements}). We forget the variation of the semi-major axis since Laplace shown in his \textit{M\'ecanique C\'eleste} that semi-major axes remain invariant over long time even when the square power of the masses of the perturbing planets are considered (See \cite{Boccaletti2}).
+We will deduce variations of orbital elements from the variation of the angular momentum and eccentricity vectors $\mathbf j_{1}$ and $\mathbf e_{1}$. \\
+Let $\mathbf \alpha \in \mathbb R^{6}$ denote the set of orbital elements, $(\mathbf r, \mathbf v)$ a couple of canonical conjugate coordinates and let us suppose that $H(\mathbf r, \mathbf v)$ can be written as $H(\mathbf r, \mathbf v)=F(\mathbf \alpha(\mathbf r, \mathbf v))$. \\
+The variation equation of $\alpha_{i}$ can be stated as
+\begin{align}
+\dot \alpha_{i} = \frac{\partial \alpha_{i}}{\partial \mathbf r} \dot{ \mathbf r} + \frac{\partial \alpha_{i}}{\partial \mathbf v} \dot { \mathbf v }+\frac{\partial \alpha_{i}}{\partial t} =  \frac{\partial \alpha_{i}}{\partial \mathbf r} \frac{\partial F}{\partial \mathbf v} - \frac{\partial \alpha_{i}}{\partial \mathbf v} \frac{\partial H}{\partial \mathbf r} + \frac{\partial \alpha_{i}}{\partial t} &= \left [ \frac{\partial \alpha_{i}}{\partial \mathbf r} \frac{\partial \alpha_{j}}{\partial \mathbf v} - \frac{\partial \alpha_{i}}{\partial \mathbf v} \frac{\partial \alpha_{j}}{\partial \mathbf r} \right ] \frac{\partial F}{\partial \alpha_{j}} + \frac{\partial \alpha_{i}}{\partial t}  \\
+\implies \qquad \dot \alpha_{i} &= - \{\alpha_{i}, \alpha_{j}\} \frac{\partial F}{\partial \alpha_{j}} + \frac{\partial \alpha_{i}}{\partial t} \ .
+\end{align}
+In our case, the Hamiltonian H only depends on secular variables and then only on $e_{1}$, $\omega_{1}$, $i_{1}$ and $\Omega_{1}$. Consequently, our set of orbital elements $\mathbf{\alpha}$ can be given by $\mathbf j_{1}$ and $\mathbf e_{1}$ and we can write
+\begin{align}
+\frac{d \mathbf j_{1}}{d t} & = - \left( \{\mathbf j_{1},\mathbf j_{1} \} \frac{\partial H}{\partial \mathbf j_{1} } + \{\mathbf j_{1},\mathbf e_{1} \} \frac{\partial H}{\partial \mathbf e_{1}}\right ) \  ,\\
+\frac{d \mathbf e_{1}}{d t} & = - \left( \{\mathbf e_{1},\mathbf j_{1}\} \frac{\partial H}{\partial \mathbf j_{1}} + \{\mathbf e_{1},\mathbf e_{1}\} \frac{\partial H}{\partial \mathbf e_{1}} \right ) \ . \\
+\end{align}
+Thus, if we now use relations \eqref{milank} we obtain
+\begin{align}
+\label{dj_dt}
+\frac{d \mathbf j_{1}}{d t} & = - \frac{1}{\Lambda_{1}}\left( \mathbf j_{1} \times \frac{\partial H}{\partial \mathbf j_{1} } + \mathbf e_{1} \times \frac{\partial H}{\partial \mathbf e_{1}}\right ) \ , \\
+\label{de_dt}
+\frac{d \mathbf e_{1}}{d t} & = - \frac{1}{\Lambda_{1}}\left( \mathbf e_{1} \times \frac{\partial H}{\partial \mathbf j_{1}} + \mathbf j_{1} \times \frac{\partial H}{\partial \mathbf e_{1}} \right )  \ .
+\end{align}
+Then, components of $\mathbf j_{1}$ and $\mathbf e_{1}$ in a reference plane (the ecliptic) can be stated as
+\begin{align}
+\frac{d \mathbf j_{1}}{d t}.u_{0} &= 
+-\frac{\sin{\Omega_{1}}\sin{i_{1}}e_{1}}{\sqrt{1-e_{1}^{2}}}\dot{e}_{1}
++\sqrt{1-e_{1}^{2}}\cos{\Omega_{1}}\sin{i_{1}}\dot{\Omega}_{1}
++\sqrt{1-e_{1}^{2}}\sin{\Omega_{1}}\cos{i_{1}}\dot{i}_{1} \ , \\
+\frac{d \mathbf j_{1}}{d t}.v_{0} &= 
++\frac{\cos{\Omega_{1}}\sin{i_{1}}e_{1}}{\sqrt{1-e_{1}^{2}}}\dot{e}_{1}
++\sqrt{1-e_{1}^{2}}\sin{\Omega_{1}}\sin{i_{1}}\dot{\Omega}_{1}
+-\sqrt{1-e_{1}^{2}}\cos{\Omega_{1}}\cos{i_{1}}\dot{i}_{1} \ , \\
+\frac{d \mathbf e_{1}}{d t}.u_{0} &= 
+\left( +\cos{\Omega_{1}}\cos{\omega_{1}}-\sin{\Omega_{1}}\sin{\omega_{1}}\cos{i_{1}} \right) \dot{e}_{1}
++\left( -\sin{\Omega_{1}}\cos{\omega_{1}}-\cos{\Omega_{1}}\sin{\omega_{1}}\cos{i_{1}} \right) \dot{\Omega}_{1}  \notag \\
+& \quad +\left( +\sin{\Omega_{1}}\sin{\omega_{1}}\sin{i_{1}} \right) \dot{i}_{1}
++\left( -\cos{\Omega_{1}}\sin{\omega_{1}}-\sin{\Omega_{1}}\cos{\omega_{1}}\cos{i_{1}} \right) \dot{\omega}_{1} \ , \\
+\frac{d \mathbf e_{1}}{d t}.v_{0} &= 
+\left( +\sin{\Omega_{1}}\cos{\omega_{1}}+\cos{\Omega_{1}}\sin{\omega_{1}}\cos{i_{1}} \right) \dot{e}_{1}
++\left( +\cos{\Omega_{1}}\cos{\omega_{1}}-\sin{\Omega_{1}}\sin{\omega_{1}}\cos{i_{1}} \right) \dot{\Omega}_{1}  \notag \\
+& \quad +\left( -\cos{\Omega_{1}}\sin{\omega_{1}}\sin{i_{1}} \right) \dot{i}_{1}
++\left( -\sin{\Omega_{1}}\sin{\omega_{1}}+\cos{\Omega_{1}}\cos{\omega_{1}}\cos{i_{1}} \right) \dot{\omega}_{1} \ .
+\end{align}
+
+Finally, the inversion of this system and the substitution of $\frac{d \mathbf j_{1}}{d t}$ and $\frac{d \mathbf e_{1}}{d t}$ by their value computed with \eqref{dj_dt} and \eqref{de_dt} lead us to $\frac{d e_{1}}{dt}$, $\frac{d \omega_{1}}{dt}$, $\frac{d i_{1}}{dt}$ and $\frac{d \Omega_{1}}{dt}$. \\
+We give just below secular frequencies of the elements of the orbit of the perturbed body in the case where $H=H_{2}$, $H_{3}$ or $H_{4}$. \\
+\\
+{
+\renewcommand{\arraystretch}{2}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\quad & $\frac{d e_{1}}{dt}$ & $\frac{d \omega_{1}}{dt}$ & $\frac{d i_{1}}{dt}$ & $\frac{d \Omega_{1}}{dt}$ \\
+\hline
+$H_{2}$ & $+2.023 \times 10^{-4}$ & $-1.268 \times 10^{+3}$ & $+4.171 \times 10^{-6}$ & $+2.520 \times 10^{+3}$ \\
+\hline
+$H_{3}$ & $-7.451 \times 10^{-4}$ & $+3.293 \times 10^{+1}$ & $+2.786 \times 10^{-7}$ & $+8.397 \times 10^{+2}$ \\
+\hline
+$H_{4}$ & $+8.291 \times 10^{-7}$ & $+1.740 \times 10^{-2}$ & $-4.786 \times 10^{-9}$ & $-1.227 $ \\
+\hline
+Units & $yr^{-1}$ & $"/yr$ & $rad/yr$ & $"/yr$ \\
+\hline
+\end{tabular}
+} \\
+Table 1 : Instantaneous Secular frequencies of the elements of the orbit of the perturbed body computed with Maple \cite{maple}.
+
+\newpage
+
+\section{Conclusion}
+
+\large{
+Les premi\`eres semaines de lecture d'ouvrages de M\'ecanique C\'eleste (Voir \cite{Boccaletti1}, \cite{Boccaletti2} et \cite{Duriez}) m'ont permis de bien comprendre les outils math\'ematiques que j'allais utiliser et de bien justifier leur emploie (Voir annexes \ref{orbitalelements} et \ref{eam}). \\
+Ensuite, une majeure partie du temps a \'et\'e consacr\'ee \`a l'\'evaluation des ordres de grandeur des diff\'erents termes apparaissant pour chaque transformation canonique (voir section \ref{clt}). \\
+Bien qu'ayant g\'en\'eralis\'e la m\'ethode (Voir \eqref{fh1}, \eqref{fh2}, \eqref{fg}), ces \'etapes de calcul ont demand\'e beaucoup d'attention. Apr\`es avoir suffisamment transform\'e le terme quadrupolaire et avoir obtenu $H_{2}$ et $H_{3}$ (Voir \eqref{hquadrupolar}), nous avons par s\'ecurit\'e aussi pris en compte et transform\'e le terme octupolaire (Voir section \ref{octu}). Une d\'ecision justifi\'ee par \eqref{sath3h4} qui montre que $H_{3}$ et $H_{4}$ peuvent \^etre du m\^eme ordre de grandeur dans certains cas. \\
+Ensuite, le calcul de $\varepsilon F_{1}$ $H_{2}$ et $H_{4}$ (Voir annexes \ref{averagingH2}, \ref{averagingF1} et \ref{averagingH4}) a demand\'e du soin mais bien moins que le calcul du crochet de Poisson pr\'esent dans $H_{3}$ qui lui s'est r\'ev\'el\'e long et ardu (Voir section \ref{averagingcp}). \\
+Une fois le r\'esultat obtenu <<\`a la main>>, Gwena\"el m'a sensibilis\'e au logiciel TRIP, d\'evelopp\'e au sein de l'IMCCE (Voir \cite{trip}) et permettant de faire du calcul vectoriel. J'ai pu ainsi v\'erifier la v\'eracit\'e de mes r\'esultats par l'utilisation d'un logiciel de calcul formel. 
+J'ai ensuite utilis\'e le Hamiltonien obtenu pour calculer les fr\'equences de pr\'ecession s\'eculaires des \'el\`ements orbitaux de la lune. J'ai ainsi eu l'occasion de programmer une proc\'edure Maple. Par contre, les fr\'equences de pr\'ecession que l'on obtient avec cette m\'ethode ne sont que les fr\'equences instantan\'ees, c'est-\`a-dire qu'elles ne sont valables que pour des valeurs donn\'ees des \'el\`ements orbitaux de la lune. En effet, ces derniers variant le long de la trajectoire, les fr\'equences obtenues dans le tableau 1 ne sont valables qu'\`a un instant et une position du syst\`eme donn\'es. \\
+Sur un plan plus large, un des objectifs des calculs qu'avait commenc\'es Gwena\"el dans son papier \'etait de transformer suffisamment le Hamiltonien initial afin de pouvoir l'utiliser pour tracer les courbes donnant l'\'evolution de l'excentricit\'e forc\'ee et de la fr\'equence de pr\'ecession de l'orbite perturb\'ee en fonction de son demi-grand axe. Le syst\`eme \`a trois corps \'etant l'association d'un syst\`eme binaire d'\'etoiles et d'une plan\`ete orbitant autour de la plus grosse et perturb\'ee par la plus petite. Malheureusement la comparaison de ces deux courbes avec celles des figures 2 et 3 de l'article de Giuppone et al. (Voir \cite{giuppone}) a montr\'e que l'on \'etait pas all\'e assez loin dans le d\'eveloppement pour faire aussi bien qu'eux. \\
+Pendant ce stage, j'ai aussi bien pris plaisir \`a lire les ouvrages sp\'ecifi\'es \'ecrit en anglais, \`a me perdre dans les calculs vectoriels, \`a programmer du code sur TRIP ou Maple, qu'\`a r\'ediger mes notes et mon rapport avec \LaTeX. J'ai particuli\`erement appr\'eci\'e le fait d'avoir pu travailler en autonomie et sans contrainte horaire, la plupart du temps seul chez soi ou \`a la BU. \\
+Je remercie grandement mes responsables de stage \textit{Gwena\"el Bou\'e} et \textit{Laurent Niederman} pour m'avoir fait d\'ecouvrir leur univers. Je remercie en particulier \textit{Gwena\"el Bou\'e} pour ses nombreux e-mails instructifs et ses relectures approfondies du rapport \c{c}i-pr\'esent.
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\newpage
+\appendix
+
+ \begin{center}
+ {\LARGE \textbf{APPENDIX}}
+ \end{center}
+ \vspace{3 cm}
+
+\section{Elements Of Celestial Mechanics}
+\label{orbitalelements}
+\begin{wrapfigure}{r}{5.5cm}
+\includegraphics[width=5.5cm,trim = 0cm 10cm 0cm 1cm, clip]{dessin}
+\caption{Orbital Elements}\label{orbit}
+\end{wrapfigure} 
+A Keplerian orbit is usualy defined in the 3D-space by 6 orbital elements: the semi-major axis $a$ and the excentricity $e$ which give its geometric 
+shape and size, the longitude of the ascending node $\Omega$, the inclination $i$ and the argument of the periapsis $\omega$ which define its orientation in space and the true anomaly $\nu$ which specify the position of the planet on the orbit itself (see figure \ref{orbit}). \\
+In Celestial Mechanics, one must consider the variations to which the orbit is  subject in the course of time, it stands to reason that the variables of 
+Newtonian mechanics ($x$, $y$, $z$, $v_{x}$, $v_{y}$, $v_{z}$) are not the best way to understand how the orbit of a planet is changing. \\
+That's why, we use Delaunay elements which at the same time are action-angle variables and are close to orbital elements (figure \ref{orbit}). Following \cite{Boccaletti1}, Delaunay elements are
+\begin{align}
+\lambda&=n.t  \ [2\pi] \ ,  \quad &\Lambda&=\beta \sqrt{\mu a}  \ , \notag \\ 
+g&=\omega   \ ,   \quad     &G&=\Lambda\sqrt{1-e^{2}} \ , \\
+\theta&=\Omega  \ ,  \quad   &\Theta&=G\cos{i}  \ , \notag
+\end{align}
+where $n$ and $\beta$ are respectively the angular frequency and the reduced mass (equals to $\frac{m_{1}m_{2}}{m_{1}+m_{2}}$) and where $\mu=G(m_{1}+m_{2})$. 
+
+\section{Elements Of Analytical Mechanics}
+\label{eam}
+\subsection{Canonical Transformation According Hamilton-Jacobi}
+
+\label{HJJ}
+We remind Hamilton's equations derive directly from the least action principle which impose the stationarity of the action integral 
+\begin{equation}
+\label{S1}
+S=\int_{ti}^{tf} \mathbf p \mathbf{\dot  q} - H \; dt \ .
+\end{equation}
+If we now call $\mathbf Q$, $\mathbf P$ the new canonical variable and $K$ the new hamiltonian, the condition which has to be satisfied so that $\mathbf Q$ and $\mathbf P$ may be canonical variables is the stationarity of 
+\begin{equation}
+\label{S2}
+S=\int_{ti}^{tf} \mathbf P \mathbf{\dot  Q} - K \; dt \ .
+\end{equation}
+Then, a necessary and sufficient condition for the canonicity of the transformation is that the integrands in \eqref{S1} and \eqref{S2} differ from one another by a total time derivative of a function $F(\mathbf q, \mathbf Q, t)$. Then, we may have
+\begin{equation}
+\label{HJ}
+\mathbf p d\mathbf q - H(\mathbf q, \mathbf p, t)=\mathbf P d\mathbf Q - K(\mathbf Q, \mathbf P, t) + dF(\mathbf q, \mathbf Q, t) \ ,
+\end{equation}
+where the exact differential  $dF$ is called the \textit{generating function} of the transformation. \\
+Now, let us call $q$, $p$, $Q$, $P$, $dq$ and $dQ$ the column matrix associated to the vectors $\mathbf q$, $\mathbf p$, $\mathbf Q$, $\mathbf P$, $d \mathbf q$ and $d \mathbf Q$. If it exists a non-singular matrix $T$ such that
+\begin{equation}
+\mathbf Q= \, T \mathbf q \ .
+\end{equation}
+Then, a necessary and sufficient condition for having the tranformation $(\mathbf q, \mathbf p) \implies (\mathbf Q, \mathbf P)$ canonical is that
+\begin{equation}
+\mathbf P= \, ^tT^{-1} \mathbf p \ .
+\end{equation}
+Indeed, we would have 
+\begin{equation}
+\mathbf p d\mathbf q - \mathbf P d\mathbf Q = \, ^t  p \, dq - \, ^t  P \, dQ = \, ^t  p \; T^{-1}dQ - \, ^t p \; T^{-1} dQ =0 \ ,
+\end{equation}
+which is a particular case of \eqref{HJ} where $H=K$ and $dF=0$.
+
+
+\subsection{Canonical Transformation According Hori-Deprit}
+
+\label{lie}
+
+Considering a non-integrable Hamiltonian $H=H(\mathbf q, \mathbf p )$, our ambition is to implement canonical transformations in order to get closer to an integrable one.
+We could have performed canonical tranformations based on Hamilton-Jacobi mechanics as developed by \textit{Von Zeipel} in 1916 but we judged Hori-Deprit techniques based on the algorihm of the Lie Transform more convenient for near-identity transformations (See \cite{Boccaletti2}). \\
+With this method, new variables $\mathbf Q$ and $\mathbf P$ are the images of the one-parameter group of tranformations due to the Hamiltonian flow generated by a function $\varepsilon W$ where $\varepsilon$ is small. Then the Hamiltonian can be Taylor-expanded in a power series of the parameter of the transformation $\varepsilon$.  \\
+Let $\mathbf q=\mathbf q(\mathbf Q, \mathbf P, \varepsilon)$ and $\mathbf p=\mathbf p(\mathbf Q, \mathbf P, \varepsilon)$ be the transformation solutions of the canonical system 
+\begin{equation}
+\frac{d \mathbf q }{d \mathbf \varepsilon}=\frac{\partial \varepsilon W(\mathbf q, \mathbf p)}{\partial \mathbf p} \qquad
+\frac{d \mathbf p }{d \mathbf \varepsilon}=-\frac{\partial \varepsilon W(\mathbf q, \mathbf p)}{\partial \mathbf q} \ ,
+\end{equation}
+with the initial conditions $\mathbf q(\varepsilon=0)=\mathbf Q$ and $\mathbf p(\varepsilon=0)=\mathbf P$ and where $\varepsilon W$ is called the \textit{generator} of the transformation, $\varepsilon$ being small enough. \\
+If $K$ is the new Hamiltonian, then we have 
+\begin{equation}
+K(\mathbf Q, \mathbf P )=H(\mathbf q(\mathbf Q, \mathbf P, \varepsilon), \mathbf p(\mathbf Q, \mathbf P, \varepsilon) )=\sum_{n=0}^{\infty} \frac{\varepsilon^{n}}{n!} \left. \frac{ d^{n}H(\mathbf q(\mathbf Q, \mathbf P, \varepsilon), \mathbf p(\mathbf Q, \mathbf P, \varepsilon) )}{d \varepsilon^{n}} \right|_{\varepsilon=0} \ ,
+\end{equation}
+where we Taylor-expanded the old Hamiltonian by means of $\varepsilon$.
+We work out 
+\begin{equation}
+\left. \frac{ d^{n}H(\mathbf q(\mathbf Q, \mathbf P, \varepsilon), \mathbf p(\mathbf Q, \mathbf P, \varepsilon) )}{d \varepsilon^{n}} \right|_{\varepsilon=0}=L^{n}_{\varepsilon W(\mathbf q, \mathbf p)}H \ ,
+\end{equation}
+where 
+\begin{equation}
+L_{\varepsilon W} H=\left. \frac{d H}{d \varepsilon} \right|_{\varepsilon=0} = \left. \frac{d \mathbf q}{d \varepsilon}\frac{\partial H}{\partial \mathbf q} \right|_{\varepsilon=0} + \left. \frac{d \mathbf p}{d \varepsilon}\frac{\partial H}{\partial \mathbf p} \right|_{\varepsilon=0}  = \frac{d \mathbf q}{d \varepsilon}\frac{\partial H}{\partial \mathbf q}+\frac{d \mathbf p}{d \varepsilon}\frac{\partial H}{\partial \mathbf p}=\frac{\partial \varepsilon W}{\partial \mathbf p}\frac{\partial H}{\partial \mathbf q}-\frac{\partial \varepsilon W}{\partial \mathbf q}\frac{\partial H}{\partial \mathbf p}=\{\varepsilon W,H\} \ ,
+\end{equation}
+is the Poisson bracket between $\varepsilon W$ and $H$ and is called the Lie derivarive of $H$ generated by $\varepsilon W$.
+Then the Lie transformation can be express as
+\begin{equation}
+K=H \circ \exp (L_{\varepsilon W})=\exp (L_{\varepsilon W})H=H+\{\varepsilon W,H\}+\frac{1}{2}\{\varepsilon W,\{\varepsilon W,H\}\}+ \cdots \ .
+\end{equation}
+Generally, H contains both short-period terms $H^{sp}$ and long-period terms $H^{lp}$ and we can choose the generator $\varepsilon W$ in order to eliminate short-period terms to any order in $\varepsilon$. For instance, in order to get rid of short-period terms up to the first order in $\varepsilon$, we can choose $\varepsilon W$ such that $\{\varepsilon W,H\}=-H^{sp}$. \\
+In this report, we identified short-period terms as $H^{sp}=H-\langle H \rangle_{fast \, variables}$. \\
+Note :  \\
+All what we have said above become wrong if $H$ or $W$ depend explicitly on $\varepsilon$ and then we would have to use the Deprit's triangle (See \cite{Boccaletti2}).
+For instance, if $H$ depends explicitly on $\varepsilon$, we would have
+\begin{equation}
+\left. \frac{d H}{d \varepsilon} \right|_{\varepsilon=0}
+=L_{\varepsilon W} H + \left. \frac{\partial H}{\partial \varepsilon} \right|_{\varepsilon=0}
+\neq L_{\varepsilon W} H \ ,
+\end{equation}
+and more generally
+\begin{equation}
+\left. \frac{ d^{n}H}{d \varepsilon^{n}} \right|_{\varepsilon=0} \neq L^{n}_{\varepsilon W}H \ .
+\end{equation}
+Likewise, if $W$ depends explicitly on $\varepsilon$, it would appear in $\frac{ d^{n}H}{d \varepsilon^{n}}$, partial derivative of $W$ through $\varepsilon$.
+\section{\boldmath{Computation Of $H_{2}$ And $H_{4}$: Averaging Over $\lambda_{1}$ And $\lambda_{2}$}}
+\label{averaging}
+\subsection{\boldmath{$ \langle h_{3} \rangle _{\lambda_{1}} $}}
+\label{averagingH2}
+\begin{equation}
+ \langle h_{3} \rangle _{\lambda_{1}}=\frac{\mu_{2}\beta_{1}}{r_{2}^{5}}(3 \langle (\mathbf{r_{2} \cdot r_{1}})^{2} \rangle _{\lambda_{1}} - \; r_{2}^{2} \langle r_{1}^{2} \rangle _{\lambda_{1}}) \ ,
+\end{equation}
+where
+\begin{align}
+ \langle (\mathbf r_{2} \cdot \mathbf r_{1})^{2} \rangle _{\lambda_{1}} &= R_{2}^{t} \langle  R_{1} R_{1}^{t} \rangle _{\lambda_{1}}R_{2} \notag \\
+&=
+\begin{pmatrix}
+X_{2} & Y_{2} & Z{2}
+\end{pmatrix}
+\begin{pmatrix}
+ \langle X_{1}^{2} \rangle _{\lambda_{1}} &  \langle X_{1}Y_ {1} \rangle _{\lambda_{1}} & 0 \\
+ \langle X_{1}Y_ {1} \rangle _{\lambda_{1}} &  \langle Y_{1}^{2} \rangle _{\lambda_{1}} & 0 \\
+0 & 0 & 0 
+\end{pmatrix}
+\begin{pmatrix}
+X_{2} \\
+Y_{2} \\
+Z_{2}
+\end{pmatrix}
+_{(u_{1},v_{1},w_{1})} \ .
+\label{matrix}
+\end{align}
+Using
+\begin{equation}
+\begin{cases}
+X=a(\cos{E} -e) \\
+Y=a\sqrt{1-e^{2}}\sin{E}
+\end{cases}  
+\quad
+\text{and }
+\quad
+\frac{dE}{d\lambda}=\frac{a}{r} \ .
+\end{equation}
+We obtain
+\begin{equation}
+\begin{cases}
+ \langle X_{1}^{2} \rangle _{\lambda_{1}}=\frac{a_{1}^{2}}{2}(1+4e_{1}^{2}) \ , \\
+ \langle Y_{1}^{2} \rangle _{\lambda_{1}}=\frac{a_{1}^{2}}{2}(1-e_{1}^{2}) \ , \\
+ \langle X_{1}Y_ {1} \rangle _{\lambda_{1}}=0 \ .
+\end{cases}
+\end{equation}
+\begin{equation}
+\implies
+\quad
+ \langle (r_{2} \cdot r_{1})^{2} \rangle _{\lambda_{1}}=\frac{a_{1}^{2}}{2}((1+4e_{1}^{2})(\mathbf{r_{2} \cdot u_{1}})^{2}+(1-e_{1}^{2})(\mathbf r_{2} \cdot \mathbf v_{1})^{2}) \ .
+\end{equation}
+We also compute
+\begin{equation}
+ \langle r_{1}^{2} \rangle =a^{2}(1+3\frac{e_{1}^{2}}{2}) \ .
+\end{equation}
+Considering that $(\mathbf r_{2} \cdot \mathbf v_{1})^{2}=r_{2}^{2}-(\mathbf r_{2} \cdot \mathbf u_{1})^{2}-(\mathbf r_{2} \cdot \mathbf w_{1})^{2}$ , we get 
+\begin{equation}
+ \langle h_{3} \rangle _{\lambda_{1}} = -\frac{\mathrm k}{4r_{2}^{5}}((1-6e_{1}^{2})r_{2}^{2}
++15(\mathbf r_{2} \cdot \mathbf e_{1})^{2}-3(\mathbf r_{2} \cdot \mathbf j_{1})^{2}) \ ,
+\label{h31f}
+\end{equation}
+where $\mathrm k=\mu_{2}\beta_{1}a_{1}^{2}$, \; $\mathbf e_{1}=e_{1}\mathbf u_{1}$ and $\mathbf j_{1}=\sqrt{1-e_{1}^{2})}\mathbf w_{1}$. \\
+Then we substitute $\mathbf r_{2}=r_{2} \left( \cos{\nu_{2}} \mathbf u_{2} + \sin{\nu_{2}} \mathbf v_{2} \right)$ in \eqref{h31f} and get
+ \begin{gather}
+ \langle h_{3} \rangle _{\lambda_{1}} = -\frac{\kappa}{4}f_{0} 
+\biggl[ (1-6e_{1}^{2})
+ +15\bigl[ \cos^{2}{\nu_{2}} (\mathbf u_{2} \cdot \mathbf e_{1})^{2}+\sin^{2}{\nu_{2}} (\mathbf v_{2} \cdot \mathbf e_{1})^{2}+2\sin{\nu_{2}}\cos{\nu_{2}}(\mathbf u_{2} \cdot \mathbf e_{1})(\mathbf v_{2} \cdot \mathbf e_{1}) \bigr]   \notag \\
+-3\bigl[ \cos^{2}{\nu_{2}} (\mathbf u_{2} \cdot \mathbf j_{1})^{2}+\sin^{2}{\nu_{2}} (\mathbf v_{2} \cdot \mathbf j_{1})^{2}+2\sin{\nu_{2}}\cos{\nu_{2}}(\mathbf u_{2} \cdot \mathbf j_{1})(\mathbf v_{2} \cdot \mathbf j_{1}) \bigr]
+\biggr] \ ,
+ \label{h312f}
+\end{gather}
+with $\kappa=\frac{\mu_{2}\beta_{1}a_{1}^{2}}{a_{2}^{3}(1-e_{2}^{2})^\frac{3}{2}}$ and $f_{0}=+\frac{(1+e_{2}\cos{\nu_{2}})^{3}}{(1-e_{2}^{2})^{\frac{3}{2}}}$.
+\subsection{\boldmath{$ \varepsilon F_{1}$ And $H_{2}=\langle h_{3} \rangle _{\lambda_{1,2}} $}}
+\label{averagingF1}
+From \eqref{he3}, let us now calculate
+\begin{equation}
+\varepsilon F_{1}=\frac{1}{n_{2}} \int_{\lambda_{2}}^{} ( \langle h_{3} \rangle _{\lambda_{1,2}}- \langle h_{3} \rangle _{\lambda_{1}}) \, \mathrm d \lambda_{2}' \ ,
+\end{equation}
+where
+\begin{equation}
+ \langle h_{3} \rangle _{\lambda_{1,2}}=-\frac{\mathrm k}{4}\biggl[(1-6e_{1}^{2}) \langle \frac{1}{r_{2}^{3}} \rangle _{\lambda_{2}}
++\; 15 \langle \frac{(\mathbf r_{2} \cdot \mathbf e_{1})}{r_{2}^{5}}^{2} \rangle _{\lambda_{2}}-\; 3 \langle \frac{(\mathbf r_{2} \cdot \mathbf j_{1})}{r_{2}^{5}}^{2} \rangle _{\lambda_{2}}\biggr] \ .
+\label{h33}
+\end{equation}
+Developing $\frac{(\mathbf r_{2} \cdot \mathbf e_{1})}{r_{2}^{5}}^{2}$ and $\frac{(\mathbf r_{2} \cdot \mathbf j_{1})}{r_{2}^{5}}^{2}$ as in \eqref{matrix} and using
+\begin{equation}
+\begin{cases}
+X=r\cos{\nu} \\
+Y=r\sin{\nu}
+\end{cases}  
+\quad
+\text{and }
+\quad
+\frac{d\nu}{d\lambda}=\frac{a^{2}}{r^{2}}\sqrt{1-e^{2}} \ .
+\label{nu}
+\end{equation}
+We get
+\begin{align}
+\begin{cases}
+\int_{\lambda_{2}}^{} \frac{X_{2}^{2}}{r_{2}^{5}} \mathrm d\lambda_{2}=\frac{1}{a_{2}^{3}(1-e_{2}^{2})^{\frac{3}{2}}} \int_{\lambda_{2}}^{} (\cos^{2}{\nu_{2}}+e_{2}\cos^{3}{\nu_{2}}) \mathrm d\lambda_{2}
+=\frac{\nu_{2}}{2}+f_{1}+e_{2}\sin{\nu_{2}} \ , \\
+\int_{\lambda_{2}}^{} \frac{Y_{2}^{2}}{r_{2}^{5}} \mathrm d\lambda_{2}=\frac{1}{a_{2}^{3}(1-e_{2}^{2})^{\frac{3}{2}}} \int_{\lambda_{2}}^{} (\sin^{2}{\nu_{2}}+e_{2}\cos{\nu_{2}}\sin^{2}{\nu_{2}}) \mathrm d\lambda_{2}
+= \frac{\nu_{2}}{2}-f_{1} \ , \\
+\int_{\lambda_{2}}^{} \frac{X_{2}Y_{2}}{r_{2}^{5}} \mathrm d\lambda_{2}=\frac{1}{a_{2}^{3}(1-e_{2}^{2})^{\frac{3}{2}}} \int_{\lambda_{2}}^{} (\sin{\nu_{2}}\cos{\nu_{2}}+e_{2}\sin{\nu_{2}}\cos^{2}{\nu_{2}}) \mathrm d\lambda_{2}=f_{2} \ ,
+\end{cases}
+\end{align}
+where
+\begin{align}
+f_{1}&=+\frac{\sin{2\nu_{2}}}{4}-\frac{e_{2}\sin^{3}{\nu_{2}}}{3} \ , \\
+f_{2}&=-\frac{\cos{2\nu_{2}}}{4}-\frac{e_{2}\cos^{3}{\nu_{2}}}{3} \ .
+\end{align}
+We obtain
+\begin{gather}
+\varepsilon F_{1}=(\lambda_{2}-\nu_{2})\frac{ \langle h_{3} \rangle _{\lambda_{1,2}}}{n_{2}}  \notag \\
++\frac{k}{n_{2}}
+\biggl[
+\frac{15}{4}
+\left[ 
+(f_{1}+e_ {2}\sin{\nu_{2}})(\mathbf u_{2} \cdot \mathbf e_{1})^{2}-f_{1}(\mathbf v_{2} \cdot \mathbf e_{1})^{2}+2f_{2}(\mathbf u_{2} \cdot \mathbf e_{1})(\mathbf v_{2} \cdot \mathbf e_{1})
+\right]  \notag \\
+-\frac{3}{4}
+\left[
+(f_{1}+e_{2}\sin{\nu_{2}})(\mathbf u_{2} \cdot \mathbf j_{1})^{2}-f_{1}(\mathbf v_{2} \cdot \mathbf j_{1})^{2}+2f_{2}(\mathbf u_{2} \cdot \mathbf j_{1})(\mathbf v_{2} \cdot \mathbf j_{1}) 
+\right]  \notag \\
++(\frac{1}{4}-\frac{3}{2}e_{1}^{2})e_{2}\sin{\nu_{2}}
+\biggr] \ .
+\label{f1f}
+\end{gather}
+Besides, using
+\begin{equation}
+\begin{cases}
+(\mathbf e_{1} \cdot \mathbf u_{1})^{2}+(\mathbf e_{1} \cdot \mathbf v_{1})^{2}&=e_{1}^{2}-(\mathbf e_{1} \cdot \mathbf w_{1})^{2} \ , \\
+(\mathbf j_{1} \cdot \mathbf u_{1})^{2}+(\mathbf j_{1} \cdot \mathbf v_{1})^{2}&=j_{1}^{2}-(\mathbf j_{1} \cdot \mathbf w_{1})^{2} \ , 
+\end{cases}
+\end{equation}
+we compute $H_{2}= \langle h_{3} \rangle _{\lambda_{1,2}}$
+\begin{gather}
+ H_{2}=-\frac{\kappa}{8} \left[ -1+6e_{1}^{2} -15(\mathbf w_{2} \cdot \mathbf e_{1})^{2} +3(\mathbf w_{2} \cdot \mathbf j_{1})^{2} \right] \ .
+\label{h32f}
+\end{gather}
+
+\subsection{\boldmath{$ \langle h_{4} \rangle _{\lambda_{1}}$}}
+\label{averagingH4}
+\begin{equation}
+ \langle h_{4} \rangle _{\lambda_{1}}=-\frac{\mu_{2}\beta_{1}}{2r_{2}^{7}}(5 \langle{(\mathbf r_{2}\cdot \mathbf r_{1})^3}\rangle _{\lambda_{1}}-3\langle{(\mathbf r_{2}\cdot \mathbf r_{1})r_{1}^{2}}\rangle _{\lambda_{1}}r_{2}^{2}) \ , 
+\end{equation}
+where
+\begin{align}
+ \langle (\mathbf r_{2} \cdot \mathbf r_{1})^{3} \rangle _{\lambda_{1}} 
+ &=(\mathbf r_{2} \cdot \mathbf u_{1})^{3} \langle x_{1}^{3} \rangle_{\lambda_{1}}
+ +3(\mathbf r_{2} \cdot \mathbf u_{1})(\mathbf r_{2} \cdot \mathbf v_{1})^{2} \langle x_{1}y_{1}^{2} \rangle_{\lambda_{1}}
+ +3(\mathbf r_{2} \cdot \mathbf u_{1})^{2}(\mathbf r_{2} \cdot \mathbf v_{1}) \langle x_{1}^{2}y_{1} \rangle_{\lambda_{1}}
+ +(\mathbf r_{2} \cdot \mathbf v_{1})^{3} \langle y_{1}^{3} \rangle_{\lambda_{1}} \ , \\
+ \langle (\mathbf r_{2} \cdot \mathbf r_{1})r_{1}^{2} \rangle _{\lambda_{1}} 
+ &=(\mathbf r_{2} \cdot \mathbf u_{1}) \left [ \langle x_{1}^{3} \rangle_{\lambda_{1}}+\langle x_{1}y_{1}^{2} \rangle_{\lambda_{1}} \right ]
+ +(\mathbf r_{2} \cdot \mathbf v_{1}) \left [ \langle y_{1}^{3} \rangle_{\lambda_{1}}+\langle x_{1}^{2}y_{1} \rangle_{\lambda_{1}} \right ] \ .
+\end{align}
+Using
+\begin{equation}
+\begin{cases}
+X=a(\cos{E} -e) \\
+Y=a\sqrt{1-e^{2}}\sin{E}
+\end{cases}  
+\quad
+\text{and }
+\quad
+\frac{dE}{d\lambda}=\frac{a}{r} \ ,
+\end{equation}
+we obtain
+\begin{equation}
+\begin{cases}
+ \langle X_{1}^{3} \rangle _{\lambda_{1}}=\frac{a_{1}^{3}}{8}(-15e_{1}-20e_{1}^{3}) \ , \\
+ \langle Y_{1}^{3} \rangle _{\lambda_{1}}=0 \ , \\
+ \langle X_{1}^{2}Y_ {1} \rangle _{\lambda_{1}}=0 \ , \\
+ \langle X_{1}Y_ {1}^{2} \rangle _{\lambda_{1}}=\frac{a_{1}^{3}}{8}(-5e_{1}+5e_{1}^{3}) \ .
+ \end{cases}
+\end{equation}
+\begin{comment}
+\begin{align}
+\implies
+\quad
+ \langle (\mathbf{r_{2} \cdot r_{1}})^{3} \rangle _{\lambda_{1}}&=\frac{a_{1}^{3}}{8}((-15e_{1}-20e_{1}^{3})(\mathbf{r_{2} \cdot u_{1}})^{3}+(-15e_{1}+15e_{1}^{3})(\mathbf r_{2} \cdot \mathbf u_{1})(\mathbf r_{2} \cdot \mathbf v_{1})^{2}) \ , \\
+  \langle (\mathbf{r_{2} \cdot r_{1}})r_{1}^{2} \rangle _{\lambda_{1}}&=\frac{a_{1}^{3}}{8}((-20e_{1}-15e_{1}^{3}) \ .
+\end{align}
+\end{comment}
+Considering that $(\mathbf r_{2} \cdot \mathbf v_{1})^{2}=r_{2}^{2}-(\mathbf r_{2} \cdot \mathbf u_{1})^{2}-(\mathbf r_{2} \cdot \mathbf w_{1})^{2}$ , we get 
+\begin{equation}
+ \langle h_{4} \rangle _{\lambda_{1}} = -\frac{\mathrm k'}{8r_{2}^{7}} \left((-\frac{15}{2}+60e_{1}^{2})r_{2}^{2}(\mathbf{r_{2} \cdot e_{1}})
+-\frac{175}{2}(\mathbf r_{2} \cdot \mathbf e_{1})^{3}+\frac{75}{2}(\mathbf r_{2} \cdot \mathbf e_{1})(\mathbf r_{2} \cdot \mathbf j_{1})^{2} \right) \ ,
+\end{equation}
+where $\mathrm k'=\mu_{2}\beta_{1}a_{1}^{3}$, \; $\mathbf e_{1}=e_{1}\mathbf u_{1}$ and $\mathbf j_{1}=\sqrt{1-e_{1}^{2}}\mathbf w_{1}$. \\
+%\subsection{$\mathbf{H_{4}=\langle h_{4} \rangle _{\lambda_{1,2}}}$}
+\subsection{\boldmath{$H_{4}=\langle h_{4} \rangle _{\lambda_{1,2}}$}}
+\begin{equation}
+ \langle h_{4} \rangle _{\lambda_{1,2}} = -\frac{\mathrm k'}{8} \left((-\frac{15}{2}+60e_{1}^{2}) \langle \frac{(\mathbf{r_{2} \cdot e_{1}})}{r_{2}^{5}} \rangle_{\lambda_{2}}
+-\frac{175}{2} \langle \frac{(\mathbf r_{2} \cdot \mathbf e_{1})^{3}}{r_{2}^{7}} \rangle_{\lambda_{2}} 
++\frac{75}{2} \langle \frac{(\mathbf r_{2} \cdot \mathbf e_{1})(\mathbf r_{2} \cdot \mathbf j_{1})^{2}}{r_{2}^{7}} \rangle_{\lambda_{2}}  \right) \ ,
+\end{equation}
+where
+\begin{align}
+\langle \frac{(\mathbf{r_{2} \cdot e_{1}})}{r_{2}^{5}} \rangle_{\lambda_{2}} &= \frac{x_{2}}{r_{2}^{5}} (\mathbf u_{2} \cdot \mathbf e_{1})+\frac{y_{2}}{r_{2}^{5}} (\mathbf v_{2} \cdot \mathbf e_{1}) \ , \\
+\langle \frac{(\mathbf r_{2} \cdot \mathbf e_{1})^{3}}{r_{2}^{7}} \rangle_{\lambda_{2}} &= \frac{x_{2}^{3}}{r_{2}^{7}} (\mathbf u_{2} \cdot \mathbf e_{1})^{3}+3\frac{x_{2}^{2}y_{2}}{r_{2}^{7}} (\mathbf u_{2} \cdot \mathbf e_{1})^{2}(\mathbf v_{2} \cdot \mathbf e_{1})+3\frac{x_{2}y_{2}^{2}}{r_{2}^{7}} (\mathbf u_{2} \cdot \mathbf e_{1})(\mathbf v_{2} \cdot \mathbf e_{1})^{2}+\frac{y_{2}^{3}}{r_{2}^{7}} (\mathbf v_{2} \cdot \mathbf e_{1})^{3} \ , \\
+\langle \frac{(\mathbf r_{2} \cdot \mathbf e_{1})(\mathbf r_{2} \cdot \mathbf j_{1})^{2}}{r_{2}^{7}} \rangle_{\lambda_{2}} &= \frac{x_{2}^{3}}{r_{2}^{7}} (\mathbf u_{2} \cdot \mathbf e_{1})(\mathbf u_{2} \cdot \mathbf w_{1})^{2}+2\frac{x_{2}^{2}y_{2}}{r_{2}^{7}} (\mathbf u_{2} \cdot \mathbf e_{1})(\mathbf u_{2} \cdot \mathbf w_{1})(\mathbf v_{2} \cdot \mathbf w_{1})+\frac{x_{2}^{2}y_{2}}{r_{2}^{7}} (\mathbf u_{2} \cdot \mathbf w_{1})^{2}(\mathbf v_{2} \cdot \mathbf u_{1}) \notag \\
+& +\frac{x_{2}y_{2}^{2}}{r_{2}^{7}} (\mathbf u_{2} \cdot \mathbf e_{1})(\mathbf v_{2} \cdot \mathbf w_{1})^{2}+2\frac{x_{2}y_{2}^{2}}{r_{2}^{7}} (\mathbf u_{2} \cdot \mathbf w_{1})(\mathbf v_{2} \cdot \mathbf e_{1})(\mathbf v_{2} \cdot \mathbf w_{1})+\frac{y_{2}^{3}}{r_{2}^{7}} (\mathbf v_{2} \cdot \mathbf e_{1})(\mathbf v_{2} \cdot \mathbf w_{1})^{2} \ .
+\end{align}
+Using
+\begin{equation}
+\begin{cases}
+X=r\cos{\nu} \\
+Y=r\sin{\nu}
+\end{cases}  
+\quad
+\text{and }
+\quad
+\frac{d\nu}{d\lambda}=\frac{a^{2}}{r^{2}}\sqrt{1-e^{2}} \ ,
+\end{equation}
+we get
+\begin{align}
+\begin{cases}
+ \langle \frac{X_{2}^{3}}{r_{2}^{7}} \rangle _{\lambda_{2}}=\frac{3e_{2}}{4a_{2}^{4}(1-e_{2}^{2})^{\frac{5}{2}}}  \ , \  &\langle \frac{X_{2}Y_{2}^{2}}{r_{2}^{7}} \rangle _{\lambda_{2}}=\frac{e_{2}}{4a_{2}^{4}(1-e_{2}^{2})^{\frac{5}{2}}} \ , \\
+ \langle \frac{Y_{2}^{3}}{r_{2}^{7}} \rangle _{\lambda_{2}}=0 \ , \ &\langle \frac{X_{2}}{r_{2}^{5}} \rangle _{\lambda_{2}}=\frac{e_{2}}{a_{2}^{4}(1-e_{2}^{2})^{\frac{5}{2}}} \ , \\
+ \langle \frac{X_{2}^{2}Y_{2}}{r_{2}^{7}} \rangle _{\lambda_{2}}=0 \ , \ &\langle \frac{Y_{2}}{r_{2}^{5}} \rangle _{\lambda_{2}}=0 \ .
+ \end{cases}
+\end{align}
+Remembering that
+\begin{align}
+(\mathbf v_{2} \cdot \mathbf u_{1})^{2}&=1-(\mathbf u_{2} \cdot \mathbf u_{1})^{2}-(\mathbf w_{2} \cdot \mathbf u_{1})^{2} \ , \\
+(\mathbf v_{2} \cdot \mathbf w_{1})^{2}&=1-(\mathbf u_{2} \cdot \mathbf w_{1})^{2}-(\mathbf w_{2} \cdot \mathbf w_{1})^{2} \ , \\
+(\mathbf v_{2} \cdot \mathbf u_{1})(\mathbf v_{2} \cdot \mathbf w_{1})&=-(\mathbf u_{2} \cdot \mathbf u_{1})(\mathbf u_{2} \cdot \mathbf w_{1})-(\mathbf w_{2} \cdot \mathbf u_{1})(\mathbf w_{2} \cdot \mathbf w_{1}) \ .
+\end{align}
+We perform
+\begin{align}
+H_{4}=-\frac{\kappa'}{8} \bigg[
+ B_{1}(\mathbf e_{2} \cdot \mathbf e_{1})
++B_{2}(\mathbf e_{2} \cdot \mathbf e_{1})(\mathbf w_{2} \cdot \mathbf e_{1})^{2} 
++B_{3}(\mathbf e_{2} \cdot \mathbf e_{1})(\mathbf w_{2} \cdot \mathbf j_{1})^{2}
++B_{4}(\mathbf e_{2} \cdot \mathbf j_{1})(\mathbf w_{2} \cdot \mathbf e_{1})(\mathbf w_{2} \cdot \mathbf j_{1})
+\bigg ] \ ,
+\end{align}
+with $\kappa'=\frac{\mu_{2}\beta_{1}a_{1}^{3}}{a_{2}^{4}(1-e_{2}^{2})^{\frac{5}{2}}}$ and
+\begin{align}
+B_{1}&=+\frac{15}{8}-15e_{1}^{2} \ , &B_{3}&=-\frac{75}{8}   \ , \notag \\
+B_{2}&=+\frac{525}{8}   \ ,                    &B_{4}&=-\frac{75}{4}    \ .
+\end{align}
+
+\newpage
+
+\bibliographystyle{unsrt}
+\bibliography{mybib}
+
+\end{document}

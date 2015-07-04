@@ -1,0 +1,138 @@
+\documentclass[a4paper]{article}
+\usepackage[9pt]{extsizes}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+%\usepackage[francais]{babel}
+\usepackage[english]{babel}
+\usepackage{layout}
+%\usepackage{geometry}
+%\usepackage{setspace}
+%\usepackage{soul}
+%\usepackage{ulem}
+%\usepackage{eurosym}
+%\usepackage{bookman}
+%\usepackage{charter}
+%\usepackage{newcent}
+%\usepackage[super]{nth}
+\usepackage{xspace}
+\usepackage{textcomp}
+\usepackage{lmodern}
+\usepackage{appendix} 
+\usepackage{verbatim}
+\usepackage{listings}
+%\usepackage[inline]{asymptote}
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{epstopdf}
+\usepackage{placeins}
+%\usepackage{MyMnSymbol}
+%\usepackage{mathpazo}
+%\usepackage{mathptmx}
+%\usepackage{url}
+%\usepackage{verbatim}
+%\usepackage{moreverb} 
+%\usepackage{listings}
+%\usepackage{fancyhdr}
+%\usepackage{color}
+%\usepackage{colortbl}
+\usepackage{mathtools,amssymb,amsfonts,amsthm}
+%\usepackage{mathabx}
+\usepackage{cancel}
+%\usepackage{mathrsfs}
+%\usepackage{asmthm}
+%\usepackage{makeidx}
+\usepackage{parskip}
+\newcommand\nth{\textsuperscript{th}\xspace}
+%\setlength{\textwidth}{410pt}
+%\setlength{\oddsidemargin}{25pt}
+%\allowdisplaybreaks
+\title{Above-Threshold Ionization in the Strong Field and Long-Wavelength Tunneling Limit}
+\author{Yann Gouttenoire}
+\date{May-July 2015}
+
+\setlength{\oddsidemargin}{0pt}
+\setlength{\marginparsep}{0pt}
+\setlength{\textwidth}{454pt}
+%\linespread{0.5}
+\lstset
+{
+breaklines=true,
+basicstyle=\footnotesize,
+frame=single,
+columns=fullflexible,
+literate={*}{{\char42}}1
+         {-}{{\char45}}1
+}
+
+\newcommand{\shiftright}[2]{\makebox[#1][r]{\makebox[0pt][l]{#2}}}
+\newcommand{\shiftleft}[2]{\makebox[0pt][r]{\makebox[#1][l]{#2}}}
+
+\begin{document}
+\makeatletter
+
+  \begin{titlepage}
+  \centering
+  {\LARGE \textbf{Above-Threshold Ionization in the Strong Field and Long-Wavelength Tunneling Limit}} \\
+      \vspace{1cm}
+  {\large \@author} \\
+      \vspace{1cm}
+  {\textbf{Master 1 and 2$^{\textbf{nd}}$ year at Magist\`ere de Physique Fondamentale d'Orsay}} \\
+      \vspace{1cm}
+      \begin{figure}[h]
+      \centering
+    \includegraphics[width=0.30\textwidth]{logo/magistere}
+      \end{figure}
+  {\textbf{which is a certificate delivered by University Paris-Sud, member of University Paris-Saclay}} \\ 
+        
+   \begin{figure}[h]
+   \centering
+   \begin{subfigure}[l]{0.30\textwidth}
+       \includegraphics[width=\textwidth]{logo/upsud}
+   \end{subfigure}
+   \hfill
+   \begin{subfigure}[r]{0.30\textwidth}
+       \includegraphics[width=\textwidth]{logo/upsaclay}
+   \end{subfigure}
+   \end{figure}
+        \vfill
+
+ {\LARGE \textbf{Internship supervisors:}}\\
+       \vspace{0.5cm} 
+  {\large \textbf{Eric Charron$^{1}$ and Misha Ivanov$^{2}$}} \\
+       \vspace{0.5cm}
+  {\large \it{$^{1}$Institut de Chimie Mol\'eculaire d'Orsay, Orsay, France}} \\   
+  {\large \it{$^{2}$Max Born Institute, Berlin, Germany}} \\
+   \begin{figure}[h]
+   \centering
+   \begin{subfigure}[l]{0.3\textwidth}
+       \includegraphics[width=\textwidth]{logo/ismo}
+   \end{subfigure}
+   \hfill
+   \begin{subfigure}[r]{0.3\textwidth}
+       \includegraphics[width=\textwidth]{logo/mbi}
+   \end{subfigure}
+   \end{figure}
+       \vfill
+  {\large\textbf{	\@date}} \\
+      \vfill
+   
+ 
+        \end{titlepage}
+\makeatother
+
+\newpage
+\unboldmath{\tableofcontents}
+\newpage
+
+\section{Introduction}
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{data/template.eps}
+\end{figure}
+
+\bibliographystyle{unsrt}
+\bibliography{mybib}
+
+\end{document}
