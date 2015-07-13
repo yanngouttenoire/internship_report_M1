@@ -54,7 +54,7 @@
     \put(0.59634241,0.29085282){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$-\frac{1}{|x|}$}}}%
     \put(0.57745924,0.4308541){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$+xF$}}}%
     \put(0.4759116,0.37084053){\color[rgb]{0,0,0.50196078}\makebox(0,0)[lb]{\smash{$0$}}}%
-    \put(0.62240583,0.21356139){\color[rgb]{0,0,0.50196078}\makebox(0,0)[lb]{\smash{$\vec{F}$}}}%
+    \put(0.56,0.21356139){\color[rgb]{0,0,0.50196078}\makebox(0,0)[lb]{\smash{$\vec{F}$ (varies slowly)}}}%
     \put(0.7385939,0.36306028){\color[rgb]{0,0,0.50196078}\makebox(0,0)[lb]{\smash{Position}}}%
     \put(0.77968484,0.31781496){\color[rgb]{0,0,0.50196078}\makebox(0,0)[lb]{\smash{$x$}}}%
     \put(0.45254441,0.21446017){\color[rgb]{0,0,0.50196078}\makebox(0,0)[lb]{\smash{in}}}%
