@@ -1,0 +1,77 @@
+%% Creator: Inkscape inkscape 0.48.3.1, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'zero_displacement.eps' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{362.14938476bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.59657849)%
+    \put(0,0){\includegraphics[width=\unitlength]{data/zero_displacement.eps}}%
+    \put(0.39810856,0.36426936){\color[rgb]{0.50196078,0.50196078,0.50196078}\makebox(0,0)[lb]{\smash{$250$}}}%
+    \put(0.17719534,0.36398185){\color[rgb]{0.50196078,0.50196078,0.50196078}\makebox(0,0)[lb]{\smash{$50$}}}%
+    \put(0.33894152,0.36429771){\color[rgb]{0.50196078,0.50196078,0.50196078}\makebox(0,0)[lb]{\smash{$200$}}}%
+    \put(0.28270942,0.36445573){\color[rgb]{0.50196078,0.50196078,0.50196078}\makebox(0,0)[lb]{\smash{$150$}}}%
+    \put(0.22458189,0.36413979){\color[rgb]{0.50196078,0.50196078,0.50196078}\makebox(0,0)[lb]{\smash{$100$}}}%
+    \put(0.13423151,0.36429774){\color[rgb]{0.50196078,0.50196078,0.50196078}\makebox(0,0)[lb]{\smash{$0$}}}%
+    \put(0.05778118,0.36492955){\color[rgb]{0.50196078,0.50196078,0.50196078}\makebox(0,0)[lb]{\smash{$-50$}}}%
+    \put(0.90091574,0.36135824){\color[rgb]{0.50196078,0.50196078,0.50196078}\makebox(0,0)[lb]{\smash{$600$}}}%
+    \put(0.67178877,0.36122869){\color[rgb]{0.50196078,0.50196078,0.50196078}\makebox(0,0)[lb]{\smash{$200$}}}%
+    \put(0.84174866,0.36186051){\color[rgb]{0.50196078,0.50196078,0.50196078}\makebox(0,0)[lb]{\smash{$500$}}}%
+    \put(0.78362112,0.36170256){\color[rgb]{0.50196078,0.50196078,0.50196078}\makebox(0,0)[lb]{\smash{$400$}}}%
+    \put(0.72738906,0.36122871){\color[rgb]{0.50196078,0.50196078,0.50196078}\makebox(0,0)[lb]{\smash{$300$}}}%
+    \put(0.61302946,0.36122871){\color[rgb]{0.50196078,0.50196078,0.50196078}\makebox(0,0)[lb]{\smash{$100$}}}%
+    \put(0.54037008,0.36249232){\color[rgb]{0.50196078,0.50196078,0.50196078}\makebox(0,0)[lb]{\smash{$0$}}}%
+    \put(0.38408773,0.39679739){\color[rgb]{0.30,0.30,0.30}\makebox(0,0)[lb]{\smash{$\omega t$ (degrees)}}}%
+    \put(0.14,0.54510493){\color[rgb]{0,0,0.50196078}\makebox(0,0)[lb]{\smash{Ionization}}}%
+    \put(0.28501268,0.49806219){\color[rgb]{0,0,0.50196078}\makebox(0,0)[lb]{\smash{Unique recollision}}}%
+    \put(0.55138745,0.55553616){\color[rgb]{0,0,0.50196078}\makebox(0,0)[lb]{\smash{Ionization}}}%
+    \put(0.67370112,0.47719033){\color[rgb]{0,0,0.50196078}\makebox(0,0)[lb]{\smash{1$^{st}$ recollision}}}%
+    \put(0.77545178,0.53279061){\color[rgb]{0,0,0.50196078}\makebox(0,0)[lb]{\smash{2$^{nd}$ recollision}}}%
+    \put(0.8358193,0.44092605){\color[rgb]{0,0,0.50196078}\makebox(0,0)[lb]{\smash{3$^{rd}$ recollision}}}%
+    \put(-0.00183367,0.23624593){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lb]{\smash{$\sin(\omega t)-\sin(\omega t_{b})$}}}%
+    \put(0.36903199,0.07965585){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lb]{\smash{$-\sin(\omega t_{b})\omega(t-t_{b})$}}}%
+  \end{picture}%
+\endgroup%
