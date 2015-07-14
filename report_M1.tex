@@ -71,6 +71,7 @@ literate={*}{{\char42}}1
 \newcommand{\shiftright}[2]{\makebox[#1][r]{\makebox[0pt][l]{#2}}}
 \newcommand{\shiftleft}[2]{\makebox[0pt][r]{\makebox[#1][l]{#2}}}
 
+\renewcommand\thesubfigure{\roman{subfigure}}
 
 \begin{document}
 \begin{comment}
@@ -144,10 +145,10 @@ During the 1970's, experiments were absolute measurements of the dependance of t
 It was a great advance when in 1979, Agostini \textit{et al} (see \cite{Agostini_1979}) measured the energy of the ionized electrons which are ejected after the illumination of atoms with a laser pulse. This is the now well-known photo-electrons spectrum (PES). It was a surprise when they observed that the electrons could absorb many more photons than the minimum number required to be promoted to the continuum. This process called above-threshold tonization (ATI) revealed new channels of ionization.
 The second phenomenon of main interest, the high-harmonic generation is first observed up to very high order by L'huillier \textit{et al} in 1989 (see \cite{Li_1989}). This can be explained by the recollisional model: half an optical cycle after ionization, the electric field will change direction, and the electron will be accelerated back toward the ionic core with which it can recombine by emitting a single high energy photon. 
 \par
-More recently, in 2009, Blagua \textit{et al} (see \cite{Blaga_2009}) observed low-energy structures (LES) in the photo-electrons spectrum. In 2012, K\"astner \textit{et al} (see \cite{Kastner_2012}) revealed that the soft recollisions where the electron rescatters with the parent nucleus with a large impact parameter are at the origin of the presence of these peaks at low energy.
+More recently, in 2009, Blagua \textit{et al} (see \cite{Blaga_2009}) observed low-energy structures (LES) in the photo-electrons spectrum. In 2012, K\"astner \textit{et al} (see \cite{Kastner_2012_soft-recollision}) revealed that the soft recollisions where the electron rescatters with the parent nucleus with a large impact parameter are at the origin of the presence of these peaks at low energy.
 \par
 During this 3 months internship, I have spent the most of the time implementing a code which computes the so-called above-threshold ionization spectrum (photo-electrons spectrum). The simulation is based on the Monte-Carlo method: we compute classic trajectories of an electron just after the ionization step, its positions and velocities at ionization time resulting from the theory of tunneling ionization. 
-On the one hand, with a view to making sure that the code was correct, I tried to reproduce some results in two differents papers when using the same parameters. First, I tried to compute the photo-electrons spectrum and to plot some interesting trajectories published in the article \cite{Hu_1997}. Second, I tried to plot the low-energy spectrum published in the article of K\"astner \textit{et al} (see \cite{Kastner_2012}).
+On the one hand, with a view to making sure that the code was correct, I tried to reproduce some results in two differents papers when using the same parameters. First, I tried to compute the photo-electrons spectrum and to plot some interesting trajectories published in the article \cite{Hu_1997}. Second, I tried to plot the low-energy spectrum published in the article \cite{Kastner_2012_pulse}.
 On the second hand, I replaced the hydrogenoid atom by a chiral molecule and the linear polarization of the laser field by a circular one and I tried to look for a signature of the chirality in the LES.
 
 
@@ -155,6 +156,7 @@ On the second hand, I replaced the hydrogenoid atom by a chiral molecule and the
 \section{Mecanisms of ionization induced by a Strong field}
 Let's us first defined some quantities used in this report. $F$ is the electric field defined as
 \begin{equation}
+\label{electric_field}
 F=F_{0} f(t)\cos{\omega t} \mathbf{e_{z}} + \beta F_{0} f(t)\sin{\omega t} \mathbf{e_{x}}
 \end{equation}
 where the envelop of the pulse laser f(t) is such that
@@ -379,6 +381,68 @@ E_{k}^{\infty}=2 U_{p} \left(\sin^{2}{\omega t_{b}}+2(1-\cos{\theta})\sin{\omega
 \end{equation}
 We immediately see that $E_{k}^{\infty}$ is maximum when $\theta=\pi$, that is when the photo-electron is scattered backward. Indeed, the back-scattering corresponds to the maximum change in velocity (the velocity vector inverts its direction) and then, it corresponds to the maximum dephasing of the harmonic motion. The detected kinetic energy in (\ref{kinetic_energy_theta}) is plotted on the right side of the figure (\ref{kinetic_energy}) as a function of the phase of the electric field at which the electron is freed $\omega t_{b}$.
 The maximum value is obtained numerically for $10.00 U_{p}$ and confirmed the position of the cut-off observed in experiment. It is attained for $\omega t_{b}=15.0^{\circ}$ and $\omega t_{c}=261.5^{\circ}$.
+
+\section{Numerical simulations}
+\subsubsection{Introduction of the code}
+
+As mentionned earlier, the objective of the internship is to be able to compute numerically the photo-electrons spectrum ejected of a medium composed of chiral molecules irradiated by short laser pulses circularly polarized. The purpose of it is to look if there is a signature of the chirality in the low energy part of the spectrum. Before this, I tried to reproduce the spectra published in two articles. 
+\par
+Let's introduce briefly the most important elements of the code. I chose to implement the code in C++ and I use as far as possible the object-oriented programming. Thus, the code is made of the following 10 classes.
+\begin{itemize}
+\item
+IC: set the initial conditions ($\phi_{b}$, $x_{b}$, $\mathbf{v_{\perp b}}$) required for the classical trajectory and the related probability for tunneling at the phase $\phi_{b}$ with the velocity $v_{\perp b}$.
+\item
+Solve: integrates the Newtonian system of ordinary differential equations of motion using the Runge-Kutta algorithm (of order 5) with adaptive step-size methods.
+\item
+System: contains the Newtonian system of ordinary differential equations of motion.
+\item
+ElectricField: contains the informations about the electric field (amplitude, wavelenght, pulse duration, components on x,y,z, vector potential...).
+\item
+ElectrostaticPotential: contains the informations about the potential of the atom/molecule (ionization potential, charges, bond lenght, potential value...). It is an abstract class which is extended by the two derived classes Hydrogen and Molecule which specify the potential properties for an hydrogen-like atom and a molecule. 
+\item
+Spectra: stores the kinetic energy of the electrons as well as the related tunneling rate after each trajectory. Then, it computes the photo-electrons spectrum. In order to do so, as for an histogram, we divide the entire range of values for the kinetic energy into a series of small intervals and then, we count how many events considered with their weight fall into each interval.
+\item
+Plot: plots the spectrum with Gnuplot.
+\item
+Display: displays informations on the terminal. 
+\end{itemize}
+\par
+Of course there is also the main program which calls the different methods defined in each class step by step: \\
+First, the three initial parameters which define one trajectory ($\phi_{b}$, $v_{\perp X b}$, $v_{\perp Y b}$) are uniformly distributed on a 3D grid through three loops. Since most of the trajectories barely contribute because of their tiny weight, we do not consider the triplet of initial parameters if the related tunneling rate is less than a given threshold.
+Second, the trajectory is propagated until the electron is far enough from the ionic core or when the field if switched off (only valid for a finite pulse). 
+Third, if the electron is not bounded, we compute its asymptotic kinetic energy and stores it, as well as the related tunneling rate.
+When all the values ($\phi_{b}$, $v_{\perp X b}$, $v_{\perp Y b}$) on the 3D grid have been sampled, we plot the spectra.
+\par 
+We precise that asymptotic kinetic energy is the kinetic energy when the electron is at a infinite distance from the ionic core, so that
+\begin{equation}
+\label{asymptotic_kinetic_energy}
+E_{k}^{\infty}=\frac{\mathbf{v}^{2}}{2}-\frac{1}{r}.
+\end{equation}
+
+\subsubsection{Plateau in above-threshold ionization spectra}
+
+My first work was to reproduce some results published in 1997 in the article \cite{Hu_1997}. Into this paper, Hu \textit{et al} implemented a code really similar to the one introduced previously in order to compute the photo-electrons spectrum (PES) as well as the angle-resolved photo-electron spectrum (ARPES). The electric field is linearly polarized and monochromatic, that is the same as in (\ref{electric_field}) with $f(t)=0$ and $\beta=0$. Then, we can not wait for the moment the field is turned off for computing the kinetic energy. However, we can cancel the electric field by doing the substitution $\mathbf{v}\Rightarrow\mathbf{v}+\mathbf{A}$ in (\ref{asymptotic_kinetic_energy}) where $\mathbf{A}$ is the vector potential given by $\mathbf{A}=\tfrac{F}{\omega}\sin{\omega t}\mathbf{e_{z}}$. Then, we obtain the compensated kinetic energy
+\begin{equation}
+E_{k}^{\infty}=\frac{(\mathbf{v}+\mathbf{A})^{2}}{2}-\frac{1}{r}
+\end{equation}
+which is approximately constant when $\frac{1}{r}$ is weak. Indeed, $\mathbf{v}+\mathbf{A}$ corresponds to the canonical momentum which is an invariant of the motion for a particle in an electromagnetic field. Therefore, the quantity defined above is the kinetic energy after we switched off the field adiabatically which is what we are looking for (see also \cite{Leopold_1979}).
+\par 
+
+\begin{figure}
+\begin{subfigure} [t]{0.5\textwidth}
+ \resizebox{1\textwidth}{!}{\input{data/pes.eps_tex}}
+ \subcaption{Computed ATI spectrum.}
+ \label{myATI} 
+\end{subfigure}
+\begin{subfigure} [t]{0.5\textwidth}
+\hspace{-1.5cm}
+ \resizebox{1.6\textwidth}{!}{\input{data/arpes.eps_tex}}
+ \subcaption{Computed PAD for different energy regions.}
+ \label{myPAD} 
+\end{subfigure}
+ \caption{Regions (a), (b) and (c) correspond respectively to $[0, 2U_{p}]$, $[2U_{p}, 8U_{p}]$ and $[8U_{p}, 10U_{p}]$. In right panel, (d) reveals the so-called side lobe which appears for $4U_{p}$}
+\end{figure}
+
 
 \bibliographystyle{unsrt}
 \bibliography{mybib}
