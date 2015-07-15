@@ -50,28 +50,28 @@
   \makeatother%
   \begin{picture}(1,0.59657849)%
     \put(0,0){\includegraphics[width=\unitlength]{data/zero_displacement.eps}}%
-    \put(0.39810856,0.36426936){\color[rgb]{0.50196078,0.50196078,0.50196078}\makebox(0,0)[lb]{\smash{$250$}}}%
-    \put(0.17719534,0.36398185){\color[rgb]{0.50196078,0.50196078,0.50196078}\makebox(0,0)[lb]{\smash{$50$}}}%
-    \put(0.33894152,0.36429771){\color[rgb]{0.50196078,0.50196078,0.50196078}\makebox(0,0)[lb]{\smash{$200$}}}%
-    \put(0.28270942,0.36445573){\color[rgb]{0.50196078,0.50196078,0.50196078}\makebox(0,0)[lb]{\smash{$150$}}}%
-    \put(0.22458189,0.36413979){\color[rgb]{0.50196078,0.50196078,0.50196078}\makebox(0,0)[lb]{\smash{$100$}}}%
-    \put(0.13423151,0.36429774){\color[rgb]{0.50196078,0.50196078,0.50196078}\makebox(0,0)[lb]{\smash{$0$}}}%
-    \put(0.05778118,0.36492955){\color[rgb]{0.50196078,0.50196078,0.50196078}\makebox(0,0)[lb]{\smash{$-50$}}}%
-    \put(0.90091574,0.36135824){\color[rgb]{0.50196078,0.50196078,0.50196078}\makebox(0,0)[lb]{\smash{$600$}}}%
-    \put(0.67178877,0.36122869){\color[rgb]{0.50196078,0.50196078,0.50196078}\makebox(0,0)[lb]{\smash{$200$}}}%
-    \put(0.84174866,0.36186051){\color[rgb]{0.50196078,0.50196078,0.50196078}\makebox(0,0)[lb]{\smash{$500$}}}%
-    \put(0.78362112,0.36170256){\color[rgb]{0.50196078,0.50196078,0.50196078}\makebox(0,0)[lb]{\smash{$400$}}}%
-    \put(0.72738906,0.36122871){\color[rgb]{0.50196078,0.50196078,0.50196078}\makebox(0,0)[lb]{\smash{$300$}}}%
-    \put(0.61302946,0.36122871){\color[rgb]{0.50196078,0.50196078,0.50196078}\makebox(0,0)[lb]{\smash{$100$}}}%
-    \put(0.54037008,0.36249232){\color[rgb]{0.50196078,0.50196078,0.50196078}\makebox(0,0)[lb]{\smash{$0$}}}%
+    \put(0.39810856,0.36426936){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$250$}}}%
+    \put(0.17719534,0.36398185){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$50$}}}%
+    \put(0.33894152,0.36429771){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$200$}}}%
+    \put(0.28270942,0.36445573){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$150$}}}%
+    \put(0.22458189,0.36413979){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$100$}}}%
+    \put(0.13423151,0.36429774){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$0$}}}%
+    \put(0.05778118,0.36492955){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$-50$}}}%
+    \put(0.90091574,0.36135824){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$600$}}}%
+    \put(0.67178877,0.36122869){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$200$}}}%
+    \put(0.84174866,0.36186051){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$500$}}}%
+    \put(0.78362112,0.36170256){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$400$}}}%
+    \put(0.72738906,0.36122871){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$300$}}}%
+    \put(0.61302946,0.36122871){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$100$}}}%
+    \put(0.54037008,0.36249232){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$0$}}}%
     \put(0.38408773,0.39679739){\color[rgb]{0.30,0.30,0.30}\makebox(0,0)[lb]{\smash{$\omega t$ (degrees)}}}%
-    \put(0.14,0.54510493){\color[rgb]{0,0,0.50196078}\makebox(0,0)[lb]{\smash{Ionization}}}%
-    \put(0.28501268,0.49806219){\color[rgb]{0,0,0.50196078}\makebox(0,0)[lb]{\smash{Unique recollision}}}%
-    \put(0.55138745,0.55553616){\color[rgb]{0,0,0.50196078}\makebox(0,0)[lb]{\smash{Ionization}}}%
-    \put(0.67370112,0.47719033){\color[rgb]{0,0,0.50196078}\makebox(0,0)[lb]{\smash{1$^{st}$ recollision}}}%
-    \put(0.77545178,0.53279061){\color[rgb]{0,0,0.50196078}\makebox(0,0)[lb]{\smash{2$^{nd}$ recollision}}}%
-    \put(0.8358193,0.44092605){\color[rgb]{0,0,0.50196078}\makebox(0,0)[lb]{\smash{3$^{rd}$ recollision}}}%
-    \put(-0.00183367,0.23624593){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lb]{\smash{$\sin(\omega t)-\sin(\omega t_{b})$}}}%
-    \put(0.36903199,0.07965585){\color[rgb]{0,0.50196078,0}\makebox(0,0)[lb]{\smash{$-\sin(\omega t_{b})\omega(t-t_{b})$}}}%
+    \put(0.14,0.54510493){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{Ionization}}}%
+    \put(0.28501268,0.49806219){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{Unique recollision}}}%
+    \put(0.55138745,0.55553616){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{Ionization}}}%
+    \put(0.67370112,0.47719033){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{1$^{st}$ recollision}}}%
+    \put(0.77545178,0.53279061){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{2$^{nd}$ recollision}}}%
+    \put(0.8358193,0.44092605){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{3$^{rd}$ recollision}}}%
+    \put(-0.00183367,0.23624593){\color[rgb]{0,0.3,0}\makebox(0,0)[lb]{\smash{$\sin(\omega t)-\sin(\omega t_{b})$}}}%
+    \put(0.36903199,0.07965585){\color[rgb]{0,0.3,0}\makebox(0,0)[lb]{\smash{$-\sin(\omega t_{b})\omega(t-t_{b})$}}}%
   \end{picture}%
 \endgroup%
