@@ -133,6 +133,7 @@ literate={*}{{\char42}}1
 \unboldmath{\tableofcontents}
 \newpage
 
+
 \section{Introduction}
 
 In the early 1960s, in California, a physicist named Theodore H. Maiman invented the first source of light based on the mecanism of amplification by way of stimulated emission: the Q switched Ruby laser. This would not have been possible without the invention of optical pumping methods by the french physicists Alfred Kastler and Jean Brossel in the early 1950s. Then the laser was born and its most important particularity is to emit light coherently which leads to an electromagnetic wave with a very narrow spectrum.
@@ -145,12 +146,11 @@ During the 1970's, experiments were absolute measurements of the dependance of t
 It was a great advance when in 1979, Agostini \textit{et al} (see \cite{Agostini_1979}) measured the energy of the ionized electrons which are ejected after the illumination of atoms with a laser pulse. This is the now well-known photo-electrons spectrum (PES). It was a surprise when they observed that the electrons could absorb many more photons than the minimum number required to be promoted to the continuum. This process called above-threshold tonization (ATI) revealed new channels of ionization.
 The second phenomenon of main interest, the high-harmonic generation is first observed up to very high order by L'huillier \textit{et al} in 1989 (see \cite{Li_1989}). This can be explained by the recollisional model: half an optical cycle after ionization, the electric field will change direction, and the electron will be accelerated back toward the ionic core with which it can recombine by emitting a single high energy photon. 
 \par
-More recently, in 2009, Blagua \textit{et al} (see \cite{Blaga_2009}) observed low-energy structures (LES) in the photo-electrons spectrum. In 2012, K\"astner \textit{et al} (see \cite{Kastner_2012_soft-recollision}) revealed that the soft recollisions where the electron rescatters with the parent nucleus with a large impact parameter are at the origin of the presence of these peaks at low energy.
+More recently, in 2009, Blagua \textit{et al} (see \cite{Blaga_2009} and \cite{Quan_2009}) observed low-energy structures (LES) in the photo-electrons spectrum. In 2012, K\"astner \textit{et al} (see \cite{Kastner_2012_soft-recollision}) revealed that the soft recollisions where the electron rescatters with the parent nucleus with a large impact parameter are at the origin of the presence of these peaks at low energy.
 \par
 During this 3 months internship, I have spent the most of the time implementing a code which computes the so-called above-threshold ionization spectrum (photo-electrons spectrum). The simulation is based on the Monte-Carlo method: we compute classic trajectories of an electron just after the ionization step, its positions and velocities at ionization time resulting from the theory of tunneling ionization. 
 On the one hand, with a view to making sure that the code was correct, I tried to reproduce some results in two differents papers when using the same parameters. First, I tried to compute the photo-electrons spectrum and to plot some interesting trajectories published in the article \cite{Hu_1997}. Second, I tried to plot the low-energy spectrum published in the article \cite{Kastner_2012_pulse}.
 On the second hand, I replaced the hydrogenoid atom by a chiral molecule and the linear polarization of the laser field by a circular one and I tried to look for a signature of the chirality in the LES.
-
 
 
 \section{Mecanisms of ionization induced by a Strong field}
@@ -193,13 +193,13 @@ During this internship, I studied ionization processes in the long-wavelengh lim
 
 \subsubsection{The tunneling rate}
 
-The probability of tunneling ionization of a hydrogen atom in an electrostatic field was first determined by Landau and Lifshitz in 1965 (see \cite{Landau_1965}) and is given by $w(0)=(4/F)\exp(-2/3F)$. In 1966 the scope of the above formula was extended by Perelomov, Popov, Terent\'ev (PPT) for an arbitrary state of the hydrogen atom (see \cite{PPT_1966}). Then, in 1986 Ammosov, Delone and Krainov (ADK) derived the quasi-classical tunneling limit of the equation of PPT (see \cite{ADK_1986}). Finally, in 1991 the ADK formula is extended in order to take into account the velocity of the electron after tunneling (see Delone and Krainov \cite{Delone_1991})
+The probability of tunneling ionization of a hydrogen atom in an electrostatic field was first determined by Landau and Lifshitz in 1965 (see \cite{Landau_1965}) and is given by $w(0)=(4/F)\exp(-2/3F)$. In 1966 the scope of the above formula was extended by Perelomov, Popov, Terent\'ev (PPT) for an arbitrary state of the hydrogen atom (see \cite{PPT_1966}). Then, in 1986 Ammosov, Delone and Krainov (ADK) derived the quasi-classical tunneling limit of the equation of PPT (see \cite{ADK_1986}). Finally, in 1991 the ADK formula is extended in order to take into account the distribution of electron velocities after tunneling (see Delone and Krainov \cite{Delone_1991})
 \begin{equation} 
 \label{ADK_distribution}
 w(\phi_{b},v_{\perp b})=w(0)w(1), \quad w(0)=\frac{4}{F}\exp(-\frac{2}{3}\frac{[2I_{p}]^{3/2}}{F}), \quad w(1)=\frac{1}{\pi F}\exp(-\frac{\sqrt{2I_{p}}v_{\perp}^{2}}{F}),
 \end{equation}
 where the index $b$ denotes the quantities at the time of ionization (at birth) and where $1/\pi F$ derived from the condition of normalization over the perpendicular velocity. 
-The velocity parallel to the laser polarisation has been took equal to 0 (see \cite{Hu_1997}).
+The velocity parallel to the laser polarisation has been took equal to 0 (see \cite{Hu_1997}). We insist that the above expression is only valable in the tunneling regime.
 \par
 This ionization rate formula has been used to weight classical trajectories in my simulations. For each trajectory, I picked the phase of the electric field at birth $\phi_{b}$ as well as each component of the perpendicular velocity at birth $v_{\perp X b}$, $v_{\perp Y b}$ where (X,Y) denotes the polarization plane. Then, I computed the probability for having such initial conditions for both the field and the electron velocity with the above formula.
 \par
@@ -209,7 +209,7 @@ w(\phi_{b},v_{\perp b})=w(0)\bar w(1), \quad w(0)=\frac{4}{F}\exp(-\frac{2}{3}\f
 \end{equation}
 In the papers mentionned previously, the ionization rate is obtained by solving the time-dependent Shr\"odinger equation and by doing approximations. The main approximation in the so-called Strong Field Approximation (see \cite{Misha_2014}). This leads to the derivation of the transition amplitude between the ground state and the final state where we completely neglect the Coulomb potential in the continuuum. The final state is then simply the wave function of a free electron in an electric field and is called \textit{Volkov} state. One of the motivation for a such approximation is that the the Volkov wave function has an analytic expression.
 \par
-We recall that the above expression is only valable in the tunneling regime, that is, in the long-wavelenght limit. The advantage of the tunneling regime, is that $\gamma \ll 1$ which is similar to $U_{p} \gg I_{p}$ is compatible with the quasi-classical limit defined by $U_{p} \gg \omega$. Upon this condition, we can consider the electron in the continuum as following classical trajectories. Quantum effects like the spreading of the wave function in phase space are encoded in the factor $w(1)$ in the tunneling rate (\ref{ADK_distribution}). It is quite suprising that such quantum effects which occur during the propagation of the wave function in the vacuum can be conceal in the distribution of initial velocities. The quantum properties are then propagated as the electron accomplished its classical trajectory. 
+Since the early 1990, the strong field physics in the tunneling regime has attracted a considerable attention. An important reason for such a thing, is that $\gamma \ll 1$ which is similar to $U_{p} \gg I_{p}$ is compatible with the quasi-classical limit defined by $U_{p} \gg \omega$. This is the case for mid-infrared laser fields where the wavelenght is $\lambda \propto 2\,\micro\text{m}$. Upon this condition, we can consider the electron in the continuum as following classical trajectories. Quantum effects like the spreading of the wave function in phase space are encoded in the factor $w(1)$ in the ionization distibution (\ref{ADK_distribution}). It is quite suprising that such quantum effects which occur during the propagation of the wave function in the vacuum can be conceal in the distribution of initial velocities. The quantum properties are then propagated as the electron accomplished its classical trajectory. 
 \par
 Besides, in contrast to the MPI, in the tunneling limit the position of the electron in the continuum is really clear.
 Indeed, the position of the electron $x_{b}$ when tunneling out of the barrier can be derived following a 1 dimensional and classical model (see figure (\ref{tunneling_ionization})). $x_{b}$ is solution of the equation of energy conservation between the time the electron tunnels in and the time the electron tunnels out when supposing the electron is at rest for both instants.
@@ -221,7 +221,7 @@ where $x_{b+}$ and $x_{b-}$ are repectively the positions of the electron when t
 \begin{figure}[h] 
 \centering
 %\def\svgwidth{<desired width>}
- \input{data/tunnel.eps_tex}
+ \input{data/tunnel.pdf_tex}
  \caption{Quasistatic picture of tunneling ionization}
  \label{tunneling_ionization} 
 \end{figure}
@@ -256,7 +256,7 @@ Furthermore, the electron can rescatter several times. The numerical resolution 
 \begin{figure}
 \centering
 %\def\svgwidth{<desired width>}
- \input{data/zero_displacement.eps_tex}
+ \input{data/zero_displacement.pdf_tex}
  \caption{Successive recollisions of the electron with the parent ion in the classical model. On the left figure, $\omega t_{b}$ is contained in $[12.55^{\circ},90^{\circ}]$ and the electron recollides only one time. On the right figure, $\omega t_{b}$ is contained in $[7.37^{\circ},12.55^{\circ}]$ and the electron recollides exactly three times.}
  \label{successive_recollision} 
 \end{figure}
@@ -294,10 +294,14 @@ On the figure (\ref{successive_recollision}), we can see that for a given phase 
 The left side of figure (\ref{kinetic_energy}) shows the kinetic energy $E_{k}$ at the time of the first recollision plotted as a function of the phase of ionization $\omega t_{b}$. The maximum value of $E_{k}$ is $3.17U_{p}$ and the cut-off law (\ref{cut-off}) is clarified. It is attained for $\omega t_{b}=18.0^{\circ}$ and $\omega t_{c}=252.0^{\circ}$. \\
 \begin{figure}
 \centering
- \input{data/simpleman.eps_tex}
+ \input{data/simpleman.pdf_tex}
  \caption{Kinetic energy of the electron at the time of the first recollision as a function of the phase of ionization (on the left) and detected kinetic energy of the electron after having been back-scattered (on the right)}
  \label{kinetic_energy} 
 \end{figure}
+
+HHG has attracted a considerable attention in connection to the possibility to generate attosecond pulses (see \cite{Ivanov_2009}).
+Then it becomes possible to study processes that occur on time scales approaching the atomic unit of time ($\sim 24\,as$), like electrons dynamic in atoms and molecules. 
+Attosecond pulses can be used in pump-probe scenario, where the first pump laser pulse prepares the system by initiating the dynamic of interest. Then the second laser pulse investigates the evolved dynamic. By varying the time delay between the two pulses, we can make a time-delayed imaging of the evolution of the system.
 
 
 \section{Above-Threshold Ionization}
@@ -308,7 +312,7 @@ The low energy region of the spectrum, up to two $U_{p}$, is simply the energy d
 \begin{equation}
 E_{k}^{\infty}=2U_{p}\sin(\omega t_{b})f(t_{b}) \quad < \quad 2U_{p}
 \end{equation}
-The sharp decrease at low energy can be explained by the fact that due to the ionization rate (\ref{ADK_distribution}), they are more electrons ionized when the electric field is at its maximum, and this corresponds to a minimum of $\sin(\omega t_{b})f(t_{b})$ in the above expression.
+The sharp decrease at low energy can be explained by the fact that due to the tunneling rate (factor $w(0)$ in (\ref{ADK_distribution})), they are more electrons ionized when the electric field is at its maximum, and this corresponds to a minimum of $\sin(\omega t_{b})f(t_{b})$ in the above expression.
 \par
 However, the high energy region is intriging because it is well-known that a free electron can not absorb photons. This stems from the conservation of the energy and momentum. Let's consider a collision between an free electron with momentum $\mathbf{p_{i}}$ and a photon with momentum $\mathbf{k_{i}}$ followed by the absorption of the photon by the electron. We denote $\mathbf{p_{f}}$ the final momentum of the electron. The energy-momentum four-vector of the system \{electron$+$photon\} is given by
 \begin{equation}
@@ -355,9 +359,9 @@ This can also be understood classically: in an electric field, the acceleration 
 Finally, the only component which remains after the pulse is the initial offset, constant over time, which is responsible for the translational motion. We have to search for a mecanism which increase this drift energy up to $10 U_{p}$.
 In experiment, when the laser pulse is long enough, the photo-electron can leave the focus of the laser beam before the latter is swithed off. Therefore the electron will pass through region of space where the electric field is inhomogeneous and will undergoe a force which drives the electron in the region of weak field. Indeed, the electric field at one turning point of the harmonic motion can exceed the electric field at the other one. Finally, the drift velocity in the opposite direction of the gradient of the field is increased. However, this mecanism disappears for ultrashort laser pulse and then, it can not explained the high energy region of the ATI spectrum.
 \par
-In fact we can not build a predictive model for the ATI spectrum if we consider the electron as free and neglect the interaction of the electron with the Coulomb potential of the parent ion. When the electron is driven back to recollide with the parent ion, it can absorb photons. We can understand it classically: when the electron scatters with the ion, its harmonic motion is dephased. Then, there is a transfer of energy between two degrees of freedom: a few of the energy of the oscillatory motion is converted into energy for the drift motion. When coupled with the Coulomb field, the electric field behaves like a reservoir of energy for the electron. This underlying mecanism which explained the multiphoton ionization far from the threshold has been intuited by Kuchiev in 1987 (see \cite{Kuchiev_1987}) when he explained that "the electron in this process plays the role of an absorber of field energy, the role of antenna".
+In fact we can not build a predictive model for the ATI spectrum if we consider the electron as free and if we neglect the interaction of the electron with the Coulomb potential of the parent ion. When the electron is driven back and recollide with the parent ion, the coulomb attraction becomes sufficiently intense to dephased the harmonic motion. Then, a transfer of energy between the oscillatory motion and the drift motion occurs. When coupled with the Coulomb field, the electric field behaves like a reservoir of energy for the electron. This underlying mecanism which explained the multiphoton ionization far from the threshold has been intuited by Kuchiev in 1987 (see \cite{Kuchiev_1987}) when he explained that "the electron in this process plays the role of an absorber of field energy, the role of antenna". 
 \par
-But multiphoton processes occuring during electron-ion collisions were already well-known by plasma physicist as free-free transitions or inverse bremstrahlung. They were considered as the mecanism responsible for the electron avalanche in laser-induced air breakdown (see \cite{Chin_2004}).
+But the absorption of many photons during electron-ion collisions were already well-known by plasma physicist as free-free transitions or inverse bremstrahlung. They were considered as the mecanism responsible for the electron avalanche in laser-induced air breakdown (see \cite{Chin_2004}).
 \par
 As for the harmonic spectrum, the position of the cut-off in the ATI spectrum can be predicted with a classical three-step model. This was predated in 1994 by Paulus \textit{et al} (see \cite{Paulus_1994}). We suppose a field linearly polarized (along x) such that the trajectory of the electron evolves in a plane (xy). The velocity of the electron just before the recollision is the expression (\ref{velocity_free_motion}) evaluated at the time $t_{c}-\epsilon$ where the time of recollision $t_{c}$ is defined by the condition of zero displacement (\ref{zero_displacement}) and where we neglect the falling contribution of the envelop of the pulse
 \begin{align}
@@ -408,12 +412,12 @@ Display: displays informations on the terminal.
 \end{itemize}
 \par
 Of course there is also the main program which calls the different methods defined in each class step by step: \\
-First, the three initial parameters which define one trajectory ($\phi_{b}$, $v_{\perp X b}$, $v_{\perp Y b}$) are uniformly distributed on a 3D grid through three loops. Since most of the trajectories barely contribute because of their tiny weight, we do not consider the triplet of initial parameters if the related tunneling rate is less than a given threshold.
-Second, the trajectory is propagated until the electron is far enough from the ionic core or when the field if switched off (only valid for a finite pulse). 
-Third, if the electron is not bounded, we compute its asymptotic kinetic energy and stores it, as well as the related tunneling rate.
-When all the values ($\phi_{b}$, $v_{\perp X b}$, $v_{\perp Y b}$) on the 3D grid have been sampled, we plot the spectra.
+First, the three initial parameters which define one trajectory ($\phi_{b}$, $v_{\perp X b}$, $v_{\perp Y b}$) are uniformly distributed on a 3D grid through three loops. Each trajectory is weighted by the instantaneous tunneling ionization rate $w (0)$ and the initial transverse velocities distribution $w (1)$ (or $\bar w(1)$ in the case of a linear laser field) in (\ref{ADK_distribution}). Since most of the trajectories barely contribute because of their tiny weight, we discard the ones such that the related ionization probability is less than a given threshold.
+Second, each trajectory is propagated until the electron is far enough from the ionic core or until the field if switched off (only valid for a finite pulse). 
+Third, if the electron is not bounded, we compute its asymptotic kinetic energy and stores it, as well as the related ionization probability.
+When all the values ($\phi_{b}$, $v_{\perp X b}$, $v_{\perp Y b}$) on the 3D grid have been sampled, we plot the spectrum.
 \par 
-We precise that asymptotic kinetic energy is the kinetic energy when the electron is at a infinite distance from the ionic core, so that
+We precise that the asymptotic kinetic energy is the kinetic energy when the electron is at a infinite distance from the ionic core, so that
 \begin{equation}
 \label{asymptotic_kinetic_energy}
 E_{k}^{\infty}=\frac{\mathbf{v}^{2}}{2}-\frac{1}{r}.
@@ -430,13 +434,13 @@ which is approximately constant when $\frac{1}{r}$ is weak. Indeed, $\mathbf{v}+
 
 \begin{figure}
 \begin{subfigure} [t]{0.5\textwidth}
- \resizebox{1\textwidth}{!}{\input{data/pes.eps_tex}}
+ \resizebox{1\textwidth}{!}{\input{data/pes.pdf_tex}}
  \subcaption{Computed ATI spectrum.}
  \label{myATI} 
 \end{subfigure}
 \begin{subfigure} [t]{0.5\textwidth}
 \hspace{-1.5cm}
- \resizebox{1.6\textwidth}{!}{\input{data/arpes.eps_tex}}
+ \resizebox{1.6\textwidth}{!}{\input{data/arpes.pdf_tex}}
  \subcaption{Computed PAD for different energy regions.}
  \label{myPAD} 
 \end{subfigure}
@@ -446,17 +450,23 @@ which is approximately constant when $\frac{1}{r}$ is weak. Indeed, $\mathbf{v}+
 \begin{figure}
 \begin{subfigure} [t]{0.5\textwidth}
 \hspace{-1cm}
- \includegraphics[width=1.2\textwidth]{data/kastner.eps}
+ \includegraphics[width=1.2\textwidth]{data/kastner.pdf}
  \subcaption{Computed PAD for different energy regions.}
  \label{myPAD} 
 \end{subfigure}
 \begin{subfigure} [t]{0.5\textwidth}
 \hspace{-0.5cm}
- \resizebox{0.983\textwidth}{!}{\input{data/les.eps_tex}}
+ \resizebox{0.983\textwidth}{!}{\input{data/les.pdf_tex}}
  \subcaption{Computed ATI spectrum.}
  \label{myATI} 
 \end{subfigure}
  \caption{Regions (a), (b) and (c) correspond respectively to $[0, 2U_{p}]$, $[2U_{p}, 8U_{p}]$ and $[8U_{p}, 10U_{p}]$. In right panel, (d) reveals the so-called side lobe which appears for $4U_{p}$}
+\end{figure}
+
+
+\begin{figure}
+ \resizebox{1\textwidth}{!}{\input{data/soft_recollision.pdf_tex}}
+ \caption{Soft recollision}
 \end{figure}
 
 \bibliographystyle{unsrt}

@@ -49,7 +49,7 @@
   \global\let\svgscale\undefined%
   \makeatother%
   \begin{picture}(1,0.59928315)%
-    \put(0,0){\includegraphics[width=\unitlength]{data/simpleman.eps}}%
+    \put(0,0){\includegraphics[width=\unitlength]{data/simpleman.pdf}}%
     \put(0.0636868,0.04445154){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{0}}}%
     \put(0.04251486,0.11865096){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{0.5}}}%
     \put(0.0636868,0.19270947){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{1}}}%
@@ -85,7 +85,7 @@
     \put(0.90754197,0.01657258){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{90}}}%
     \put(0.01137737,0.55490309){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$E_{k}$ at first recollision}}}%
     \put(0.41177304,0.55416752){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$E_{k}$ detected after back-scattering}}}%
-    \put(0.3,0.07561474){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$\omega t_{b}$ (degrees)}}}%
+    \put(0.37,0.07561474){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$\omega t_{b}$ (degrees)}}}%
     \put(0.86,0.07561474){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$\omega t_{b}$ (degrees)}}}%
   \end{picture}%
 \endgroup%

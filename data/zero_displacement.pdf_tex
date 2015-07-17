@@ -49,7 +49,7 @@
   \global\let\svgscale\undefined%
   \makeatother%
   \begin{picture}(1,0.59657849)%
-    \put(0,0){\includegraphics[width=\unitlength]{data/zero_displacement.eps}}%
+    \put(0,0){\includegraphics[width=\unitlength]{data/zero_displacement.pdf}}%
     \put(0.39810856,0.36426936){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$250$}}}%
     \put(0.17719534,0.36398185){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$50$}}}%
     \put(0.33894152,0.36429771){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$200$}}}%
@@ -71,7 +71,7 @@
     \put(0.67370112,0.47719033){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{1$^{st}$ recollision}}}%
     \put(0.77545178,0.53279061){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{2$^{nd}$ recollision}}}%
     \put(0.8358193,0.44092605){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{3$^{rd}$ recollision}}}%
-    \put(-0.00183367,0.23624593){\color[rgb]{0,0.3,0}\makebox(0,0)[lb]{\smash{$\sin(\omega t)-\sin(\omega t_{b})$}}}%
-    \put(0.36903199,0.07965585){\color[rgb]{0,0.3,0}\makebox(0,0)[lb]{\smash{$-\sin(\omega t_{b})\omega(t-t_{b})$}}}%
+    \put(-0.00183367,0.23624593){\color[rgb]{0,0,0.3}\makebox(0,0)[lb]{\smash{$\sin(\omega t)-\sin(\omega t_{b})$}}}%
+    \put(-0.12,0.46){\color[rgb]{0,0,0.3}\makebox(0,0)[lb]{\smash{$-\sin(\omega t_{b})\omega(t-t_{b})$}}}%
   \end{picture}%
 \endgroup%

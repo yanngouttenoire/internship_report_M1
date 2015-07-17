@@ -1,0 +1,119 @@
+%% Creator: Inkscape inkscape 0.48.3.1, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'soft_recollision.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{360bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.6)%
+  \scriptsize
+    \put(0,0){\includegraphics[width=\unitlength]{data/soft_recollision.pdf}}%
+    \put(0.02164061,0.3756379){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$0$}}}%
+    \put(0.01456597,0.41897679){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$10$}}}%
+    \put(0.01456597,0.46230457){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$20$}}}%
+    \put(0.01456597,0.50549901){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$30$}}}%
+    \put(0.01456597,0.5488379){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$40$}}}%
+    \put(0.06,0.315){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$-150$}}}%
+    \put(0.11,0.315){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$-100$}}}%
+    \put(0.18,0.315){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$-50$}}}%
+    \put(0.25655389,0.315){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$0$}}}%
+    \put(0.30620556,0.315){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$50$}}}%
+    \put(0.35586944,0.315){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$100$}}}%
+    \put(0.40906111,0.315){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$150$}}}%
+    \put(0.51,0.36481012){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$-150$}}}%
+    \put(0.51,0.39730734){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$-100$}}}%
+    \put(0.52,0.42980457){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$-50$}}}%
+    \put(0.54652161,0.46230457){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$0$}}}%
+    \put(0.53944939,0.49467123){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$50$}}}%
+    \put(0.5323855,0.52716846){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$100$}}}%
+    \put(0.5323855,0.55966568){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$150$}}}%
+    \put(0.56865494,0.315){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$0$}}}%
+    \put(0.61394383,0.315){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$100$}}}%
+    \put(0.66616883,0.315){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$200$}}}%
+    \put(0.71852439,0.315){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$300$}}}%
+    \put(0.77088828,0.315){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$400$}}}%
+    \put(0.82311328,0.315){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$500$}}}%
+    \put(0.87546883,0.315){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$600$}}}%
+    \put(0.92769105,0.315){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$700$}}}%
+    \put(0,0.06419806){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$-0.04$}}}%
+    \put(0,0.10753583){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$-0.02$}}}%
+    \put(0.005,0.1508625){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$0$}}}%
+    \put(0.004,0.19420028){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$0.02$}}}%
+    \put(0.004,0.23753806){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$0.04$}}}%
+    \put(0.04515171,0.002){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$0$}}}%
+    \put(0.12258123,0.002){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$200$}}}%
+    \put(0.20743383,0.002){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$400$}}}%
+    \put(0.29215219,0.002){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$600$}}}%
+    \put(0.37700364,0.002){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$800$}}}%
+    \put(0.54600421,0.05178023){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$0$}}}%
+    \put(0.52802666,0.0848343){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$0.02$}}}%
+    \put(0.52802666,0.11788836){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$0.04$}}}%
+    \put(0.52802666,0.15094242){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$0.06$}}}%
+    \put(0.52802666,0.18400778){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$0.08$}}}%
+    \put(0.53521146,0.21706184){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$0.1$}}}%
+    \put(0.52802666,0.25011591){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$0.12$}}}%
+    \put(0.56851359,0.002){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$0$}}}%
+    \put(0.61358602,0.002){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$100$}}}%
+    \put(0.66599866,0.002){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$200$}}}%
+    \put(0.7182672,0.002){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$300$}}}%
+    \put(0.77053575,0.002){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$400$}}}%
+    \put(0.82280429,0.002){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$500$}}}%
+    \put(0.87521692,0.002){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$600$}}}%
+    \put(0.92748547,0.002){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$700$}}}%
+    \put(0.38,0.43474572){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\normalsize\smash{$(a)$}}}%
+    \put(0.89451389,0.37963186){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\normalsize\smash{$(c)$}}}%
+    \put(0.89705621,0.16353017){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\normalsize\smash{$(d)$}}}%
+    \put(0.39759839,0.21183527){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\normalsize\smash{$(b)$}}}%
+    \put(0.91,0.298){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\normalsize\smash{time}}}%
+    \put(0.51,0.465){\color[rgb]{0.3,0.3,0.3}{\makebox(0,0)[lb]{\normalsize\smash{z}}}}%
+    \put(0.49,0.15){\color[rgb]{0.3,0.3,0.3}{\makebox(0,0)[lb]{\normalsize\smash{$v_{\perp}$}}}}%
+    \put(0.91,-0.02){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\normalsize\smash{time}}}%
+    \put(0.35,-0.02){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\normalsize\smash{time}}}%
+    \put(0.35,0.29192471){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\normalsize\smash{z}}}%
+    \put(-0.003,0.45){\color[rgb]{0.3,0.3,0.3}{\makebox(0,0)[lb]{\normalsize\smash{$\rho$}}}}%
+    \put(-0.003,0.058){\color[rgb]{0.3,0.3,0.3}\rotatebox{90}{\normalsize\makebox(0,0)[lb]{\normalsize\smash{electric field}}}}%
+  \end{picture}%
+\endgroup%
