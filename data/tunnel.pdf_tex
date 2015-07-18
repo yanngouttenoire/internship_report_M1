@@ -50,7 +50,7 @@
   \makeatother%
   \begin{picture}(1,0.60005555)%
     \put(0,0){\includegraphics[width=\unitlength]{data/tunnel.pdf}}%
-    \put(0.21977137,0.36634677){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$x_{b}$}}}%
+    \put(0.21977137,0.36634677){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$x_{i}$}}}%
     \put(0.59634241,0.29085282){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$-\frac{1}{|x|}$}}}%
     \put(0.57745924,0.4308541){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$+xF$}}}%
     \put(0.4759116,0.37084053){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$0$}}}%

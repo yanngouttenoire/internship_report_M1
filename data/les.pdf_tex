@@ -59,7 +59,7 @@
     \put(0.99,0.372){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$0.04$}}}%
     \put(0.99,0.585){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$0.06$}}}%
     \put(0.99,0.792){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$0.08$}}}%
-    \put(0.39,0.0){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\large\smash{energy $[eV]$}}}%
+    \put(0.39,-0.05){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\large\smash{energy $[eV]$}}}%
     \put(1.1,0.7){\color[rgb]{0.3,0.3,0.3}\rotatebox{270}{\makebox(0,0)[lb]{\large \smash{electrons counts  [linear scale]}}}}%
   \end{picture}%
 \endgroup%

@@ -33,7 +33,7 @@
 %\usepackage{mathptmx}
 %\usepackage{url}
 %\usepackage{comment}
-%\usepackage{moreverb} 
+%\usepackage{moreverb } 
 %\usepackage{listings}
 %\usepackage{fancyhdr}
 \usepackage{color}
@@ -146,7 +146,7 @@ During the 1970's, experiments were absolute measurements of the dependance of t
 It was a great advance when in 1979, Agostini \textit{et al} (see \cite{Agostini_1979}) measured the energy of the ionized electrons which are ejected after the illumination of atoms with a laser pulse. This is the now well-known photo-electrons spectrum (PES). It was a surprise when they observed that the electrons could absorb many more photons than the minimum number required to be promoted to the continuum. This process called above-threshold tonization (ATI) revealed new channels of ionization.
 The second phenomenon of main interest, the high-harmonic generation is first observed up to very high order by L'huillier \textit{et al} in 1989 (see \cite{Li_1989}). This can be explained by the recollisional model: half an optical cycle after ionization, the electric field will change direction, and the electron will be accelerated back toward the ionic core with which it can recombine by emitting a single high energy photon. 
 \par
-More recently, in 2009, Blagua \textit{et al} (see \cite{Blaga_2009} and \cite{Quan_2009}) observed low-energy structures (LES) in the photo-electrons spectrum. In 2012, K\"astner \textit{et al} (see \cite{Kastner_2012_soft-recollision}) revealed that the soft recollisions where the electron rescatters with the parent nucleus with a large impact parameter are at the origin of the presence of these peaks at low energy.
+More recently, in 2009, Blagua \textit{et al} (see \cite{Blaga_2009} and \cite{Quan_2009}) observed low-energy structures (LES) in the photo-electrons spectrum. In 2012, K\"astner \textit{et al} (see \cite{Kastner_2012_soft}) revealed that the soft recollisions where the electron rescatters with the parent nucleus with a large impact parameter are at the origin of the presence of these peaks at low energy.
 \par
 During this 3 months internship, I have spent the most of the time implementing a code which computes the so-called above-threshold ionization spectrum (photo-electrons spectrum). The simulation is based on the Monte-Carlo method: we compute classic trajectories of an electron just after the ionization step, its positions and velocities at ionization time resulting from the theory of tunneling ionization. 
 On the one hand, with a view to making sure that the code was correct, I tried to reproduce some results in two differents papers when using the same parameters. First, I tried to compute the photo-electrons spectrum and to plot some interesting trajectories published in the article \cite{Hu_1997}. Second, I tried to plot the low-energy spectrum published in the article \cite{Kastner_2012_pulse}.
@@ -196,27 +196,27 @@ During this internship, I studied ionization processes in the long-wavelengh lim
 The probability of tunneling ionization of a hydrogen atom in an electrostatic field was first determined by Landau and Lifshitz in 1965 (see \cite{Landau_1965}) and is given by $w(0)=(4/F)\exp(-2/3F)$. In 1966 the scope of the above formula was extended by Perelomov, Popov, Terent\'ev (PPT) for an arbitrary state of the hydrogen atom (see \cite{PPT_1966}). Then, in 1986 Ammosov, Delone and Krainov (ADK) derived the quasi-classical tunneling limit of the equation of PPT (see \cite{ADK_1986}). Finally, in 1991 the ADK formula is extended in order to take into account the distribution of electron velocities after tunneling (see Delone and Krainov \cite{Delone_1991})
 \begin{equation} 
 \label{ADK_distribution}
-w(\phi_{b},v_{\perp b})=w(0)w(1), \quad w(0)=\frac{4}{F}\exp(-\frac{2}{3}\frac{[2I_{p}]^{3/2}}{F}), \quad w(1)=\frac{1}{\pi F}\exp(-\frac{\sqrt{2I_{p}}v_{\perp}^{2}}{F}),
+w(\phi_{i},v_{\perp i})=w(0)w(1), \quad w(0)=\frac{4}{F}\exp(-\frac{2}{3}\frac{[2I_{p}]^{3/2}}{F}), \quad w(1)=\frac{1}{\pi F}\exp(-\frac{\sqrt{2I_{p}}v_{\perp}^{2}}{F}),
 \end{equation}
-where the index $b$ denotes the quantities at the time of ionization (at birth) and where $1/\pi F$ derived from the condition of normalization over the perpendicular velocity. 
+where the index $i$ denotes the quantities at the time of ionization and where $1/\pi F$ derived from the condition of normalization over the perpendicular velocity. 
 The velocity parallel to the laser polarisation has been took equal to 0 (see \cite{Hu_1997}). We insist that the above expression is only valable in the tunneling regime.
 \par
-This ionization rate formula has been used to weight classical trajectories in my simulations. For each trajectory, I picked the phase of the electric field at birth $\phi_{b}$ as well as each component of the perpendicular velocity at birth $v_{\perp X b}$, $v_{\perp Y b}$ where (X,Y) denotes the polarization plane. Then, I computed the probability for having such initial conditions for both the field and the electron velocity with the above formula.
+This ionization rate formula has been used to weight classical trajectories in my simulations. For each trajectory, I picked the phase of the electric field at birth $\phi_{i}$ as well as each component of the perpendicular velocity at birth $v_{\perp X i}$, $v_{\perp Y i}$ where (X,Y) denotes the polarization plane. Then, I computed the probability for having such initial conditions for both the field and the electron velocity with the above formula.
 \par
-However, when the field is linearly polarized, the system is cylindrical symmetric by reference to the laser polarization and we would prefer picking only the radial component $v_{\perp b}=\sqrt{v_{\perp X b}^{2} + v_{\perp Y b}^{2}}$ instead of the two components $v_{\perp X b}$ and $v_{\perp Y b}$. Then, we have to take into account the additional Jacobian factor $v_{\perp}$ which appears when we transform cartesian coordinates into cylindrical coordinates,
+However, when the field is linearly polarized, the system is cylindrical symmetric by reference to the laser polarization and we would prefer picking only the radial component $v_{\perp i}=\sqrt{v_{\perp X i}^{2} + v_{\perp Y i}^{2}}$ instead of the two components $v_{\perp X i}$ and $v_{\perp Y i}$. Then, we have to take into account the additional Jacobian factor $v_{\perp}$ which appears when we transform cartesian coordinates into cylindrical coordinates,
 \begin{equation}
-w(\phi_{b},v_{\perp b})=w(0)\bar w(1), \quad w(0)=\frac{4}{F}\exp(-\frac{2}{3}\frac{[2I_{p}]^{3/2}}{F}), \quad \bar w(1)=\frac{v_{\perp}}{\pi F}\exp(-\frac{\sqrt{2I_{p}}v_{\perp}^{2}}{F}).
+w(\phi_{i},v_{\perp i})=w(0)\bar w(1), \quad w(0)=\frac{4}{F}\exp(-\frac{2}{3}\frac{[2I_{p}]^{3/2}}{F}), \quad \bar w(1)=\frac{v_{\perp}}{\pi F}\exp(-\frac{\sqrt{2I_{p}}v_{\perp}^{2}}{F}).
 \end{equation}
 In the papers mentionned previously, the ionization rate is obtained by solving the time-dependent Shr\"odinger equation and by doing approximations. The main approximation in the so-called Strong Field Approximation (see \cite{Misha_2014}). This leads to the derivation of the transition amplitude between the ground state and the final state where we completely neglect the Coulomb potential in the continuuum. The final state is then simply the wave function of a free electron in an electric field and is called \textit{Volkov} state. One of the motivation for a such approximation is that the the Volkov wave function has an analytic expression.
 \par
 Since the early 1990, the strong field physics in the tunneling regime has attracted a considerable attention. An important reason for such a thing, is that $\gamma \ll 1$ which is similar to $U_{p} \gg I_{p}$ is compatible with the quasi-classical limit defined by $U_{p} \gg \omega$. This is the case for mid-infrared laser fields where the wavelenght is $\lambda \propto 2\,\micro\text{m}$. Upon this condition, we can consider the electron in the continuum as following classical trajectories. Quantum effects like the spreading of the wave function in phase space are encoded in the factor $w(1)$ in the ionization distibution (\ref{ADK_distribution}). It is quite suprising that such quantum effects which occur during the propagation of the wave function in the vacuum can be conceal in the distribution of initial velocities. The quantum properties are then propagated as the electron accomplished its classical trajectory. 
 \par
 Besides, in contrast to the MPI, in the tunneling limit the position of the electron in the continuum is really clear.
-Indeed, the position of the electron $x_{b}$ when tunneling out of the barrier can be derived following a 1 dimensional and classical model (see figure (\ref{tunneling_ionization})). $x_{b}$ is solution of the equation of energy conservation between the time the electron tunnels in and the time the electron tunnels out when supposing the electron is at rest for both instants.
+Indeed, the position of the electron $x_{i}$ when tunneling out of the barrier can be derived following a 1 dimensional and classical model (see figure (\ref{tunneling_ionization})). $x_{i}$ is solution of the equation of energy conservation between the time the electron tunnels in and the time the electron tunnels out when supposing the electron is at rest for both instants.
 \begin{equation}
--\frac{1}{| x_{b} |}+x_{b}F_{b}=-I_{p} \Rightarrow Fx^{2}+I_{p}x-1=0 \Rightarrow x_{b\pm}=-\frac{I_{p}}{2F_{b}}\pm\frac{\sqrt{I_{p}^{2}-4F_{b}}}{2F_{b}}
+-\frac{1}{| x_{i} |}+x_{i}F_{i}=-I_{p} \Rightarrow Fx^{2}+I_{p}x-1=0 \Rightarrow x_{i\pm}=-\frac{I_{p}}{2F_{i}}\pm\frac{\sqrt{I_{p}^{2}-4F_{i}}}{2F_{i}}
 \end{equation} 
-where $x_{b+}$ and $x_{b-}$ are repectively the positions of the electron when tunneling in and when tunneling out.
+where $x_{i+}$ and $x_{i-}$ are repectively the positions of the electron when tunneling in and when tunneling out.
 
 \begin{figure}[h] 
 \centering
@@ -232,32 +232,32 @@ In the previous section, we explained that the character of the dynamic of stron
 \begin{equation}
 \frac{d \mathbf{v(t)}}{dt}=-\frac{\mathbf{r(t)}}{r(t)^{3}}-F\mathbf{e_{x}}\cos(\omega t) f(t) 
 \end{equation}
-Let's try a first approach in which we neglect the Coulomb field, following the example of the Strong Field Approximation mentionned previously. We also consider that the electron after tunneling out at the time $t_{b}$ is at rest. Then, its velocity at a time $t>t_{b}$ follows
+Let's try a first approach in which we neglect the Coulomb field, following the example of the Strong Field Approximation mentionned previously. We also consider that the electron after tunneling out at the time $t_{i}$ is at rest. Then, its velocity at a time $t>t_{i}$ follows
 \begin{align}
 \label{velocity_free_motion}
-v_{x}(t)&=-\frac{F}{\omega}\left[\sin(\omega t) f(t)-\sin(\omega t_{b}) f(t_{b})\right] \\
+v_{x}(t)&=-\frac{F}{\omega}\left[\sin(\omega t) f(t)-\sin(\omega t_{i}) f(t_{i})\right] \\
 v_{\perp}(t)&=0
 \end{align}
-We immediately noticed that the velocity along the field is the superposition of two contributions. The first is the velocity associated with the oscillatory motion, also called \textit{quiver} motion. The second is the velocity related to the translational motion, also called the drift motion. Because of the condition (\ref{envelop}), the drift velocity is the one that we measure in experiment when the field is switched off. It depends only on the phase value of the field at the time $t_{b}$ when the electron becomes free. This sensitivity of the photo-electron energy to the time of ionization is demonstrated by Gallaguer in 1988 who managed to control $t_{b}$ by varying the ionization potential of the atom. For this purpose, he used Rydberg atoms excited to specific states (see \cite{Gallagher_1988}).
+We immediately noticed that the velocity along the field is the superposition of two contributions. The first is the velocity associated with the oscillatory motion, also called \textit{quiver} motion. The second is the velocity related to the translational motion, also called the drift motion. Because of the condition (\ref{envelop}), the drift velocity is the one that we measure in experiment when the field is switched off. It depends only on the phase value of the field at the time $t_{i}$ when the electron becomes free. This sensitivity of the photo-electron energy to the time of ionization is demonstrated by Gallaguer in 1988 who managed to control $t_{i}$ by varying the ionization potential of the atom. For this purpose, he used Rydberg atoms excited to specific states (see \cite{Gallagher_1988}).
 \par
 Then, we integrate the above formula and derive the position $x$ of the free electron along the field
 \begin{equation}
 \label{position_free_motion}
-x(t)=\frac{F}{\omega}\left[\cos(\omega t)-\cos(\omega t_{b})+\sin(\omega t_{b})\omega(t-t_{b})\right] \\
+x(t)=\frac{F}{\omega}\left[\cos(\omega t)-\cos(\omega t_{i})+\sin(\omega t_{i})\omega(t-t_{i})\right] \\
 \end{equation}
 where we neglected the position of the electron after tunneling as well as the fall of the envelop.
-The above equation tells us that the electron has two possibilities: it can either escape or be driven back and recollide with the parent ion. The condition of rescattering with the ionic core at a time $t_{c}$ is the condition of zero displacement between the time of ionization $t_{b}$ and the time of collision $t_{c}$
+The above equation tells us that the electron has two possibilities: it can either escape or be driven back and recollide with the parent ion. The condition of rescattering with the ionic core at a time $t_{c}$ is the condition of zero displacement between the time of ionization $t_{i}$ and the time of collision $t_{c}$
 \begin{equation}
 \label{zero_displacement}
 x(t_{c})=0 
 \end{equation}
-The resolution of this equation shows that the electron rescatters only for ionization after the maximum of the peak, that is for $\omega t_{b} \in [0^{\circ},90^{\circ}]$. Otherwise, for $\omega t_{b} \in [-90^{\circ},0^{\circ}]$ the electron never comes back in the vicinity of the nucleus. The difference between these two cases is pure effects of the drift component of the velocity $v_{drift}=\frac{F}{\omega}\sin{\omega t_{b}}$. After the peak  of the field $v_{drift}$ is positive and drives the electron back but before the peak $v_{drift}$ is negative and pushes the electron away. \\
-Furthermore, the electron can rescatter several times. The numerical resolution of the zero displacement condition (\ref{zero_displacement}) shows that the electron comes back exactly one time for $\omega t_{b} \in [12.55^{\circ},90^{\circ}]$, 3 times for $\omega t_{b} \in [7.37^{\circ},12.55^{\circ}]$, 5 times for $\omega t_{b} \in [5.24^{\circ},7.37^{\circ}]$ and so on. Asymptotically, the electron comes back an infinite numbers of times when $\omega t_{b}$ tends to the peaks of the field. The figure (\ref{successive_recollision}) shows the graphical resolution of equation (\ref{zero_displacement}) in the case of one and three recollisions.
+The resolution of this equation shows that the electron rescatters only for ionization after the maximum of the peak, that is for $\omega t_{i} \in [0^{\circ},90^{\circ}]$. Otherwise, for $\omega t_{i} \in [-90^{\circ},0^{\circ}]$ the electron never comes back in the vicinity of the nucleus. The difference between these two cases is pure effects of the drift component of the velocity $v_{drift}=\frac{F}{\omega}\sin{\omega t_{i}}$. After the peak  of the field $v_{drift}$ is positive and drives the electron back but before the peak $v_{drift}$ is negative and pushes the electron away. \\
+Furthermore, the electron can rescatter several times. The numerical resolution of the zero displacement condition (\ref{zero_displacement}) shows that the electron comes back exactly one time for $\omega t_{i} \in [12.55^{\circ},90^{\circ}]$, 3 times for $\omega t_{i} \in [7.37^{\circ},12.55^{\circ}]$, 5 times for $\omega t_{i} \in [5.24^{\circ},7.37^{\circ}]$ and so on. Asymptotically, the electron comes back an infinite numbers of times when $\omega t_{i}$ tends to the peaks of the field. The figure (\ref{successive_recollision}) shows the graphical resolution of equation (\ref{zero_displacement}) in the case of one and three recollisions.
 \begin{figure}
 \centering
 %\def\svgwidth{<desired width>}
  \input{data/zero_displacement.pdf_tex}
- \caption{Successive recollisions of the electron with the parent ion in the classical model. On the left figure, $\omega t_{b}$ is contained in $[12.55^{\circ},90^{\circ}]$ and the electron recollides only one time. On the right figure, $\omega t_{b}$ is contained in $[7.37^{\circ},12.55^{\circ}]$ and the electron recollides exactly three times.}
+ \caption{Successive recollisions of the electron with the parent ion in the classical model. On the left figure, $\omega t_{i}$ is contained in $[12.55^{\circ},90^{\circ}]$ and the electron recollides only one time. On the right figure, $\omega t_{i}$ is contained in $[7.37^{\circ},12.55^{\circ}]$ and the electron recollides exactly three times.}
  \label{successive_recollision} 
 \end{figure}
 \par 
@@ -287,11 +287,11 @@ In 1993, Corkum (see \cite{Corkum_1993}) showed that $3U_{p}$ corresponds to the
 Let's now use the three-step model described previously in order to explained the cut-off law (\ref{cut-off}).
 With the expression of the velocity of the electron in (\ref{velocity_free_motion}) as well as the condition of zero-displacement in (\ref{zero_displacement}), we can deduct the kinetic energy $E_{k}$ of the electron at the time of the recollision $t_{c}$
 \begin{equation}
-E_{k}(t_{c})=2U_{p}\left[ \sin{\omega t_{c}}-\sin{\omega t_{b}}\right ]^{2}
+E_{k}(t_{c})=2U_{p}\left[ \sin{\omega t_{c}}-\sin{\omega t_{i}}\right ]^{2}
 \end{equation}
-where we neglected the falling contribution of the envelop ($f(t)=f(t_{b})=1$). \\
-On the figure (\ref{successive_recollision}), we can see that for a given phase of ionization $\omega t_{b}$, the electron can rescatter several times with the ion and then, it corresponds several values of the kinetic energy $E_{k}$. 
-The left side of figure (\ref{kinetic_energy}) shows the kinetic energy $E_{k}$ at the time of the first recollision plotted as a function of the phase of ionization $\omega t_{b}$. The maximum value of $E_{k}$ is $3.17U_{p}$ and the cut-off law (\ref{cut-off}) is clarified. It is attained for $\omega t_{b}=18.0^{\circ}$ and $\omega t_{c}=252.0^{\circ}$. \\
+where we neglected the falling contribution of the envelop ($f(t)=f(t_{i})=1$). \\
+On the figure (\ref{successive_recollision}), we can see that for a given phase of ionization $\omega t_{i}$, the electron can rescatter several times with the ion and then, it corresponds several values of the kinetic energy $E_{k}$. 
+The left side of figure (\ref{kinetic_energy}) shows the kinetic energy $E_{k}$ at the time of the first recollision plotted as a function of the phase of ionization $\omega t_{i}$. The maximum value of $E_{k}$ is $3.17U_{p}$ and the cut-off law (\ref{cut-off}) is clarified. It is attained for $\omega t_{i}=18.0^{\circ}$ and $\omega t_{c}=252.0^{\circ}$. \\
 \begin{figure}
 \centering
  \input{data/simpleman.pdf_tex}
@@ -310,9 +310,9 @@ When we measure the kinetic energy of the photo-electrons ejected from a dilute 
 \par
 The low energy region of the spectrum, up to two $U_{p}$, is simply the energy due to the drift component. Indeed, with the expression (\ref{velocity_free_motion}) of the velocity of the electron as well as the condition (\ref{envelop}), we can derive the expression of the kinetic energy detected when the laser field is switched off
 \begin{equation}
-E_{k}^{\infty}=2U_{p}\sin(\omega t_{b})f(t_{b}) \quad < \quad 2U_{p}
+E_{k}^{\infty}=2U_{p}\sin(\omega t_{i})f(t_{i}) \quad < \quad 2U_{p}
 \end{equation}
-The sharp decrease at low energy can be explained by the fact that due to the tunneling rate (factor $w(0)$ in (\ref{ADK_distribution})), they are more electrons ionized when the electric field is at its maximum, and this corresponds to a minimum of $\sin(\omega t_{b})f(t_{b})$ in the above expression.
+The sharp decrease at low energy can be explained by the fact that due to the tunneling rate (factor $w(0)$ in (\ref{ADK_distribution})), they are more electrons ionized when the electric field is at its maximum, and this corresponds to a minimum of $\sin(\omega t_{i})f(t_{i})$ in the above expression.
 \par
 However, the high energy region is intriging because it is well-known that a free electron can not absorb photons. This stems from the conservation of the energy and momentum. Let's consider a collision between an free electron with momentum $\mathbf{p_{i}}$ and a photon with momentum $\mathbf{k_{i}}$ followed by the absorption of the photon by the electron. We denote $\mathbf{p_{f}}$ the final momentum of the electron. The energy-momentum four-vector of the system \{electron$+$photon\} is given by
 \begin{equation}
@@ -365,26 +365,58 @@ But the absorption of many photons during electron-ion collisions were already w
 \par
 As for the harmonic spectrum, the position of the cut-off in the ATI spectrum can be predicted with a classical three-step model. This was predated in 1994 by Paulus \textit{et al} (see \cite{Paulus_1994}). We suppose a field linearly polarized (along x) such that the trajectory of the electron evolves in a plane (xy). The velocity of the electron just before the recollision is the expression (\ref{velocity_free_motion}) evaluated at the time $t_{c}-\epsilon$ where the time of recollision $t_{c}$ is defined by the condition of zero displacement (\ref{zero_displacement}) and where we neglect the falling contribution of the envelop of the pulse
 \begin{align}
-v_{x}(t_{c}-\epsilon)&=-\frac{F}{\omega} \left( \sin{\omega t_{c}} - \sin{\omega t_{b}} \right) \\
+v_{x}(t_{c}-\epsilon)&=-\frac{F}{\omega} \left( \sin{\omega t_{c}} - \sin{\omega t_{i}} \right) \\
 v_{y}(t_{c}-\epsilon)&=0
 \end{align}
 After the collision, the norm of the velocity vector is conserved but the electron is deflected with an angle $\theta$, then the velocity just after the scattering is given by
 \begin{align}
-v_{x}(t_{c}+\epsilon)&=-\frac{F}{\omega} \left( \sin{\omega t_{c}} - \sin{\omega t_{b}} \right) \cos{\theta} \\
-v_{y}(t_{c}+\epsilon)&=-\frac{F}{\omega} \left( \sin{\omega t_{c}} - \sin{\omega t_{b}} \right) \sin{\theta}
+v_{x}(t_{c}+\epsilon)&=-\frac{F}{\omega} \left( \sin{\omega t_{c}} - \sin{\omega t_{i}} \right) \cos{\theta} \\
+v_{y}(t_{c}+\epsilon)&=-\frac{F}{\omega} \left( \sin{\omega t_{c}} - \sin{\omega t_{i}} \right) \sin{\theta}
 \end{align}
 This constitutes new initial conditions for the classical trajectory of the free electron in the electric field after the scattering process. Thus, its velocity after $t_{c}$ is now
 \begin{align}
-v_{x}(t)&=-\frac{F}{\omega} \left(f(t)\sin{\omega t}-\sin{\omega t_{c}} \right) - \frac{F}{\omega} \left( \sin{\omega t_{c}}-\sin{\omega t_{b}} \right) \cos{\theta} \\
-v_{y}(t)&=-\frac{F}{\omega} \left( \sin{\omega t_{c}} - \sin{\omega t_{b}} \right) \sin{\theta}
+v_{x}(t)&=-\frac{F}{\omega} \left(f(t)\sin{\omega t}-\sin{\omega t_{c}} \right) - \frac{F}{\omega} \left( \sin{\omega t_{c}}-\sin{\omega t_{i}} \right) \cos{\theta} \\
+v_{y}(t)&=-\frac{F}{\omega} \left( \sin{\omega t_{c}} - \sin{\omega t_{i}} \right) \sin{\theta}
 \end{align}
-Therefore, we can deduct the detected kinetic energy of the electron which after having been ionized at the phase $\omega t_{b}$ recollides exactly one time with the parent ion with a deflected angle $\theta$
+Therefore, we can deduct the detected kinetic energy of the electron which after having been ionized at the phase $\omega t_{i}$ recollides exactly one time with the parent ion with a deflected angle $\theta$
 \begin{equation}
-E_{k}^{\infty}=2 U_{p} \left(\sin^{2}{\omega t_{b}}+2(1-\cos{\theta})\sin{\omega t_{c}} \left(\sin{\omega t_{c}}-\sin{\omega t_{b}}\right)\right)
+E_{k}^{\infty}=2 U_{p} \left(\sin^{2}{\omega t_{i}}+2(1-\cos{\theta})\sin{\omega t_{c}} \left(\sin{\omega t_{c}}-\sin{\omega t_{i}}\right)\right)
 \label{kinetic_energy_theta}
 \end{equation}
-We immediately see that $E_{k}^{\infty}$ is maximum when $\theta=\pi$, that is when the photo-electron is scattered backward. Indeed, the back-scattering corresponds to the maximum change in velocity (the velocity vector inverts its direction) and then, it corresponds to the maximum dephasing of the harmonic motion. The detected kinetic energy in (\ref{kinetic_energy_theta}) is plotted on the right side of the figure (\ref{kinetic_energy}) as a function of the phase of the electric field at which the electron is freed $\omega t_{b}$.
-The maximum value is obtained numerically for $10.00 U_{p}$ and confirmed the position of the cut-off observed in experiment. It is attained for $\omega t_{b}=15.0^{\circ}$ and $\omega t_{c}=261.5^{\circ}$.
+We immediately see that $E_{k}^{\infty}$ is maximum when $\theta=\pi$, that is when the photo-electron is scattered backward. Indeed, the back-scattering corresponds to the maximum change in velocity (the velocity vector inverts its direction) and then, it corresponds to the maximum dephasing of the harmonic motion. The detected kinetic energy in (\ref{kinetic_energy_theta}) is plotted on the right side of the figure (\ref{kinetic_energy}) as a function of the phase of the electric field at which the electron is freed $\omega t_{i}$.
+The maximum value is obtained numerically for $10.00 U_{p}$ and confirmed the position of the cut-off observed in experiment. It is attained for $\omega t_{i}=15.0^{\circ}$ and $\omega t_{c}=261.5^{\circ}$.
+
+
+
+
+\subsubsection{Low-Energy Structure}
+
+When we dealt with the ATI spectrum previously, we explained that although the hard recollisions had to be considered in order to explained the high-energy component of the spectrum, the low-energy part can be explained without having to consider any further electron-ion interaction (strong-field approximation). The reason is that the electrons detected in the region $[0,2U_{p}]$ reached the detector directly after their ionization, with the unchanged drift initial velocity.
+However, in 2009 Blaga \textit{et al} \cite{Blaga_2009} and Quan \textit{et al} \cite{Quan_2009} reported the observation of unexpected peaks in the low-energy region of the ATI spectrum for electrons emitted along the polarization direction of strong midinfrared laser field. This was a surprise because it could not be explained in the strong-field approximation. This phenomena has been termed as energy bunching \cite{Kastner_2012_soft}. It reveals it must exist caustic trajectories \cite{Yan_2010}, that is, trajectories which even though they have different initial conditions ($\phi_{i}$ and $\mathbf{p_{i}}$), are focused on the same region in phase space and lead to the same final momentum $\mathbf{p_{f}}$. Analytically, if we consider the map 
+\begin{equation}
+\mathbf{p_{f}}(\phi_{i},\mathbf{p_{i}}): \, (\phi_{i},\mathbf{p_{i}}) \mapsto \mathbf{p_{f}},
+\end{equation}
+the peaks in the LES correspond to saddle points in $\mathbf{p_{f}}(\phi_{i},\mathbf{p_{i}})$ (see \cite{Kastner_2012_soft}).
+Then, it must exist a mechanism which make electrons with slightly different initial ionisation phases and slightly different initial momenta acquire a change in their momenta which will compensate their difference and leads to the same final momentum.
+\par
+In their original article \cite{Blaga_2009}, Blaga \textit{et al} observed that the LES disappears when passing from linear polarized field to circular polarized field. This reveals that recollisons with the ion should be responsible for the LES.
+The fact that the peaks appear only for electrons detected along the polarization of the laser field led to suggest that the recollisions accountable for the low-energy features must be forward-scattering \cite{Faisal_2009}, that is, soft recollisions with large impact parameter in contrast to the high-energy large-angle recollisions responsible for the high-energy part of the ATI. 
+\par 
+Then, in 2010 the origin of the LES was attributed to the mechanism of Coulomb focusing \cite{Liu_2010}. This mechanism, first introduced in \cite{Misha_1996} describes how the multiple rescattering with large impact parameters vanished the transverse component of the momentum $p_{\perp}$ and focuses the electron toward the laser polarization.
+In \cite{Liu_2010}, it is showed that for certain conditions on the initial ionization phase $\phi_{i}$, soft recollisions can involve big change in the transverse momentum (according the laser polarization) $p_{\perp}$. If we consider cylindrical coordinate ($\rho$, $\theta$, $z$) along the polarization of the field, they explained that the maximum change in $p_{\perp}$ occurs when the turning point of the harmonic motion is in the plane $z=0$. Such a trajectory is plot in figure (\ref{soft_recollision}). We can clearly see that $p_{\perp}$ varies essentially when the electron z-coordinate is within $40$ au (green area). Therefore, we understand that the longer the electron stay in the green area, the greater will be the change in $p_{\perp}$. This occurs when the turning point of the harmonic motion (indicated with a star $*$) is within the green area. It is established that also higher order scattering ($2^{nd}$, $3^{rd}$ and $4^{th}$ recollisons) strongly contributed to the appearance of LES \cite{Liu_2010}. These successive soft recollisions with the ion are the mechanism responsible for inducing the required change in the transverse momentum $p_{\perp}$ which compensates the differences in initial momentum $\mathbf{p_{i}}$ and leads to the energy bunching.
+\par
+
+
+
+\begin{figure}
+ \resizebox{1\textwidth}{!}{\input{data/soft_recollision.pdf_tex}}
+ \caption{ (a) Trajectory which undergoes a forward-scattering. (b) Evolution of the strong field laser pulse after the ionization date. (c) Time evolution of the z-coordinate (along the field polarization) of the electron. (d) Time evolution of the transverse momentum $p_{\perp}$. The green stripe corresponds the area $|z|<40$. The blue stripe corresponds to the time intervals such that the electron undergoes big change in $p_{\perp}$. The star $*$ indicates the turning point mentionned in the text. Unit are in au}
+ \label{soft_recollision}
+\end{figure}
+
+
+
+
 
 \section{Numerical simulations}
 \subsubsection{Introduction of the code}
@@ -394,7 +426,7 @@ As mentionned earlier, the objective of the internship is to be able to compute 
 Let's introduce briefly the most important elements of the code. I chose to implement the code in C++ and I use as far as possible the object-oriented programming. Thus, the code is made of the following 10 classes.
 \begin{itemize}
 \item
-IC: set the initial conditions ($\phi_{b}$, $x_{b}$, $\mathbf{v_{\perp b}}$) required for the classical trajectory and the related probability for tunneling at the phase $\phi_{b}$ with the velocity $v_{\perp b}$.
+IC: set the initial conditions ($\phi_{i}$, $x_{i}$, $\mathbf{v_{\perp i}}$) required for the classical trajectory and the related probability for tunneling at the phase $\phi_{i}$ with the velocity $v_{\perp i}$.
 \item
 Solve: integrates the Newtonian system of ordinary differential equations of motion using the Runge-Kutta algorithm (of order 5) with adaptive step-size methods.
 \item
@@ -412,10 +444,10 @@ Display: displays informations on the terminal.
 \end{itemize}
 \par
 Of course there is also the main program which calls the different methods defined in each class step by step: \\
-First, the three initial parameters which define one trajectory ($\phi_{b}$, $v_{\perp X b}$, $v_{\perp Y b}$) are uniformly distributed on a 3D grid through three loops. Each trajectory is weighted by the instantaneous tunneling ionization rate $w (0)$ and the initial transverse velocities distribution $w (1)$ (or $\bar w(1)$ in the case of a linear laser field) in (\ref{ADK_distribution}). Since most of the trajectories barely contribute because of their tiny weight, we discard the ones such that the related ionization probability is less than a given threshold.
+First, the three initial parameters which define one trajectory ($\phi_{i}$, $v_{\perp X i}$, $v_{\perp Y i}$) are uniformly distributed on a 3D grid through three loops. Each trajectory is weighted by the instantaneous tunneling ionization rate $w (0)$ and the initial transverse velocities distribution $w (1)$ (or $\bar w(1)$ in the case of a linear laser field) in (\ref{ADK_distribution}). Since most of the trajectories barely contribute because of their tiny weight, we discard the ones such that the related ionization probability is less than a given threshold.
 Second, each trajectory is propagated until the electron is far enough from the ionic core or until the field if switched off (only valid for a finite pulse). 
 Third, if the electron is not bounded, we compute its asymptotic kinetic energy and stores it, as well as the related ionization probability.
-When all the values ($\phi_{b}$, $v_{\perp X b}$, $v_{\perp Y b}$) on the 3D grid have been sampled, we plot the spectrum.
+When all the values ($\phi_{i}$, $v_{\perp X i}$, $v_{\perp Y i}$) on the 3D grid have been sampled, we plot the spectrum.
 \par 
 We precise that the asymptotic kinetic energy is the kinetic energy when the electron is at a infinite distance from the ionic core, so that
 \begin{equation}
@@ -450,13 +482,13 @@ which is approximately constant when $\frac{1}{r}$ is weak. Indeed, $\mathbf{v}+
 \begin{figure}
 \begin{subfigure} [t]{0.5\textwidth}
 \hspace{-1cm}
- \includegraphics[width=1.2\textwidth]{data/kastner.pdf}
+ \includegraphics[width=1.2\textwidth, height=201px]{data/kastner.pdf}
  \subcaption{Computed PAD for different energy regions.}
  \label{myPAD} 
 \end{subfigure}
 \begin{subfigure} [t]{0.5\textwidth}
 \hspace{-0.5cm}
- \resizebox{0.983\textwidth}{!}{\input{data/les.pdf_tex}}
+  \raisebox{17px}{\resizebox{0.983\textwidth}{!}{\input{data/les.pdf_tex}}}
  \subcaption{Computed ATI spectrum.}
  \label{myATI} 
 \end{subfigure}
@@ -464,10 +496,7 @@ which is approximately constant when $\frac{1}{r}$ is weak. Indeed, $\mathbf{v}+
 \end{figure}
 
 
-\begin{figure}
- \resizebox{1\textwidth}{!}{\input{data/soft_recollision.pdf_tex}}
- \caption{Soft recollision}
-\end{figure}
+
 
 \bibliographystyle{unsrt}
 \bibliography{mybib}
