@@ -21,6 +21,7 @@
 \usepackage{comment}
 \usepackage{listings}
 %\usepackage[inline]{asymptote}
+\usepackage{pgfplots}
 \usepackage{graphicx}
 \usepackage{wrapfig}
 \usepackage{hyperref}
@@ -123,11 +124,11 @@ urlcolor=blue}
   {\large \textit{$^{2}$Max Born Institute, Berlin, Germany}} \\
    \begin{figure}[h]
    \centering
-   \begin{subfigure}[l]{0.3\textwidth}
+   \begin{subfigure}[l]{0.2\textwidth}
        \includegraphics[width=\textwidth]{logo/ismo}
    \end{subfigure}
    \hfill
-   \begin{subfigure}[r]{0.3\textwidth}
+   \begin{subfigure}[r]{0.2\textwidth}
        \includegraphics[width=\textwidth]{logo/mbi}
    \end{subfigure}
    \end{figure}
@@ -206,13 +207,13 @@ During this internship, I studied ionization processes in the long-wavelengh lim
 \subsection{The tunneling regime}
 \label{tunneling_regime}
 
-The probability of tunneling ionization of a hydrogen atom in an electrostatic field was first determined by Landau and Lifshitz in 1965 \cite{Landau_1965} and is given by $w(0)=(4/F)\exp(-2/3F)$. In 1966 the scope of the above formula was extended by Perelomov, Popov, Terent\'ev (PPT) for an arbitrary state of the hydrogen atom \cite{PPT_1966}. Then, in 1986 Ammosov, Delone and Krainov (ADK) derived the quasi-classical tunneling limit of the equation of PPT \cite{ADK_1986}. Finally, in 1991 the ADK formula was extended in order to take into account the distribution of electron velocities after tunneling (see Delone and Krainov \cite{Delone_1991}) and is given by
+The probability of tunneling ionization of a hydrogen atom in an electrostatic field was first determined by Landau and Lifshitz in 1965 \cite{Landau_1965} and is given by $w(0)=(4/F)\exp(-2/3F)$. In 1966, Perelomov, Popov, Terent\'ev (PPT) largely extended the scope of the formula for an oscillating field, with arbitrary intensity and wavelength and for an arbitray state of the atom \cite{PPT_1966}. Then, in 1986 Ammosov, Delone and Krainov (ADK) derived the quasi-classical tunneling limit of the equation of PPT \cite{ADK_1986}. Finally, in 1991 the ADK formula was extended in order to take into account the distribution of electron velocities after tunneling (see Delone and Krainov \cite{Delone_1991}) in the classical approach. The latter is given by
 \begin{equation} 
 \label{ADK_distribution}
 w(\phi_{i},v_{\perp i})=w(0)w(1), \quad w(0)=\frac{4}{F}\exp(-\frac{2}{3}\frac{[2I_{p}]^{3/2}}{F}), \quad w(1)=\frac{1}{\pi F}\exp(-\frac{\sqrt{2I_{p}}v_{\perp}^{2}}{F}),
 \end{equation}
 where the index $i$ denotes the quantities at the time of ionization and where $1/\pi F$ derived from the condition of normalization over the perpendicular velocity. 
-The velocity parallel to the laser polarisation has been took equal to 0 \cite{Hu_1997}. We insist upon the fact that the above expression is only valable in the tunneling regime.
+The velocity parallel to the laser polarisation can be took equal to 0 since it plays no role for the photoelectron spectrum. We insist upon the fact that the above expression is only valable in the tunneling regime.
 \par
 This ionization rate formula has been used to weight classical trajectories in my simulations (see \ref{computation_pes}). For each trajectory, I picked the initial phase of the electric field $\phi_{i}$ as well as each component of the initial perpendicular velocity $v_{\perp X i}$, $v_{\perp Y i}$ where (X,Y) denotes the polarization plane. Then, I computed the probability for having such initial conditions for both the field and the electron velocity with the above formula.
 \par
@@ -377,6 +378,7 @@ In fact we can not build a predictive model for the ATI spectrum if we consider 
 But the absorption of many photons during electron-ion collisions were already well-known by plasma physicist as free-free transitions or inverse bremstrahlung. They were considered as the mecanism responsible for the electron avalanche in laser-induced air breakdown \cite{Chin_2004}.
 
 \subsubsection{Three-step model}
+\label{3stepmodel_ATI}
 
 As for the harmonic spectrum, the position of the cut-off in the ATI spectrum can be predicted with a classical three-step model. This was predated in 1994 by Paulus \textit{et al} \cite{Paulus_1994_Classical_Model}. We suppose a field linearly polarized (along x) such that the trajectory of the electron evolves in a plane (xy). The velocity of the electron just before the recollision is the expression (\ref{velocity_free_motion}) evaluated at the time $t_{c}-\epsilon$ where the time of recollision $t_{c}$ is defined by the condition of zero displacement in Eq.~(\ref{zero_displacement}) and where we neglect the falling contribution of the envelope of the pulse
 \begin{align}
@@ -390,7 +392,9 @@ v_{y}(t_{c}+\epsilon)&=-\frac{F}{\omega} \left( \sin{\omega t_{c}} - \sin{\omega
 \end{align}
 This constitutes new initial conditions for the classical trajectory of the free electron in the electric field after the scattering process. Thus, its velocity after $t_{c}$ is now
 \begin{align}
+\label{vx_theta}
 v_{x}(t)&=-\frac{F}{\omega} \left(f(t)\sin{\omega t}-\sin{\omega t_{c}} \right) - \frac{F}{\omega} \left( \sin{\omega t_{c}}-\sin{\omega t_{i}} \right) \cos{\theta} \\
+\label{vy_theta}
 v_{y}(t)&=-\frac{F}{\omega} \left( \sin{\omega t_{c}} - \sin{\omega t_{i}} \right) \sin{\theta}
 \end{align}
 Therefore, we can deduct the detected kinetic energy of the electron which after having been ionized at the phase $\omega t_{i}$ recollides exactly one time with the parent ion with a deflected angle $\theta$
@@ -401,9 +405,6 @@ E_{k}^{\infty}=2 U_{p} \left(\sin^{2}{\omega t_{i}}+2(1-\cos{\theta})\sin{\omega
 We immediately see that $E_{k}^{\infty}$ is maximum when $\theta=\pi$, that is, when the photo-electron is scattered backward. Indeed, the back-scattering corresponds to the maximum change in velocity (the velocity vector direction is reversed) and then, it corresponds to the maximum dephasing of the harmonic motion. The detected kinetic energy in Eq.~(\ref{kinetic_energy_theta}) with $\theta=\pi$ is plotted on the right side of the Fig.~(\ref{kinetic_energy}) as a function of the phase of the electric field at which the electron is freed $\omega t_{i}$.
 The maximum value is obtained numerically for $10.00 U_{p}$ and confirmed the position of the cut-off observed in experiment. It is attained for $\omega t_{i}=15.0^{\circ}$ and $\omega t_{c}=261.5^{\circ}$.
 
-\subsubsection{Photoelectrons angular distribution}
-
-It is also possible to measure the angular distribution of the detected electrons: the photoelectrons angular distribution (PAD). For a linearly polarized laser field, the PAD is strongly concentred along the laser polarization direction at low-energy within $[0, 2U_{p}]$ and high energy (end of the plateau). However, the PAD in the transition region reveals unexpected side lobes structures at angles between $30^{\circ}$ and $45^{\circ}$ with respect to the field \cite{Paulus_1994_PAD, Yang_1993}. They have been termed by "scattering rings" by \cite{Yang_1993} who supposed them to be consequences of the rescattering processes in the tunneling regime. Moreover, it has been shown in \cite{Paulus_1994_Classical_Model}, that these rings can be explained with the same simple three-step classical model as the one used for explaining the cut-off of the ATI in the previous section.
 
 \subsubsection{Numerical computation of the photo-electrons spectrum}
 \label{computation_pes}
@@ -427,21 +428,21 @@ E_{k}^{\infty}=\frac{(\mathbf{v}+\mathbf{A})^{2}}{2}-\frac{1}{r}
 \end{equation}
 which is approximately constant when $\frac{1}{r}$ is weak. Indeed, $\mathbf{v}+\mathbf{A}$ corresponds to the canonical momentum which is an invariant of the motion for a particle in an electromagnetic field. Therefore, the quantity defined above is the kinetic energy after we switched off the field adiabatically.
 \par 
-The calculated PES is shown in Fig.~(\ref{myATI}). We can clearly distinct the three regions characteristic of the spectrum: the sharp decrease within $[0, 2U_{p}]$, the plateau within $[2U_{p}, 8U_{p}]$ and the abrupt cut-off within $[8U_{p}, 10U_{p}]$. The low-energy component $[0, 2U_{p}]$ is due to the photo-electrons detected directly after ionization with the unchanged drift energy. The plateau is due to the electrons which have absorb photons in the continuum in the combined Coulomb and laser fields (above-threshold ionization). In order to do so, the electrons have to rescatter with the parent ion with a low impact parameter (backward scattering). In such cases, the electrons motion is chaotic and shows a sensitive dependence on the initial conditions \cite{Hu_1997}. We notice that the plateau is several orders of magnitude below the maximum of the spectrum. This is due to the weakness of the Rutherford cross section for large-angle scattering (backward scattering)
-\begin{equation}
-\frac{d\sigma}{d\Omega} \propto \frac{1}{\sin^{4}{\frac{\theta}{2}}}.
-\end{equation}
-Moreover, the low variation of the Rutherford cross section when $\theta$ is large involves that for large scattering, the angles $\theta$ in Eq.~\eqref{kinetic_energy_theta} are sampled quasi-uniformly. This explained the flatness of the plateau \cite{Walker_1996}.
+The calculated PES is shown in Fig.~(\ref{myATI}). We can clearly distinct the three regions characteristic of the spectrum: the sharp decrease within $[0, 2U_{p}]$, the plateau within $[2U_{p}, 8U_{p}]$ and the abrupt cut-off within $[8U_{p}, 10U_{p}]$. The low-energy component $[0, 2U_{p}]$ is due to the photo-electrons detected directly after ionization with the unchanged drift energy. The plateau is due to the electrons which have absorb photons in the continuum in the combined Coulomb and laser fields (above-threshold ionization). In order to do so, the electrons have to rescatter with the parent ion with a low impact parameter (backward scattering). In such cases, the electrons motion is chaotic and shows a sensitive dependence on the initial conditions \cite{Hu_1997}. We notice that the plateau is several orders of magnitude below the maximum of the spectrum. Indeed, because of the spreading of the electron wave packet which is embedded in the velocities distribution factor $\omega(1)$ in Eq.~\ref{ADK_distribution}, the most of the time the electron misses the ion. Then, hard-scattering responsible for the plateau of ATI are rare events.
 \par
-The calculated PAD is shown in Fig.~(\ref{myPAD}). We clearly see that the PAD of the low-energy electrons, within $[O, 2U_{p}]$ in panel (a), as well as the PAD of the high-energy electrons, within $[8U_{p}, 10U_{p}]$ in panel (c), are strongly peaked along the field. On the one hand, the PAD of low-energy electrons is due to small-angles forward scattering with the ions. In such cases, when the field changed its direction, the electron is driven back but missed the ion. Then, the harmonic motion of the electron is slowly disturbed by the Coulomb potential.On the other hand, the detection of very high-energy electrons with an angle of $180^{\circ}$ reveals that these electrons experienced large-angles back scattering with the ions. \\
-By contrast, the PAD in the transition region of the ATI spectrum, shows in panel (b), reveals a much broader distribution. This is the superposition of a narrow distribution and of the so-called side lobes. For instance, one of them appears near $4U_{p}$ and is shown in panel (d). These rings can be attributed to the chaotic behaviour of the electrons which are responsible for the plateau of the ATI spectrum \cite{Hu_1997}. 
-Finally, we noticed that there are no electrons detected perpendicularly to the laser polarization direction.
-
+The calculated PAD is shown in Fig.~(\ref{myPAD}). The PAD of the low-energy electrons $[O, 2U_{p}]$, in panel (a), is strongly peaked along the field, in the forward direction. Most of the time, these electrons misse the ion and their harmonic motion are not really disturbed by the Coulomb potential. Besides, if the Coulomb potential affects the trajectory, it focuses the electrons along the field direction even more (see Sec.~\ref{soft_rescattering_section}). These electrons are mainly detected in the forward direction because of the initial change in their parallel momemtum they undergoe, due to the Coulomb potential as they are still close to the core. \\
+The PAD of the very high-energy electrons, within $[8U_{p}, 10U_{p}]$ in panel (c), is also strongly peaked along the field but in the backward direction. This reveals that the most energetic electrons, detected near the cut-off of the ATI spectrum, undergoes very large-angles scattering (around $180^{\circ}$). This agrees with the results obtained with the 3 step classical model in Sec.~\ref{3stepmodel_ATI}.  \\
+By contrast, the PAD in the transition region of the ATI spectrum, shows in panel (b), reveals a much broader distribution. This is due to purely classical kinematic effect and can be explained with the previous 3 step model. Indeed, Eq.~\ref{kinetic_energy_theta} allows a one to one correspondance between the detected kinetic energy and the emission angle $\Omega$ according the field polarization direction defined as
+\begin{equation}
+\tan{\Omega}=\frac{v_{y}}{v_{x}}
+\end{equation}
+where $v_{y}$ and $v_{x}$ are defined in Eq.~\ref{vy_theta} and Eq.~\ref{vx_theta}.
+For instance, if we look for electrons with an energy restricted to $4U_{p}$, we will only detect electrons with the angle $\Omega=30-40^{\circ}$ as it is shown in panel (d). Then, the resulting PAD for the whole plateau shows in panel (b) is the superposition of all these side lobes.
 
 
 \subsection{Low-Energy Structure}
 \subsubsection{Introduction}
-
+\label{soft_rescattering_section}
 \begin{figure}[htp]
  \resizebox{1\textwidth}{!}{\input{data/soft_recollision.pdf_tex}}
  \caption{ (a) Trajectory which undergoes a forward-scattering. (b) Evolution of the strong field laser pulse after the ionization date. (c) Time evolution of the z-coordinate (along the field polarization) of the electron. (d) Time evolution of the transverse momentum $p_{\perp}$. The green stripe corresponds to the area $|z|<40$. The blue stripes correspond to the time intervals such that the electron is within the green area. We can notice that it exactly coincides with the time intervals such that the electron undergoes big change in $p_{\perp}$. The star $*$ indicates the turning point mentionned in the text. Units are atomic units.}
@@ -465,24 +466,31 @@ In \cite{Liu_2010}, it is showed that for certain conditions on the initial ioni
 \subsubsection{Computed low-energy structure}
 
 \begin{figure}[htp]
-\begin{subfigure} [t]{0.5\textwidth}
+\begin{subfigure} [t]{0.49\textwidth}
 \hspace{-1cm}
  \includegraphics[width=1.2\textwidth, height=201px]{data/kastner.pdf}
  \subcaption{Computed LES from \cite{Kastner_2012_pulse}}
  \label{KastnerLES} 
 \end{subfigure}
-\begin{subfigure} [t]{0.5\textwidth}
+\begin{subfigure} [t]{0.49\textwidth}
 \hspace{-0.5cm}
   \raisebox{17px}{\resizebox{0.983\textwidth}{!}{\input{data/les.pdf_tex}}}
  \subcaption{Computed LES with the code describe in Appendix~\cite{code}}
  \label{myLES} 
 \end{subfigure}
- \caption{Calculations for argon atoms ($I_{p}=0.5792\,au$), wavelength $\lambda =2_,\micro$m, intensity $I=10^{14}$, $2$-cycle pulse,$U_{p}=37.3\,eV$. \label{comparison_Kastner_LES}}
+ \caption{Calculations for argon atoms ($I_{p}=0.5792\,au$), wavelength $\lambda =2\micro$m, intensity $I=10^{14}$, $2$-cycle pulse,  $U_{p}=37.3\,eV$. \label{comparison_Kastner_LES}}
+\end{figure}
+
+\begin{figure}[htp]
+ \resizebox{1\textwidth}{!}{\input{data/laser_pulse.pdf_tex}}
+ \caption{Laser pulse with full width at half maximum equals to 2 optical cycles $T$ used for the computation of the LES shown in Fig.~\ref{comparison_Kastner_LES}. }
+\label{laser_pulse}
 \end{figure}
 
 In order to check that there is not any errors in the code described in Appendix~\ref{code}, I try to reproduce the low-energy structure computed by \cite{Kastner_2012_pulse} with a very short laser pulse (Full width at half maximum equals to $2$ optical cycles). I choose the exact same parameters that in the paper. The comparison between the two LES, shown in Fig.(\ref{comparison_Kastner_LES}), reveals really good agreements. This is encouraging and gives us confidence for the further computations.
 \par
-We precise that the trajectory plotted in panel (a) of Fig.(\ref{soft_recollision}) has been selected as being one of the trajectory responsible for the peaks which constitutes the LES in Fig.(\ref{comparison_Kastner_LES}).
+The field responsible for the spectra is plotted on Fig.~\ref{laser_pulse}. We only picked trajectories which are born near the two subsequent peaks of the field marked with green shades. Then, the four arrows indicate the four possible sets of caustic trajectories responsible for the four peaks of energy bunching in Fig.~\ref{comparison_Kastner_LES}. In the previous section, we explained that these particular trajectories are such that the position of their turning point is in the plane $z=0$ (see Fig.~\ref{soft_recollision}). The two first peaks (red 1 and blue 1 in Fig.~\ref{myLES}) stem from the trajectories which undergoe first-order soft recollisions \cite{Kastner_2012_pulse} as it is the case of the trajectory plotted in Fig.~\ref{soft_recollision}. Indeed, the latter trajectory has been numerically selected as being one of the trajectory responsible for the first red peak. 
+The two last peaks (red 2 and blue 2 in Fig.~\ref{myLES}) result from the trajectories which undergoe second-order soft recollisions. In such cases, the soft rescattering event occurs one optical cycle latter compared to the previous ones.
 
 
 
@@ -490,7 +498,7 @@ We precise that the trajectory plotted in panel (a) of Fig.(\ref{soft_recollisio
 \newpage
 \appendix
 
-\section{Numerical computation of the photo-electrons spectrum: presentation of the code}
+\section{Numerical computation of the photo-electrons spectrum: introduction of the code}
 \label{code}
 
 As mentionned earlier, the final objective of the internship is to be able to compute numerically the low-energy part of the photo-electrons spectrum ejected from a medium composed of chiral molecules irradiated by short laser pulses circularly polarized. The purpose of it is to look if there is a signature of the chirality in the low energy part of the spectrum. Before this, I tried to compute the photo-electrons spectrum (PES), the angular-resolved photo-electrons spectrum (PAD) and the low-energy structure (LES). 
