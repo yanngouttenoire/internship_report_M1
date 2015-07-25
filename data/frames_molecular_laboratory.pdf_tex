@@ -1,6 +1,6 @@
 %% Creator: Inkscape inkscape 0.48.3.1, www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
-%% Accompanies image file 'tunnel.eps' (pdf, eps, ps)
+%% Accompanies image file 'frames_molecular_laboratory.pdf' (pdf, eps, ps)
 %%
 %% To include the image in your LaTeX document, write
 %%   \input{<filename>.pdf_tex}
@@ -36,7 +36,7 @@
   }%
   \providecommand\rotatebox[2]{#2}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{360.05088668bp}%
+    \setlength{\unitlength}{300bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -48,20 +48,23 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.60005555)%
-    \put(0,0){\includegraphics[width=\unitlength]{data/tunnel.pdf}}%
-    \put(0.21977137,0.36634677){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$z_{i}$}}}%
-    \put(0.59634241,0.29085282){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$-\frac{1}{|x|}$}}}%
-    \put(0.57745924,0.4308541){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$+zF$}}}%
-    \put(0.4759116,0.37084053){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$0$}}}%
-    \put(0.58,0.21176392){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{Electric field}}}%
-    \put(0.7385939,0.36306028){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{Position}}}%
-    \put(0.77968484,0.31781496){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$z$}}}%
-    \put(0.45254441,0.21446017){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{in}}}%
-    \put(0.23774616,0.21446015){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{out}}}%
-    \put(0.22965754,0.15514348){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{forbidden classically}}}%
-    \put(0.05308529,0.34109143){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$0$}}}%
-    \put(0.02347986,0.23728628){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$-I_{p}$}}}%
-    \put(0.10967432,0.49421494){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{Energy}}}%
+  \begin{picture}(1,0.74218482)%
+    \put(0,0){\includegraphics[width=\unitlength]{data/frames_molecular_laboratory.pdf}}%
+    \put(-0.00278926,0.07618659){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$x_{m}$}}}%
+    \put(0.84778833,0.14370545){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$y_{m}$}}}%
+    \put(0.27654745,0.70444557){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$z_{m}$}}}%
+    \put(0.5016857,0.61280344){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$x_{0}$}}}%
+    \put(0.76941333,0.68942791){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$y_{0}$}}}%
+    \put(0.57443725,0.67862875){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$z_{0}$}}}%
+    \put(0.29650708,0.03987107){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\theta$}}}%
+    \put(0.41375454,0.41430489){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\phi$}}}%
+    \put(0.48466031,0.54973997){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\alpha$}}}%
+    \put(0.26509385,0.4220165){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{3}}}%
+    \put(0.1992081,0.23252996){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{2}}}%
+    \put(0.46847786,0.26473493){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{1}}}%
+    \put(0.54617107,0.21834578){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{(0.3)}}}%
+    \put(0.30917049,0.17115118){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{(0.2)}}}%
+    \put(0.24452929,0.60136428){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{(0.2)}}}%
+    \put(0.06016412,0.14812123){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{(0.3)}}}%
   \end{picture}%
 \endgroup%

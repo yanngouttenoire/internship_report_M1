@@ -1,6 +1,6 @@
 %% Creator: Inkscape inkscape 0.48.3.1, www.inkscape.org
 %% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
-%% Accompanies image file 'tunnel.eps' (pdf, eps, ps)
+%% Accompanies image file 'LES_chiral_experiment.pdf' (pdf, eps, ps)
 %%
 %% To include the image in your LaTeX document, write
 %%   \input{<filename>.pdf_tex}
@@ -36,7 +36,7 @@
   }%
   \providecommand\rotatebox[2]{#2}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{360.05088668bp}%
+    \setlength{\unitlength}{400bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -48,20 +48,14 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.60005555)%
-    \put(0,0){\includegraphics[width=\unitlength]{data/tunnel.pdf}}%
-    \put(0.21977137,0.36634677){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$z_{i}$}}}%
-    \put(0.59634241,0.29085282){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$-\frac{1}{|x|}$}}}%
-    \put(0.57745924,0.4308541){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$+zF$}}}%
-    \put(0.4759116,0.37084053){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$0$}}}%
-    \put(0.58,0.21176392){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{Electric field}}}%
-    \put(0.7385939,0.36306028){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{Position}}}%
-    \put(0.77968484,0.31781496){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$z$}}}%
-    \put(0.45254441,0.21446017){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{in}}}%
-    \put(0.23774616,0.21446015){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{out}}}%
-    \put(0.22965754,0.15514348){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{forbidden classically}}}%
-    \put(0.05308529,0.34109143){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$0$}}}%
-    \put(0.02347986,0.23728628){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{$-I_{p}$}}}%
-    \put(0.10967432,0.49421494){\color[rgb]{0.3,0.3,0.3}\makebox(0,0)[lb]{\smash{Energy}}}%
+  \begin{picture}(1,0.55728491)%
+    \put(0,0){\includegraphics[width=\unitlength]{data/LES_chiral_experiment.pdf}}%
+    \put(0.20,0.00916054){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$x_{0}$}}}%
+    \put(0.27674544,0.1208195){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$z_{0}$}}}%
+    \put(0.98666109,0.01973878){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$y_{0}$}}}%
+    \put(0.09,0.25){\color[rgb]{0.5,0.5,0.5}\makebox(0,0)[lb]{\smash{$D_{1}$}}}%
+    \put(0.88,0.25){\color[rgb]{0.5,0.5,0.5}\makebox(0,0)[lb]{\smash{$D_{2}$}}}%
+    \put(0.22,0.3995985){\color[rgb]{0,0.5,0.5}\makebox(0,0)[lb]{\smash{elliptic field}}}%
+    \put(0.5,0.43){\color[rgb]{0.5,0.5,0.5}\makebox(0,0)[lb]{\smash{medium}}}%
   \end{picture}%
 \endgroup%
